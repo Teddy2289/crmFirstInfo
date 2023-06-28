@@ -1,0 +1,36 @@
+<?php
+use App\Http\Controllers\CategoriedepenseController;
+use Illuminate\Support\Facades\Route;
+
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\PagesController;
+use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\PermissionController;
+
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+// Route::group(['middleware' => ['auth']], function() {
+//     Route::resource('users', UserController::class);
+//     Route::resource('roles', RoleController::class);
+//     Route::resource('permissions', PermissionController::class);
+// });
+
+Route::group(['prefix' => 'parametrages', 'middleware' => 'auth'], function(){
+    Route::get('categorie_depense', [CategoriedepenseController::class, 'page'])->name('parametrages.categorie_depenses');
+});
+
+
+Route::group(['prefix' => 'security', 'middleware' => 'auth'], function(){
+    Route::get('users', [PagesController::class, 'userPage'])->name('security.users');
+    Route::get('role', [PagesController::class, 'rolePage'])->name('security.role');
+    Route::get('permission', [PagesController::class, 'permissionPage'])->name('security.permission');
+});
