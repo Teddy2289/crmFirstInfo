@@ -102,12 +102,4 @@ class Users extends Component
         $user->delete();
         $this->emit('success');
     }
-
-    public function block(User $user, $active)
-    {
-        $user->update([
-            'active' => $active
-        ]);
-        $this->emit('success');
-    }
 }
