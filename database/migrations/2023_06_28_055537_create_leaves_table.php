@@ -17,8 +17,8 @@ class CreateLeavesTable extends Migration
             $table->id();
             $table->string('label');
             $table->foreignId('employe_id')->constrained()->onDelete('cascade');
-            $table->date('date_debut');
-            $table->date('date_fin');
+            $table->date('date_start');
+            $table->date('date_end');
             $table->timestamps();
         });
     }

@@ -20,9 +20,9 @@
                     <div class="card-body">
                         <h5 class="card-title">Role</h5>
                         @can('add-role')
-                            <button class="btn btn-primary btn-rounded" wire:click="addrole">
-                                <span>{{__('Créer rôle')}}</span>
-                            </button>
+                        <button class="btn btn-primary btn-rounded" wire:click="addrole">
+                            <span>{{__('Créer rôle')}}</span>
+                        </button>
                         @if ($form == 'addrole')
                         <form wire:submit.prevent='storerole'>
                             <div class="card">
@@ -138,8 +138,9 @@
                                     @endforeach
                                 </tbody>
                             </table>
-
-                            {{ $roles->links() }}
+                            <div class="d-flex justify-content-center">
+                                {{ $roles->links() }}
+                            </div>
 
                             <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                                 <div class="modal-dialog" role="document">
