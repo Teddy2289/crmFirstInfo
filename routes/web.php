@@ -34,3 +34,9 @@ Route::group(['prefix' => 'security', 'middleware' => 'auth'], function(){
     Route::get('role', [PagesController::class, 'rolePage'])->name('security.role');
     Route::get('permission', [PagesController::class, 'permissionPage'])->name('security.permission');
 });
+
+
+Route::group(['prefix' => 'esn', 'middleware' => 'auth'], function(){
+    Route::get('company', [PagesController::class, 'companyPage'])->name('esn.company');
+});
+

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Company extends Model
 {
     use HasFactory;
-    protected $fillable = ['contract_id', 'name', 'email', 'phone', 'adress', 'postal_code', 'capital', 'siren', 'siret', 'ape', 'rcs', 'num_vat', 'iban', 'bic'];
+    protected $fillable = ['name','trade_name','town', 'email', 'phone', 'address', 'postal_code', 'capital', 'siren', 'siret', 'ape', 'rcs', 'num_vat', 'iban', 'bic'];
     public function contract()
     {
         return $this->belongsTo(Contract::class);

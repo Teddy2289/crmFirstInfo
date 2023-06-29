@@ -17,4 +17,8 @@ class PagesController extends Controller
     public function permissionPage(){
         return view('Admin.permission.page');
     }
+
+    public function companyPage(){
+        return view('Admin.company.page');
+    }
 }
