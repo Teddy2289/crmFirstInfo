@@ -18,12 +18,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-// Route::group(['middleware' => ['auth']], function() {
-//     Route::resource('users', UserController::class);
-//     Route::resource('roles', RoleController::class);
-//     Route::resource('permissions', PermissionController::class);
-// });
-
 Route::group(['prefix' => 'parametrages', 'middleware' => 'auth'], function(){
     Route::get('categorie_depense', [CategoriedepenseController::class, 'page'])->name('parametrages.categorie_depenses');
 });
