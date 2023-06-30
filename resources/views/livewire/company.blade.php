@@ -11,7 +11,6 @@
         <div wire:poll.5s="hideNotification"></div>
     </div>
     @endif
-
     <section class="section">
 
         <h4 class="card-title mb-3">{{ __('Liste des entreprises') }}</h4>
@@ -505,6 +504,5 @@
                 </div>
             </div>
         </div>
-</div>
-</section>
+    </section>
 </div>
