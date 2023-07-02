@@ -38,9 +38,6 @@
     <div class='loadscreen' id="preloader">
 
         <div class="loader spinner-bubble spinner-bubble-primary">
-
-
-
         </div>
     </div>
     <!-- Pre Loader end  -->

@@ -16,10 +16,10 @@ class CreateClientsTable extends Migration
         Schema::create('clients', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->foreignId('country_id')->constrained()->onDelete('cascade');
             $table->string('phone', 13)->nullable();
             $table->text('address')->nullable();
             $table->text('postal_code')->nullable();
-            $table->text('country')->nullable();
             $table->string('tva')->nullable();
             $table->timestamps();
         });

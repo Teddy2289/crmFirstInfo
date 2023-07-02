@@ -15,12 +15,13 @@ class CreateCompaniesTable extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('contract_id')->constrained()->onDelete('cascade');
             $table->string('name');
+            $table->string('trade_name');
             $table->string('email');
             $table->string('phone', 13)->nullable();
-            $table->string('adress');
+            $table->string('address');
             $table->string('postal_code');  
+            $table->string('town');  
             $table->decimal('capital',8, 2);  
             $table->string('siren', 20)->unique()->nullable();
             $table->string('siret', 20)->unique()->nullable();
@@ -32,6 +33,7 @@ class CreateCompaniesTable extends Migration
 
             $table->timestamps();
         });
+        Schema::table('contracts', fn(Blueprint $table) => $table->foreignId('company_id')->after('id')->constrained());
     }
 
     /**
@@ -41,6 +43,7 @@ class CreateCompaniesTable extends Migration
      */
     public function down()
     {
+        Schema::table('contracts', fn(Blueprint $table) => $table->dropConstrainedForeignId('company_id'));
         Schema::dropIfExists('companies');
     }
 }

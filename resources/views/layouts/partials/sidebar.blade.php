@@ -76,7 +76,7 @@
 				</a>
 				<ul class="submenu">
 					<li>
-						<a class="" href="http://gull-html-laravel.ui-lib.com/apps/task-manager">
+						<a class="" href="{{route('esn.client')}}">
 							<i class="nav-icon i-Receipt"></i>
 							<span class="item-name">{{__('Liste clients')}}</span>
 						</a>
@@ -92,7 +92,7 @@
 				</a>
 				<ul class="submenu">
 					<li>
-						<a class="" href="http://gull-html-laravel.ui-lib.com/apps/task-manager">
+						<a class="" href="{{route('esn.company')}}">
 							<i class="nav-icon i-Receipt-4"></i>
 							<span class="item-name">{{__('Liste entreprise')}}</span>
 						</a>
