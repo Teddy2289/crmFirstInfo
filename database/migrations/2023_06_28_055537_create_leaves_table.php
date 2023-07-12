@@ -16,7 +16,7 @@ class CreateLeavesTable extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
             $table->string('label');
-            $table->foreignId('employee_id')->constrained()->onDelete('cascade');
+            $table->foreignId('employe_id')->constrained()->onDelete('cascade');
             $table->date('date_start');
             $table->date('date_end');
             $table->enum('status', ['En attente', 'Accordé', 'Rejeté'])->default('En attente');
