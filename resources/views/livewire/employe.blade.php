@@ -14,7 +14,7 @@
 
     <section class="section">
 
-        <h4 class="card-title mb-3">{{ __('Liste des clients') }}</h4>
+        <h4 class="card-title mb-3">{{ __('Liste des employées') }}</h4>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
