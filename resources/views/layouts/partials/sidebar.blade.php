@@ -47,7 +47,7 @@
 
 		<ul class="childNav" data-parent="salaries">
 			<li class="nav-item">
-				<a href="">
+				<a href="{{route('gestionEmploye.employe')}}">
 					<i class="nav-icon i-Business-ManWoman"></i>
 					<span class="item-name">{{__('Liste Employées')}}</span>
 				</a>

@@ -7,6 +7,7 @@ use App\Http\Controllers\PagesController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\PermissionController;
+use Illuminate\Support\Facades\Auth;
 
 Route::get('/', function () {
     return view('auth.login');
@@ -33,5 +34,9 @@ Route::group(['prefix' => 'security', 'middleware' => 'auth'], function(){
 Route::group(['prefix' => 'esn', 'middleware' => 'auth'], function(){
     Route::get('company', [PagesController::class, 'companyPage'])->name('esn.company');
     Route::get('client', [PagesController::class, 'clientPage'])->name('esn.client');
+});
+
+Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){
+    Route::get('employe', [PagesController::class, 'employePage'])->name('gestionEmploye.employe');
 });
 

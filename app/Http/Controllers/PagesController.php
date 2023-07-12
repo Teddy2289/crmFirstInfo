@@ -25,4 +25,8 @@ class PagesController extends Controller
     public function clientPage(){
         return view('Admin.client.page');
     }
+
+    public function employePage(){
+        return view('Admin.employe.page');
+    }
 }
