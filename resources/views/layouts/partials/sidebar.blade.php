@@ -102,8 +102,13 @@
 			</li>
 
 			<li class="nav-item">
+<<<<<<< HEAD
 				<a class="" href="{{route('esn.technology')}}">
 					<i class="nav-icon i-Receipt-4"></i>
+=======
+                <a class="" href="{{route('esn.technology')}}">
+                <i class="nav-icon i-Receipt-4"></i>
+>>>>>>> 5ffc711ae7840ee17ab13a1e3d22e5593f625097
 					<span class="item-name">{{__('Liste techno')}}</span>
 				</a>
 			</li>
