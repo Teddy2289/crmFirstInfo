@@ -85,16 +85,17 @@ class Technology extends Component
         }
     }
 
-<<<<<<< HEAD
-// Assuming this code is in your component class or controller
-public function deleteTechnologyConfirmed()
-{
-    $technology = ModelsTechnology::find($this->technologyId);
-    if ($technology) {
-        $technology->delete();
-        $this->resetAll();
-        $this->emit('success'); // Optionally, emit an event to indicate successful deletion.
-=======
+
+    public function deleteTechnologyConfirmed()
+    {
+        $technology = ModelsTechnology::find($this->technologyId);
+        if ($technology) {
+            $technology->delete();
+            $this->resetAll();
+            $this->emit('success');
+        }
+    }
+
     public function deleteTechnologyConfirmation($technology_id)
     {
         $this->technologyId = $technology_id;
@@ -123,9 +124,7 @@ public function deleteTechnologyConfirmed()
         $this->form = '';
         $this->confirmingDelete = false;
         $this->confirmingUpdate = false;
->>>>>>> 5ffc711ae7840ee17ab13a1e3d22e5593f625097
-    }
 
-    // Close the modal after deleting the technology
-    $this->confirmingDelete = false;
+        $this->confirmingDelete = false;
+    }
 }

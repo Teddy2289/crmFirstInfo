@@ -19,11 +19,8 @@
                 <div class="card-body">
                     @can('add-technology')
                         <button class="btn btn-primary btn-rounded mb-3" wire:click="addTechnology">
-<<<<<<< HEAD
+
                             <span>{{__('Créer une techno')}}</span>
-=======
-                            <span>{{__('Créer une technologie')}}</span>
->>>>>>> 5ffc711ae7840ee17ab13a1e3d22e5593f625097
                         </button>
                         @if ($form == 'addTechnology')
                             <form wire:submit.prevent="storeTechnology" class="mb-3">
@@ -237,8 +234,7 @@
     </section>
 </div>
 {{-- In work, do what you enjoy. --}}
-<<<<<<< HEAD
 </div>
-=======
+
 </div>
->>>>>>> 5ffc711ae7840ee17ab13a1e3d22e5593f625097
+
