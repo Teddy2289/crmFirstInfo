@@ -34,6 +34,7 @@ Route::group(['prefix' => 'security', 'middleware' => 'auth'], function(){
 Route::group(['prefix' => 'esn', 'middleware' => 'auth'], function(){
     Route::get('company', [PagesController::class, 'companyPage'])->name('esn.company');
     Route::get('client', [PagesController::class, 'clientPage'])->name('esn.client');
+    Route::get('techno', [PagesController::class,'technologyPage'])->name('esn.technology');
 });
 
 Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){

@@ -29,4 +29,9 @@ class PagesController extends Controller
     public function employePage(){
         return view('Admin.employe.page');
     }
+
+    public function technologyPage()
+    {
+        return view('Admin.technology.page');
+    }
 }

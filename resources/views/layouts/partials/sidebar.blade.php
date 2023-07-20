@@ -102,7 +102,7 @@
 			</li>
 
 			<li class="nav-item">
-				<a href="">
+				<a class="" href="{{route('esn.technology')}}">
 					<i class="nav-icon i-Receipt-4"></i>
 					<span class="item-name">{{__('Liste techno')}}</span>
 				</a>
