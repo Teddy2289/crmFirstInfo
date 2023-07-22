@@ -32,6 +32,17 @@ class Technology extends Component
         ]);
     }
 
+    public function resetAll()
+    {
+        $this->name = '';
+        $this->description = '';
+        $this->form = '';
+        $this->confirmingDelete = false;
+        $this->confirmingUpdate = false;
+
+        $this->confirmingDelete = false;
+    }
+
     public function addTechnology()
     {
         $this->resetValidation();
@@ -117,14 +128,4 @@ class Technology extends Component
         $this->resetAll();
     }
 
-    public function resetAll()
-    {
-        $this->name = '';
-        $this->description = '';
-        $this->form = '';
-        $this->confirmingDelete = false;
-        $this->confirmingUpdate = false;
-
-        $this->confirmingDelete = false;
-    }
 }

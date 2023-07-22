@@ -31,12 +31,32 @@ class Company extends Component
             'companies' => $companies,
         ]);
     }
+    public function resetAll()
+    {
+        $this->name = '';
+        $this->trade_name = '';
+        $this->email = '';
+        $this->phone = '';
+        $this->address = '';
+        $this->postal_code = '';
+        $this->town = '';
+        $this->capital = '';
+        $this->siren = '';
+        $this->siret = '';
+        $this->ape = '';
+        $this->rcs = '';
+        $this->num_vat = '';
+        $this->iban = '';
+        $this->bic = '';
+        $this->form = '';
+        $this->confirmingDelete = false;
+        $this->confirmingUpdate = false;
+    }
 
     public function addCompany()
     {
         $this->form = 'addCompany';
     }
-
 
     public function storeCompany()
     {
@@ -82,25 +102,6 @@ class Company extends Component
         $this->loading = false;
     }
 
-
-    public function deleteCompanyConfirmation($companyId)
-    {
-        $this->companyId = $companyId;
-        $this->confirmingDelete = true;
-    }
-
-    public function deleteCompanyConfirmed()
-    {
-        $this->loading = true;
-        $company = ModelsCompany::find($this->companyId);
-        if ($company) {
-            $company->delete();
-            $this->resetAll();
-            $this->emit('success');
-            $this->dispatchBrowserEvent('close-delete-confirmation-modal');
-            $this->loading = false;
-        }
-    }
 
     public function showEdit($companyId)
     {
@@ -152,9 +153,28 @@ class Company extends Component
                 ]);
                 $this->resetAll();
                 $this->emit('success');
-                $this->confirmingUpdate = false; 
+                $this->confirmingUpdate = false;
                 $this->loading = false;
             }
+        }
+    }
+
+    public function deleteCompanyConfirmation($companyId)
+    {
+        $this->companyId = $companyId;
+        $this->confirmingDelete = true;
+    }
+
+    public function deleteCompanyConfirmed()
+    {
+        $this->loading = true;
+        $company = ModelsCompany::find($this->companyId);
+        if ($company) {
+            $company->delete();
+            $this->resetAll();
+            $this->emit('success');
+            $this->dispatchBrowserEvent('close-delete-confirmation-modal');
+            $this->loading = false;
         }
     }
 
@@ -163,25 +183,5 @@ class Company extends Component
         $this->resetAll();
     }
 
-    public function resetAll()
-    {
-        $this->name = '';
-        $this->trade_name = '';
-        $this->email = '';
-        $this->phone = '';
-        $this->address = '';
-        $this->postal_code = '';
-        $this->town = '';
-        $this->capital = '';
-        $this->siren = '';
-        $this->siret = '';
-        $this->ape = '';
-        $this->rcs = '';
-        $this->num_vat = '';
-        $this->iban = '';
-        $this->bic = '';
-        $this->form = '';
-        $this->confirmingDelete = false;
-        $this->confirmingUpdate = false;
-    }
+
 }

@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Contract extends Model
 {
     use HasFactory;
-    protected $fillable = ['label', 'client_id', 'user_id', 'daily_rate', 'start_date', 'end_date'];
+    protected $fillable = ['label', 'client_id', 'company_id', 'user_id', 'daily_rate', 'start_date', 'end_date'];
 
     public function user()
     {

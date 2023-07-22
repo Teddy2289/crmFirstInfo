@@ -20,9 +20,9 @@ class CreateCompaniesTable extends Migration
             $table->string('email');
             $table->string('phone', 13)->nullable();
             $table->string('address');
-            $table->string('postal_code');  
-            $table->string('town');  
-            $table->decimal('capital',8, 2);  
+            $table->string('postal_code');
+            $table->string('town');
+            $table->decimal('capital',8, 2);
             $table->string('siren', 20)->unique()->nullable();
             $table->string('siret', 20)->unique()->nullable();
             $table->string('ape', 10)->nullable();
@@ -30,7 +30,6 @@ class CreateCompaniesTable extends Migration
             $table->string('num_vat', 50)->nullable();
             $table->string('iban', 50)->nullable();
             $table->string('bic', 50)->nullable();
-
             $table->timestamps();
         });
         Schema::table('contracts', fn(Blueprint $table) => $table->foreignId('company_id')->after('id')->constrained());

@@ -35,6 +35,19 @@ class Client extends Component
         ]);
     }
 
+    public function resetAll()
+    {
+        $this->name = '';
+        $this->phone = '';
+        $this->address = '';
+        $this->postal_code = '';
+        $this->country_id = '';
+        $this->tva = '';
+        $this->form = '';
+        $this->confirmingDelete = false;
+        $this->confirmingUpdate = false;
+    }
+
     public function addClient()
     {
         $this->form = 'addClient';
@@ -64,25 +77,6 @@ class Client extends Component
         $this->resetAll();
         $this->emit('success');
         $this->loading = false;
-    }
-
-    public function deleteClientConfirmation($clientId)
-    {
-        $this->clientId = $clientId;
-        $this->confirmingDelete = true;
-    }
-
-    public function deleteClientConfirmed()
-    {
-        $this->loading = true;
-        $client = ModelsClient::find($this->clientId);
-        if ($client) {
-            $client->delete();
-            $this->resetAll();
-            $this->emit('success');
-            $this->dispatchBrowserEvent('close-delete-confirmation-modal');
-            $this->loading = false;
-        }
     }
 
     public function showEdit($clientId)
@@ -123,21 +117,30 @@ class Client extends Component
         }
     }
 
+    public function deleteClientConfirmation($clientId)
+    {
+        $this->clientId = $clientId;
+        $this->confirmingDelete = true;
+    }
+
+    public function deleteClientConfirmed()
+    {
+        $this->loading = true;
+        $client = ModelsClient::find($this->clientId);
+        if ($client) {
+            $client->delete();
+            $this->resetAll();
+            $this->emit('success');
+            $this->dispatchBrowserEvent('close-delete-confirmation-modal');
+            $this->loading = false;
+        }
+    }
+
+
     public function cancel()
     {
         $this->resetAll();
     }
 
-    public function resetAll()
-    {
-        $this->name = '';
-        $this->phone = '';
-        $this->address = '';
-        $this->postal_code = '';
-        $this->country_id = '';
-        $this->tva = '';
-        $this->form = '';
-        $this->confirmingDelete = false;
-        $this->confirmingUpdate = false;
-    }
+
 }

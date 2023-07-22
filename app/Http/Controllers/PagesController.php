@@ -40,4 +40,9 @@ class PagesController extends Controller
     {
         return view('Admin.technology.page');
     }
+
+    public function contractPage()
+    {
+        return view('Admin.contract.page');
+    }
 }

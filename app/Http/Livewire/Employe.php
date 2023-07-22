@@ -63,6 +63,28 @@ class Employe extends Component
         return view('livewire.employe', compact('employees', 'countries', 'companies', 'users'));
     }
 
+    public function resetAll()
+    {
+        $this->phone_number = '';
+        $this->address = '';
+        $this->street_number = '';
+        $this->country_id = '';
+        $this->company_id = '';
+        $this->user_id = '';
+        $this->city = '';
+        $this->postal_code = '';
+        $this->birth_name = '';
+        $this->date_of_birth = '';
+        $this->birth_postal_code = '';
+        $this->birth_city = '';
+        $this->gender = '';
+        $this->nationality = '';
+        $this->social_security_number = '';
+        $this->form = '';
+        $this->confirmingDelete = false;
+        $this->confirmingUpdate = false;
+    }
+
     public function addEmployee()
     {
         $this->resetValidation();
@@ -121,8 +143,6 @@ class Employe extends Component
         }
     }
 
-
-
     public function updateEmployeConfirmed()
     {
         $this->loading = true;
@@ -154,7 +174,6 @@ class Employe extends Component
         }
     }
 
-
     public function deleteEmployeeConfirmation($employe_id)
     {
         $this->employe_id = $employe_id;
@@ -177,25 +196,5 @@ class Employe extends Component
         $this->resetAll();
     }
 
-    public function resetAll()
-    {
-        $this->phone_number = '';
-        $this->address = '';
-        $this->street_number = '';
-        $this->country_id = '';
-        $this->company_id = '';
-        $this->user_id = '';
-        $this->city = '';
-        $this->postal_code = '';
-        $this->birth_name = '';
-        $this->date_of_birth = '';
-        $this->birth_postal_code = '';
-        $this->birth_city = '';
-        $this->gender = '';
-        $this->nationality = '';
-        $this->social_security_number = '';
-        $this->form = '';
-        $this->confirmingDelete = false;
-        $this->confirmingUpdate = false;
-    }
+
 }

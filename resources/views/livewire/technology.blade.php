@@ -152,6 +152,11 @@
                 <!-- Vue Livewire -->
                     <!-- Vue Blade -->
                     <div>
+                        @if($technologies->isEmpty())
+                            <div class="alert alert-info" role="alert">
+                                {{ __('Aucune technologie disponible.') }}
+                            </div>
+                        @else
                         <table class="table table-striped table-hover">
                             <thead>
                             <tr>
@@ -187,6 +192,7 @@
                         <div class="d-flex justify-content-center">
                             {{ $technologies->links() }}
                         </div>
+                        @endif
 
                         <!-- Delete Modal -->
                         <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1"
@@ -233,7 +239,6 @@
         </div>
     </section>
 </div>
-{{-- In work, do what you enjoy. --}}
 </div>
 
 </div>

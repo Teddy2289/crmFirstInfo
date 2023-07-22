@@ -41,3 +41,9 @@ Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){
     Route::get('employe', [PagesController::class, 'employePage'])->name('gestionEmploye.employe');
 });
 
+Route::group(['prefix' => 'facturation', 'middleware' => 'auth'], function(){
+    Route::get('contract', [PagesController::class, 'contractPage'])->name('facturation.contract');
+});
+
+
+
