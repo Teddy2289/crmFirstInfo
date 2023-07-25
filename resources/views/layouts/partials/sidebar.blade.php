@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="">
+                <a href="{{route('conges.employe')}}">
                     <i class="nav-icon i-Calendar-4"></i>
                     <span class="item-name">{{__('Suivi congée')}}</span>
                 </a>

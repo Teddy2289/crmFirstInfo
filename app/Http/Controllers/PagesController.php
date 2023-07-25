@@ -45,4 +45,9 @@ class PagesController extends Controller
     {
         return view('Admin.contract.page');
     }
+
+    public function congesPage()
+    {
+        return view('Admin.conges.page');
+    }
 }
