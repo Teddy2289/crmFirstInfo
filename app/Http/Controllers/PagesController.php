@@ -46,8 +46,8 @@ class PagesController extends Controller
         return view('Admin.contract.page');
     }
 
-    public function congesPage()
+    public function typeLeavePage()
     {
-        return view('Admin.conges.page');
+        return view('Admin.typeLeave.page');
     }
 }
