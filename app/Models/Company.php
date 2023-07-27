@@ -14,4 +14,9 @@ class Company extends Model
     {
         return $this->hasMany(Employe::class);
     }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequested::class, 'company_id');
+    }
 }

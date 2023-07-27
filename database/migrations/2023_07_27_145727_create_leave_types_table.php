@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCongeTable extends Migration
+class CreateLeaveTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,10 @@ class CreateCongeTable extends Migration
      */
     public function up()
     {
-        Schema::create('conge', function (Blueprint $table) {
+        Schema::create('leave_types', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('employe_id');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->string('type', 50);
-            $table->string('status', 20);
+            $table->string('Libelle');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -31,6 +28,6 @@ class CreateCongeTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('conge');
+        Schema::dropIfExists('leave_types');
     }
 }

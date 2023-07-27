@@ -39,7 +39,6 @@ Route::group(['prefix' => 'esn', 'middleware' => 'auth'], function(){
 
 Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){
     Route::get('employe', [PagesController::class, 'employePage'])->name('gestionEmploye.employe');
-    Route::get('conge', [PagesController::class, 'congesPage'])->name('conges.employe');
 });
 
 Route::group(['prefix' => 'facturation', 'middleware' => 'auth'], function(){

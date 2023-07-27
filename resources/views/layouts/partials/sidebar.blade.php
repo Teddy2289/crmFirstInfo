@@ -53,7 +53,7 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="{{route('conges.employe')}}">
+                <a href="">
                     <i class="nav-icon i-Calendar-4"></i>
                     <span class="item-name">{{__('Suivi congée')}}</span>
                 </a>
@@ -149,6 +149,12 @@
                 <a href="{{ route('security.users')}}">
                     <i class="nav-icon i-Business-Mens"></i>
                     <span class="item-name">{{__('Utilisateurs')}}</span>
+                </a>
+            </li>
+            </li><li class="nav-item">
+                <a href="#">
+                    <i class="nav-icon i-Business-Mens"></i>
+                    <span class="item-name">{{__('Country')}}</span>
                 </a>
             </li>
         </ul>
