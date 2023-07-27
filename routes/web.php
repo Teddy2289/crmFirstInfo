@@ -19,11 +19,6 @@ Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-Route::group(['prefix' => 'parametrages', 'middleware' => 'auth'], function(){
-    Route::get('categorie_depense', [CategoriedepenseController::class, 'page'])->name('parametrages.categorie_depenses');
-});
-
-
 Route::group(['prefix' => 'security', 'middleware' => 'auth'], function(){
     Route::get('users', [PagesController::class, 'userPage'])->name('security.users');
     Route::get('role', [PagesController::class, 'rolePage'])->name('security.role');
