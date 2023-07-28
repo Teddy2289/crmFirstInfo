@@ -45,4 +45,8 @@ class PagesController extends Controller
     {
         return view('Admin.contract.page');
     }
+    public function countryPage()
+    {
+        return view('Admin.countrie.page');
+    }
 }
