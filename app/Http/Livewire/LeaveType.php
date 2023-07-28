@@ -15,6 +15,7 @@ class LeaveType extends Component
     public $confirmingDelete = false;
     public $confirmingUpdate = false;
     public $notification;
+    public $loading = false;
 
     protected $rules = [
         'libelle' => 'required',
@@ -49,6 +50,7 @@ class LeaveType extends Component
             'description' => $this->description,
         ]);
 
+        $this->form = 'default';
         $this->resetAll();
         $this->emit('success');
     }
@@ -83,12 +85,14 @@ class LeaveType extends Component
             // Show notification and flash message
             $this->notification = true;
             session()->flash('message', 'Leave type updated successfully!');
+            $this->form = 'default';
         }
     }
 
     public function deleteLeaveTypeConfirmation($leaveTypeId)
     {
         $this->selectedLeaveType = LeaveTypeModel::findOrFail($leaveTypeId);
+        
     }
 
     public function deleteLeaveTypeConfirmed()
@@ -98,7 +102,17 @@ class LeaveType extends Component
             $this->selectedLeaveType = null;
             $this->notification = true;
             session()->flash('message', 'Leave type deleted successfully!');
+            $this->resetAll();
+            $this->emit('success');          
         }
+    }
+    public function closeDeleteConfirmationModal()
+    {
+        $this->confirmingDelete = false;
+    }
+    public function hideNotification()
+    {
+        $this->notification = false;
     }
 
     public function cancelEdit()
