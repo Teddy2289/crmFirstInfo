@@ -151,7 +151,8 @@
                     <span class="item-name">{{__('Utilisateurs')}}</span>
                 </a>
             </li>
-            </li><li class="nav-item">
+            </li>
+            <li class="nav-item">
                 <a href="{{ route('esn.country')}}">
                     <i class="nav-icon i-Shop-4"></i>
                     <span class="item-name">{{__('Country')}}</span>
