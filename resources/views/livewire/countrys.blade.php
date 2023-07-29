@@ -1,5 +1,4 @@
 <div>
-    {{-- Care about people's approval and you will be their prisoner. --}}
     <div>
     @if($notification)
     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">

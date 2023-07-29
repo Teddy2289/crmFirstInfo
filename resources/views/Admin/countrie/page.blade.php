@@ -1,4 +1,3 @@
-<x-crm-layout> 
 <x-crm-layout>
     <div class="main-content-wrap sidenav-open d-flex flex-column">
         <div class="breadcrumb">
@@ -17,7 +16,6 @@
               <li class="breadcrumb-item active" aria-current="page">{{__('Liste Country')}}</li>
             </ol>
           </nav>
-          @livewire('countrys')
+          @livewire('country')
 </div>
-</x-crm-layout>
 </x-crm-layout>

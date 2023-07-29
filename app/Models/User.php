@@ -55,6 +55,6 @@ class User extends Authenticatable
 
     public function employee()
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Employe::class);
     }
 }
