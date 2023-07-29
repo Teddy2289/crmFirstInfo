@@ -18,19 +18,21 @@ class PostEmploye extends Component
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
 
     public function render()
     {
         $postEmployees = ModelsPostEmployee::paginate(3);
         $users = User::all();
-        return view('livewire.post-employe',[
+        return view('livewire.post-employe', [
             'postEmployees' => $postEmployees,
-            'users'=>$users
+            'users' => $users
         ]);
     }
 
@@ -44,6 +46,18 @@ class PostEmploye extends Component
         $this->form = '';
         $this->confirmingDelete = false;
         $this->confirmingUpdate = false;
+
+    }
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
     }
 
     public function addPostEmployee()
@@ -73,6 +87,7 @@ class PostEmploye extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Post Employee added successfully.';
         $this->emit('success');
     }
 
@@ -107,6 +122,7 @@ class PostEmploye extends Component
                     'user_id' => $this->userId,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Post Employee updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -120,6 +136,7 @@ class PostEmploye extends Component
         if ($postEmployee) {
             $postEmployee->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Post Employee deleted successfully.';
             $this->emit('success');
         }
     }
