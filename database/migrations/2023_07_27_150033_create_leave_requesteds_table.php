@@ -17,7 +17,7 @@ class CreateLeaveRequestedsTable extends Migration
             $table->id();
             $table->foreignId('employe_id')->constrained()->onDelete('cascade');
             $table->foreignId('leave_type_id')->constrained()->onDelete('cascade');
-            $table->foreignId('compagny_id')->constrained()->onDelete('cascade');
+            $table->foreignId('company_id')->constrained()->onDelete('cascade');
             $table->string('Leave_reason');
             $table->date('start_date');
             $table->date('end_date');

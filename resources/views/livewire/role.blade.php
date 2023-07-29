@@ -20,7 +20,7 @@
                     <div class="card-body">
                         <h5 class="card-title">Role</h5>
                         @can('add-role')
-                        <button class="btn btn-primary btn-rounded" wire:click="addrole">
+                        <button class="btn btn-primary btn-rounded mb-3" wire:click="addrole">
                             <span>{{__('Créer rôle')}}</span>
                         </button>
                         @if ($form == 'addrole')

@@ -53,10 +53,26 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a href="">
+                <a href="{{route('gestionEmploye.postEmploye')}}">
                     <i class="nav-icon i-Calendar-4"></i>
-                    <span class="item-name">{{__('Suivi congée')}}</span>
+                    <span class="item-name">{{__('Post Employer')}}</span>
                 </a>
+            </li>
+            <li class="nav-item dropdown-sidemenu">
+                <a>
+                    <i class="nav-icon i-Shop-2"></i>
+                    <span class="item-name">{{__('Suivi congée')}}</span>
+                    <i class="dd-arrow i-Arrow-Down"></i>
+                </a>
+                <ul class="submenu">
+                    <li>
+                        <a class="" href="{{route('gestionEmploye.typeleave')}}">
+                            <i class="nav-icon i-Calendar-4"></i>
+                            <span class="item-name">{{__('Type conge')}}</span>
+                        </a>
+                    </li>
+                    <li></li>
+                </ul>
             </li>
         </ul>
 

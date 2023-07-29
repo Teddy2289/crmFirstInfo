@@ -36,6 +36,7 @@ Route::group(['prefix' => 'esn', 'middleware' => 'auth'], function(){
 Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){
     Route::get('employe', [PagesController::class, 'employePage'])->name('gestionEmploye.employe');
     Route::get('typeleave', [PagesController::class, 'typeLeavePage'])->name('gestionEmploye.typeleave');
+    Route::get('postEmploye', [PagesController::class, 'postEmployePage'])->name('gestionEmploye.postEmploye');
 });
 
 Route::group(['prefix' => 'facturation', 'middleware' => 'auth'], function(){

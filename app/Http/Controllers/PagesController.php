@@ -54,4 +54,8 @@ class PagesController extends Controller
     {
         return view('Admin.countrie.page');
     }
+    public function postEmployePage()
+    {
+        return view('Admin.postEmploye.page');
+    }
 }
