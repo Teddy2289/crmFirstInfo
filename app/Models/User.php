@@ -57,4 +57,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Employe::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(PostEmployee::class);
+    }
 }

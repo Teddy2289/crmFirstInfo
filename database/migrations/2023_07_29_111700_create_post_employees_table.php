@@ -17,7 +17,7 @@ class CreatePostEmployeesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('role');
-            $table->enum('type_contrat',['CDI','CDD','intern'])->default('CDI');
+            $table->enum('type_contrat',['Indeterminer','Determiner','Stagiaire'])->default('Indeterminer');
             $table->date('start_date');
             $table->foreignId('user_id')->constrained();
             $table->date('end_date')->nullable();

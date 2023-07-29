@@ -4,6 +4,7 @@ namespace App\Http\Livewire;
 
 use App\Models\PostEmployee as ModelsPostEmployee;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -12,13 +13,15 @@ class PostEmploye extends Component
 
     use WithPagination;
 
-    public $name, $role, $type_contrat, $start_date, $end_date, $userId;
+    public $name, $role, $start_date, $end_date, $userId;
     public $form = '';
     public $confirmingDelete = false;
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
     public $notificationMessage;
+    public $selectedContractType;
+    public $type_contrat = [];
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
@@ -28,6 +31,12 @@ class PostEmploye extends Component
 
     public function render()
     {
+        $this->type_contrat = DB::select(DB::raw('SHOW COLUMNS FROM post_employees WHERE Field = "type_contrat"'))[0]->Type;
+        preg_match('/^enum\((.*)\)$/', $this->type_contrat, $matches);
+        $enumValues = explode(',', $matches[1]);
+        $this->type_contrat = array_map(function ($value) {
+            return trim($value, "'");
+        }, $enumValues);
         $postEmployees = ModelsPostEmployee::paginate(3);
         $users = User::all();
         return view('livewire.post-employe', [
@@ -80,7 +89,7 @@ class PostEmploye extends Component
         ModelsPostEmployee::create([
             'name' => $this->name,
             'role' => $this->role,
-            'type_contrat' => $this->type_contrat,
+            'type_contrat' => $this->selectedContractType,
             'start_date' => $this->start_date,
             'end_date' => $this->end_date,
             'user_id' => $this->userId,
@@ -100,7 +109,7 @@ class PostEmploye extends Component
             $this->postId = $postEmployeeId;
             $this->name = $postEmployee->name;
             $this->role = $postEmployee->role;
-            $this->type_contrat = $postEmployee->type_contrat;
+            $this->type_contrat = $postEmployee->selectedContractType;
             $this->start_date = $postEmployee->start_date;
             $this->end_date = $postEmployee->end_date;
             $this->userId = $postEmployee->user_id;
@@ -116,7 +125,7 @@ class PostEmploye extends Component
                 $postEmployee->update([
                     'name' => $this->name,
                     'role' => $this->role,
-                    'type_contrat' => $this->type_contrat,
+                    'type_contrat' => $this->selectedContractType,
                     'start_date' => $this->start_date,
                     'end_date' => $this->end_date,
                     'user_id' => $this->userId,

@@ -23,7 +23,7 @@ class RolePermissionSeeder extends Seeder
         // Création des permissions
         $permissions = [
             'add-role', 'edit-role',
-            'delete-role','add-permission',
+            'delete-role', 'add-permission',
             'edit-permission', 'delete-permission',
             'edit-user', 'create-user',
             'giverole-user', 'givepermission-user',
@@ -31,10 +31,10 @@ class RolePermissionSeeder extends Seeder
             'add-client', 'edit-client',
             'delete-client', 'add-company',
             'edit-company', 'delete-company',
-            'edit-contract','delete-contract',
-            'add-contract','add-employe',
-            'edit-employe','delete-employe',
-            'add-technology','edit-technology',
+            'edit-contract', 'delete-contract',
+            'add-contract', 'add-employe',
+            'edit-employe', 'delete-employe',
+            'add-technology', 'edit-technology',
             'delete-technology'
         ];
 
@@ -47,7 +47,9 @@ class RolePermissionSeeder extends Seeder
 
         // Création de l'utilisateur admin
         $user = User::create([
-            'name' => 'admin',
+            'first_name' => 'FirstInfo',
+            'last_name' => 'Lab',
+            'name' => 'FirstInfoLab',
             'password' => bcrypt('password'),
             'email' => 'admin@gmail.com',
         ]);

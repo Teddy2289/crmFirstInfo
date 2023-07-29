@@ -53,12 +53,11 @@
                                                 <div class="mb-3">
                                                     <label for="type_contrat"
                                                            class="form-label">{{__('Type de contrat')}}</label>
-                                                    <select class="form-control" id="type_contrat" name="type_contrat"
-                                                            wire:model.lazy="type_contrat">
-                                                        <option value="">{{ __('Veuillez selectionez ') }}</option>
-                                                        <option value="CDI">CDI</option>
-                                                        <option value="CDD">CDD</option>
-                                                        <option value="intern">Intern</option>
+                                                    <select  class="form-control" wire:model="selectedContractType" id="type_contrat" name="type_contrat">
+                                                        <option value="">Select Contract Type</option>
+                                                        @foreach ($type_contrat as $type)
+                                                            <option value="{{ $type }}">{{ $type }}</option>
+                                                        @endforeach
                                                     </select>
                                                     @error('type_contrat')
                                                     <div class="alert alert-danger" role="alert">
@@ -163,12 +162,11 @@
                                                 <div class="mb-3">
                                                     <label for="edit_type_contrat"
                                                            class="form-label">{{__('Type de contrat')}}</label>
-                                                    <select class="form-control" id="edit_type_contrat"
-                                                            name="edit_type_contrat" wire:model.lazy="type_contrat">
-                                                        <option value="">{{ __('Veuillez selectionez ') }}</option>
-                                                        <option value="CDI">CDI</option>
-                                                        <option value="CDD">CDD</option>
-                                                        <option value="intern">Intern</option>
+                                                    <select  class="form-control" wire:model="selectedContractType" id="type_contrat" name="type_contrat">
+                                                        <option value="">Select Contract Type</option>
+                                                        @foreach ($type_contrat as $type)
+                                                            <option value="{{ $type }}">{{ $type }}</option>
+                                                        @endforeach
                                                     </select>
                                                     @error('type_contrat')
                                                     <div class="alert alert-danger" role="alert">

@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use PDF;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -102,4 +103,27 @@ class Users extends Component
         $user->delete();
         $this->emit('success');
     }
+
+    public function exportPDF($id)
+    {
+        $user = User::findOrFail($id);
+        $employee = $user->employee;
+        $posts = $user->posts;
+        $company = null; // Define $company variable before the loop
+        foreach ($user->employee as $employee) {
+            $company = $employee->company;
+        }
+        $pdf = PDF::loadView('userPdf.user', compact('employee', 'posts', 'user', 'company'));
+        $pdf->getDomPDF()->setHttpContext(
+            stream_context_create([
+                'ssl' => [
+                    'allow_self_signed' => true,
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                ]
+            ])
+        );
+        return $pdf->download($user->name . '.pdf');
+    }
+
 }
