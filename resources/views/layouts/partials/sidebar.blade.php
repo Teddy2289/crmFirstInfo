@@ -52,26 +52,11 @@
                     <span class="item-name">{{__('Liste Employées')}}</span>
                 </a>
             </li>
-            <li class="nav-item dropdown-sidemenu">
-                <a>
-                    <i class="nav-icon i-Shop-2"></i>
+            <li class="nav-item">
+                <a href="">
+                    <i class="nav-icon i-Calendar-4"></i>
                     <span class="item-name">{{__('Suivi congée')}}</span>
-                    <i class="dd-arrow i-Arrow-Down"></i>
                 </a>
-                <ul class="submenu">
-                    <li class="nav-item">
-                        <a href="{{route('gestionEmploye.typeleave')}}">
-                            <i class="nav-icon i-Calendar-4"></i>
-                            <span class="item-name">{{__('Type congée')}}</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="">
-                            <i class="nav-icon i-Calendar-4"></i>
-                            <span class="item-name">{{__('Congée demander')}}</span>
-                        </a>
-                    </li>
-                </ul>
             </li>
         </ul>
 
@@ -164,12 +149,6 @@
                 <a href="{{ route('security.users')}}">
                     <i class="nav-icon i-Business-Mens"></i>
                     <span class="item-name">{{__('Utilisateurs')}}</span>
-                </a>
-            </li>
-            </li><li class="nav-item">
-                <a href="#">
-                    <i class="nav-icon i-Business-Mens"></i>
-                    <span class="item-name">{{__('Country')}}</span>
                 </a>
             </li>
         </ul>

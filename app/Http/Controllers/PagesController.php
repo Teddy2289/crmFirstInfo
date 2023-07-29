@@ -50,4 +50,8 @@ class PagesController extends Controller
     {
         return view('Admin.typeLeave.page');
     }
+    public function countryPage()
+    {
+        return view('Admin.countrie.page');
+    }
 }
