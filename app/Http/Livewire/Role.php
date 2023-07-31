@@ -19,13 +19,16 @@ class Role extends Component
     public $confirmingUpdate = false;
     public $role_id;
     public $notification = false;
+    public $notificationMessage;
+
 
     //permission
     public $permissionId;
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
 
     public function render()
@@ -70,6 +73,7 @@ class Role extends Component
         $newrole->givePermissionTo($this->permissionselect);
 
         $this->resetall();
+        $this->notificationMessage = 'Role added successfully.';
         $this->emit('success');
     }
 
@@ -95,6 +99,7 @@ class Role extends Component
         $id->syncPermissions($this->getpermissionrole);
 
         $this->resetall();
+        $this->notificationMessage = 'Role updated successfully.';
         $this->emit('success');
     }
 
@@ -104,6 +109,7 @@ class Role extends Component
         if ($role) {
             $role->delete();
             $this->resetall();
+            $this->notificationMessage = 'Role deleted successfully.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
         }

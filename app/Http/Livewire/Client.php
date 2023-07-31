@@ -18,11 +18,25 @@ class Client extends Component
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
+
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -75,6 +89,7 @@ class Client extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Client added successfully.';
         $this->emit('success');
         $this->loading = false;
     }
@@ -110,6 +125,7 @@ class Client extends Component
                     'tva' => $this->tva,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Client updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -130,6 +146,7 @@ class Client extends Component
         if ($client) {
             $client->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Client deleted successfully.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
             $this->loading = false;

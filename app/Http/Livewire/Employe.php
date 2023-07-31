@@ -34,6 +34,12 @@ class Employe extends Component
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
+
+    protected $listeners = [
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
+    ];
 
     protected $rules = [
         'phone_number' => 'required',
@@ -52,6 +58,17 @@ class Employe extends Component
         'nationality' => 'required',
         'social_security_number' => 'required',
     ];
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -115,6 +132,7 @@ class Employe extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Employe added successfully.';
         $this->emit('success');
     }
 
@@ -167,6 +185,7 @@ class Employe extends Component
                     'social_security_number' => $this->social_security_number,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Employe updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -186,6 +205,7 @@ class Employe extends Component
 
         if ($employee) {
             $employee->delete();
+            $this->notificationMessage = 'Employee deleted successfully.';
             $this->resetAll();
             $this->emit('success');
         }

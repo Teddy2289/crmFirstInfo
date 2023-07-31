@@ -16,7 +16,7 @@ class LeaveType extends Component
     public $confirmingUpdate = false;
     public $notification;
     public $loading = false;
-
+      
     protected $rules = [
         'libelle' => 'required',
         'description' => 'required',

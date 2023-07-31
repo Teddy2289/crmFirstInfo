@@ -18,10 +18,24 @@ class Permission extends Component
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
+
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -60,6 +74,7 @@ class Permission extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Permission added successfully.';
         $this->emit('success');
     }
 
@@ -86,6 +101,7 @@ class Permission extends Component
                     'guard_name' => $this->guard_name,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Permission updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -98,6 +114,7 @@ class Permission extends Component
         if ($permission) {
             $permission->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Permission deleted successfully.';
             $this->emit('success');
         }
     }
@@ -114,6 +131,7 @@ class Permission extends Component
         if ($permission) {
             $permission->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Permission deleted successfully.';
             $this->emit('success');
         }
     }

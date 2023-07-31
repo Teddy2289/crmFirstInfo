@@ -18,10 +18,13 @@ class Country extends Component
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
+
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
 
     public function render()
@@ -39,6 +42,17 @@ class Country extends Component
         $this->form = '';
         $this->confirmingDelete = false;
         $this->confirmingUpdate = false;
+    }
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
     }
 
     public function addCountry()
@@ -63,6 +77,7 @@ class Country extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Country added successfully.';
         $this->emit('success');
     }
 
@@ -91,6 +106,7 @@ class Country extends Component
                     'nationality' => $this->nationality,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Country updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -104,6 +120,7 @@ class Country extends Component
         if ($country) {
             $country->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Country deleted successfully.';
             $this->emit('success');
         }
     }

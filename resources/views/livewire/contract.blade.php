@@ -1,16 +1,16 @@
 <div>
-    @if($notification)
-        <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-            <div id="notification" wire:transition.fade.out.500ms>
-                @if (session()->has('message'))
-                    <div class="alert alert-success" role="alert">
-                        <i class="icon-info1"></i>{{ session('message')}}
-                    </div>
-                @endif
-            </div>
-            <div wire:poll.5s="hideNotification"></div>
-        </div>
-    @endif
+        @if($notification)
+                            <div class="alert alert-success mt-3">
+                                {{ $notificationMessage }}
+                            </div>
+
+                            <!-- JavaScript to automatically hide the notification after 3 seconds -->
+                            <script>
+                                setTimeout(() => {
+                                    Livewire.emit('clearNotification');
+                                }, 3000);
+                            </script>
+                    @endif
     <section class="section">
 
         <h4 class="card-title mb-3">{{ __('Liste des contrats') }}</h4>

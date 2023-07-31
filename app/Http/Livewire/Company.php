@@ -17,11 +17,24 @@ class Company extends Component
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -98,6 +111,7 @@ class Company extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Company added successfully.';
         $this->emit('success');
         $this->loading = false;
     }
@@ -152,6 +166,7 @@ class Company extends Component
                     'bic' => $this->bic,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Company updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -172,6 +187,7 @@ class Company extends Component
         if ($company) {
             $company->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Company deleted successfully.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
             $this->loading = false;

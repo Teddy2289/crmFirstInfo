@@ -20,11 +20,25 @@ class Contract extends Component
     public $confirmingDelete = false;
     public $confirmingUpdate = false;
     public $notification = false;
+    public $notificationMessage;
+
     public $loading = false;
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -85,6 +99,7 @@ class Contract extends Component
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Contract added successfully.';
         $this->emit('success');
         $this->loading = false;
     }
@@ -122,6 +137,7 @@ class Contract extends Component
                     'end_date' => $this->end_date,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Contract updated successfully.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -142,6 +158,7 @@ class Contract extends Component
         if ($contract) {
             $contract->delete();
             $this->resetAll();
+            $this->notificationMessage = 'Contract deleted successfully.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
             $this->loading = false;
