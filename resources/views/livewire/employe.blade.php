@@ -522,6 +522,11 @@
                     <!-- Vue Livewire -->
                     <!-- Vue Blade -->
                     <div>
+                    @if ($employees->isEmpty())
+                            <div class="alert alert-info" role="alert">
+                                {{ __('Aucun employé disponible.') }}
+                            </div>
+                        @else
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -556,7 +561,7 @@
                         <div class="d-flex justify-content-center">
                             {{ $employees->links() }}
                         </div>
-
+                        @endif
                         <!-- Delete Confirmation Modal -->
                         <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

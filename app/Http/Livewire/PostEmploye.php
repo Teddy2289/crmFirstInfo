@@ -96,7 +96,7 @@ class PostEmploye extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Post Employee added successfully.';
+        $this->notificationMessage = 'Poste d\'employé(e) ajouté(e) avec succes.';
         $this->emit('success');
     }
 
@@ -131,7 +131,7 @@ class PostEmploye extends Component
                     'user_id' => $this->userId,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Post Employee updated successfully.';
+                $this->notificationMessage = 'Poste d\'employé(e) mise à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -145,7 +145,7 @@ class PostEmploye extends Component
         if ($postEmployee) {
             $postEmployee->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Post Employee deleted successfully.';
+            $this->notificationMessage = 'Poste d\'employé(e) supprimé(e) avec succes.';
             $this->emit('success');
         }
     }

@@ -73,7 +73,7 @@ class Role extends Component
         $newrole->givePermissionTo($this->permissionselect);
 
         $this->resetall();
-        $this->notificationMessage = 'Role added successfully.';
+        $this->notificationMessage = 'Rôle ajouté avec succes.';
         $this->emit('success');
     }
 
@@ -99,7 +99,7 @@ class Role extends Component
         $id->syncPermissions($this->getpermissionrole);
 
         $this->resetall();
-        $this->notificationMessage = 'Role updated successfully.';
+        $this->notificationMessage = 'Rôle mise à jour avec succes.';
         $this->emit('success');
     }
 
@@ -109,7 +109,7 @@ class Role extends Component
         if ($role) {
             $role->delete();
             $this->resetall();
-            $this->notificationMessage = 'Role deleted successfully.';
+            $this->notificationMessage = 'Rôle supprimé avec succes.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
         }

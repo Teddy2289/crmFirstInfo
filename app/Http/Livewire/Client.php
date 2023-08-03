@@ -89,7 +89,7 @@ class Client extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Client added successfully.';
+        $this->notificationMessage = 'Client(e) ajouté(e) avec succes.';
         $this->emit('success');
         $this->loading = false;
     }
@@ -125,7 +125,7 @@ class Client extends Component
                     'tva' => $this->tva,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Client updated successfully.';
+                $this->notificationMessage = 'Client(e) mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -146,7 +146,7 @@ class Client extends Component
         if ($client) {
             $client->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Client deleted successfully.';
+            $this->notificationMessage = 'Client(e) supprimé(e) avec succes.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
             $this->loading = false;
