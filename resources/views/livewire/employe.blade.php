@@ -1,16 +1,16 @@
 <div>
     @if($notification)
-                        <div class="alert alert-success mt-3">
-                            {{ $notificationMessage }}
-                        </div>
+    <div class="alert alert-success mt-3">
+        {{ $notificationMessage }}
+    </div>
 
-                        <!-- JavaScript to automatically hide the notification after 3 seconds -->
-                        <script>
-                            setTimeout(() => {
-                                Livewire.emit('clearNotification');
-                            }, 3000);
-                        </script>
-                @endif
+    <!-- JavaScript to automatically hide the notification after 3 seconds -->
+    <script>
+        setTimeout(() => {
+            Livewire.emit('clearNotification');
+        }, 3000);
+    </script>
+    @endif
 
     <section class="section">
 
@@ -29,6 +29,28 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
+                                            <label for="last_name" class="form-label">{{__('Nom')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="last_name" name="last_name" wire:model.lazy="last_name">
+                                            @error('last_name')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="first_name" class="form-label">{{__('Prenom')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="first_name" name="first_name" wire:model.lazy="first_name">
+                                            @error('first_name')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
                                             <label for="phone_number" class="form-label">{{__('Numéro de téléphone')}}<span class="text-danger">(*)</span></label>
                                             <input type="text" class="form-control" id="phone_number" name="phone_number" wire:model.lazy="phone_number">
                                             @error('phone_number')
@@ -38,6 +60,8 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="address" class="form-label">{{__('Adresse')}}</label>
@@ -49,8 +73,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="street_number" class="form-label">{{__('Numéro de rue')}}</label>
@@ -112,6 +134,17 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="social_security_number" class="form-label">{{__('Numéro de sécurité sociale')}}</label>
+                                            <input type="text" class="form-control" id="social_security_number" name="social_security_number" wire:model.lazy="social_security_number">
+                                            @error('social_security_number')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
@@ -136,8 +169,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="birth_name" class="form-label">{{__('Nom de naissance')}}</label>
@@ -149,6 +180,8 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="date_of_birth" class="form-label">{{__('Date de naissance')}}</label>
@@ -160,8 +193,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="birth_postal_code" class="form-label">{{__('Code postal de naissance')}}</label>
@@ -213,19 +244,6 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="row col-md-12">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="social_security_number" class="form-label">{{__('Numéro de sécurité sociale')}}</label>
-                                            <input type="text" class="form-control" id="social_security_number" name="social_security_number" wire:model.lazy="social_security_number">
-                                            @error('social_security_number')
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
                                 <div class="col-md-12 mt-3 mb-3">
                                     <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
                                         <span wire:loading wire:target="storeEmployee" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -247,6 +265,28 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
+                                            <label for="last_name" class="form-label">{{__('Nom')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="last_name" name="edit_last_name" wire:model.lazy="last_name">
+                                            @error('last_name')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="first_name" class="form-label">{{__('Prenom')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="first_name" name="edit_first_name" wire:model.lazy="first_name">
+                                            @error('first_name')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
                                             <label for="edit_phone_number" class="form-label">{{__('Numéro de téléphone')}}</label>
                                             <input type="text" class="form-control" id="edit_phone_number" name="edit_phone_number" wire:model.lazy="phone_number">
                                             @error('phone_number')
@@ -256,6 +296,8 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_address" class="form-label">{{__('Adresse')}}</label>
@@ -267,8 +309,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_street_number" class="form-label">{{__('Numéro de rue')}}</label>
@@ -330,6 +370,17 @@
                                             @enderror
                                         </div>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="edit_social_security_number" class="form-label">{{__('Numéro de sécurité sociale')}}</label>
+                                            <input type="text" class="form-control" id="edit_social_security_number" name="edit_social_security_number" wire:model.lazy="social_security_number">
+                                            @error('social_security_number')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
@@ -354,8 +405,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_birth_name" class="form-label">{{__('Nom de naissance')}}</label>
@@ -367,6 +416,9 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row col-md-12">
+                                
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_date_of_birth" class="form-label">{{__('Date de naissance')}}</label>
@@ -378,8 +430,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_birth_postal_code" class="form-label">{{__('Code postal de naissance')}}</label>
@@ -424,19 +474,6 @@
                                             <label for="edit_nationality" class="form-label">{{__('Nationalité')}}</label>
                                             <input type="text" class="form-control" id="edit_nationality" name="edit_nationality" wire:model.lazy="nationality">
                                             @error('nationality')
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row col-md-12">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="edit_social_security_number" class="form-label">{{__('Numéro de sécurité sociale')}}</label>
-                                            <input type="text" class="form-control" id="edit_social_security_number" name="edit_social_security_number" wire:model.lazy="social_security_number">
-                                            @error('social_security_number')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>

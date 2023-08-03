@@ -47,8 +47,6 @@ class RolePermissionSeeder extends Seeder
 
         // Création de l'utilisateur admin
         $user = User::create([
-            'first_name' => 'FirstInfo',
-            'last_name' => 'Lab',
             'name' => 'FirstInfoLab',
             'password' => bcrypt('password'),
             'email' => 'admin@gmail.com',

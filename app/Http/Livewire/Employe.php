@@ -27,6 +27,8 @@ class Employe extends Component
         $birth_city,
         $gender,
         $nationality,
+        $first_name,
+        $last_name,
         $social_security_number;
     public $employe_id;
     public $form = '';
@@ -42,6 +44,8 @@ class Employe extends Component
     ];
 
     protected $rules = [
+        'first_name' => 'required',
+        'last_name' => 'required',
         'phone_number' => 'required',
         'address' => 'required',
         'street_number' => 'required',
@@ -95,6 +99,8 @@ class Employe extends Component
         $this->birth_postal_code = '';
         $this->birth_city = '';
         $this->gender = '';
+        $this->first_name = '';
+        $this->last_name = '';
         $this->nationality = '';
         $this->social_security_number = '';
         $this->form = '';
@@ -114,6 +120,8 @@ class Employe extends Component
         $this->validate();
 
         ModelsEmploye::create([
+            'first_name' => $this->first_name,
+            'last_name' => $this->last_name,
             'phone_number' => $this->phone_number,
             'address' => $this->address,
             'street_number' => $this->street_number,
@@ -143,6 +151,8 @@ class Employe extends Component
             $this->form = 'editEmploye';
             $this->confirmingUpdate = true;
             $this->employe_id = $employe_id;
+            $this->first_name = $employe->first_name;
+            $this->last_name = $employe->last_name;
             $this->phone_number = $employe->phone_number;
             $this->address = $employe->address;
             $this->street_number = $employe->street_number;
@@ -168,6 +178,8 @@ class Employe extends Component
             $employe = ModelsEmploye::find($this->employe_id);
             if ($employe) {
                 $employe->update([
+                    'first_name' => $this->first_name,
+                    'last_name' => $this->last_name,
                     'phone_number' => $this->phone_number,
                     'address' => $this->address,
                     'street_number' => $this->street_number,
