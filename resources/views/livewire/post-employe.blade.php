@@ -268,7 +268,7 @@
                     <div>
                         @if ($postEmployees->isEmpty())
                             <div class="alert alert-info" role="alert">
-                                {{ __('Aucun employé disponible.') }}
+                                {{ __('Aucun post d\'employé disponible.') }}
                             </div>
                         @else
                             <table class="table table-striped table-hover">

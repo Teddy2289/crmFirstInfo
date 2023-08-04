@@ -432,6 +432,11 @@
                     <!-- Vue Livewire -->
                     <!-- Vue Blade -->
                     <div>
+                    @if ($companies->isEmpty())
+                            <div class="alert alert-info" role="alert">
+                                {{ __('Aucun entreprise disponible.') }}
+                            </div>
+                        @else
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
@@ -464,7 +469,7 @@
                         <div class="d-flex justify-content-center">
                             {{ $companies->links() }}
                         </div>
-
+                        @endif
                         <!-- Delete  Modal -->
                         <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

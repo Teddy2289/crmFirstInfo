@@ -111,7 +111,7 @@ class Company extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Company added successfully.';
+        $this->notificationMessage = 'Entreprise ajouté(e) avec succes.';
         $this->emit('success');
         $this->loading = false;
     }
@@ -166,7 +166,7 @@ class Company extends Component
                     'bic' => $this->bic,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Company updated successfully.';
+                $this->notificationMessage = 'Entreprise mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -187,7 +187,7 @@ class Company extends Component
         if ($company) {
             $company->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Company deleted successfully.';
+            $this->notificationMessage = 'Entreprise supprimé avec succes.';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
             $this->loading = false;

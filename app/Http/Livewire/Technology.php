@@ -78,7 +78,7 @@ class Technology extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Technology added successfully.';
+        $this->notificationMessage = 'Technologie ajouté avec succes.';
         $this->emit('success');
     }
 
@@ -105,7 +105,7 @@ class Technology extends Component
                     'description' => $this->description,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Technology updated successfully.';
+                $this->notificationMessage = 'Technologie mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -120,7 +120,7 @@ class Technology extends Component
         if ($technology) {
             $technology->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Technology deleted successfully.';
+            $this->notificationMessage = 'Technologie supprimé avec succes.';
             $this->emit('success');
         }
     }

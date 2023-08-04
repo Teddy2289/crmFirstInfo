@@ -77,7 +77,7 @@ class Country extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Country added successfully.';
+        $this->notificationMessage = 'Pays ajouté avec succes.';
         $this->emit('success');
     }
 
@@ -106,7 +106,7 @@ class Country extends Component
                     'nationality' => $this->nationality,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Country updated successfully.';
+                $this->notificationMessage = 'Pays mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -120,7 +120,7 @@ class Country extends Component
         if ($country) {
             $country->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Country deleted successfully.';
+            $this->notificationMessage = 'Pays supprimé avec succes.';
             $this->emit('success');
         }
     }

@@ -140,7 +140,7 @@ class Employe extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Employe added successfully.';
+        $this->notificationMessage = 'Employé(e) ajouté(e) avec succes.';
         $this->emit('success');
     }
 
@@ -197,7 +197,7 @@ class Employe extends Component
                     'social_security_number' => $this->social_security_number,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Employe updated successfully.';
+                $this->notificationMessage = 'Employé(e) mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -217,7 +217,7 @@ class Employe extends Component
 
         if ($employee) {
             $employee->delete();
-            $this->notificationMessage = 'Employee deleted successfully.';
+            $this->notificationMessage = 'Employé(e) supprimé(e) avec succes.';
             $this->resetAll();
             $this->emit('success');
         }

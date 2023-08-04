@@ -74,7 +74,7 @@ class Permission extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Permission added successfully.';
+        $this->notificationMessage = 'Permission ajouté avec succes.';
         $this->emit('success');
     }
 
@@ -101,7 +101,7 @@ class Permission extends Component
                     'guard_name' => $this->guard_name,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Permission updated successfully.';
+                $this->notificationMessage = 'Permission mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -114,7 +114,7 @@ class Permission extends Component
         if ($permission) {
             $permission->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Permission deleted successfully.';
+            $this->notificationMessage = 'Permission supprimé avec succes.';
             $this->emit('success');
         }
     }

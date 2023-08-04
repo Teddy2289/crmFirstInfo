@@ -99,7 +99,7 @@ class Contract extends Component
         ]);
 
         $this->resetAll();
-        $this->notificationMessage = 'Contract added successfully.';
+        $this->notificationMessage = 'Contrat ajouté avec succes';
         $this->emit('success');
         $this->loading = false;
     }
@@ -137,7 +137,7 @@ class Contract extends Component
                     'end_date' => $this->end_date,
                 ]);
                 $this->resetAll();
-                $this->notificationMessage = 'Contract updated successfully.';
+                $this->notificationMessage = 'Contrat mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -158,7 +158,7 @@ class Contract extends Component
         if ($contract) {
             $contract->delete();
             $this->resetAll();
-            $this->notificationMessage = 'Contract deleted successfully.';
+            $this->notificationMessage = 'Contrat supprimé avec succes';
             $this->emit('success');
             $this->dispatchBrowserEvent('close-delete-confirmation-modal');
             $this->loading = false;
