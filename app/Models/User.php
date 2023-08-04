@@ -62,4 +62,10 @@ class User extends Authenticatable
     {
         return $this->hasMany(PostEmployee::class);
     }
+    // Dans le modèle User (app/Models/User.php)
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
 }
