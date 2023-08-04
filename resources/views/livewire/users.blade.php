@@ -1,5 +1,17 @@
 <div>
     {{-- If your happiness depends on money, you will never be happy with yourself. --}}
+    @if($notification)
+            <div class="alert alert-success mt-3">
+                {{ $notificationMessage }}
+            </div>
+
+            <!-- JavaScript to automatically hide the notification after 3 seconds -->
+            <script>
+                setTimeout(() => {
+                    Livewire.emit('clearNotification');
+                }, 3000);
+            </script>
+    @endif
     <section class="section">
         <div class="row">
             <div class="col-lg-12">

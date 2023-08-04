@@ -20,10 +20,23 @@ class Users extends Component
     public $email;
     public $name;
     public $btnCreate = true;
+    public $notificationMessage;
+    public $notification = false;
 
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -49,6 +62,7 @@ class Users extends Component
         $user->syncRoles($this->getroleuseredit);
         $user->syncPermissions($this->userPermissions);
         $this->resetAll();
+        $this->notificationMessage = 'Utilisateur modifié avec succes.';
         $this->emit('success');
     }
 
@@ -95,12 +109,14 @@ class Users extends Component
         }
 
         $this->resetAll();
+        $this->notificationMessage = 'Utilisateur ajouté(e) avec succes.';
         $this->emit('success');
     }
 
     public function delete(User $user)
     {
         $user->delete();
+        $this->notificationMessage = 'Utilisateur supprimé(e) avec succes.';
         $this->emit('success');
     }
 
