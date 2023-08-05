@@ -147,6 +147,14 @@
         </a>
     @endcan
 </li>
+        <li class="nav-item">
+            @can('view_contract', auth()->user())
+                <a href="{{ route('Payement.contract') }}">
+                    <i class="nav-icon i-Receipt-4"></i>
+                    <span class="item-name">{{ __('Payement') }}</span>
+                </a>
+            @endcan
+        </li>
         </ul>
 
         <ul class="childNav" data-parent="dashboard">
