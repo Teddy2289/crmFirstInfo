@@ -35,8 +35,15 @@ class RolePermissionSeeder extends Seeder
             'add-contract', 'add-employe',
             'edit-employe', 'delete-employe',
             'add-technology', 'edit-technology',
-            'delete-technology'
-        ];
+            'delete-technology','add-leave-type','edit-leave-type',
+            'delete-leave-type','add-post-employee',
+            'edit-post-employee','delete-post-employee',
+            'view_technology','view_company','view_clients',
+            'manage_permissions','manage_roles','view_contract',
+            'view_invoice_list','view_billing','view_employee_list',
+            'view_post_employer','view_type_leave','manage_users',
+            'manage_countries'
+                ];
 
         foreach ($permissions as $permissionName) {
             Permission::create(['name' => $permissionName]);
