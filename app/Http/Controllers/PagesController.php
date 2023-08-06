@@ -58,4 +58,9 @@ class PagesController extends Controller
     {
         return view('Admin.postEmploye.page');
     }
+
+    public function invoicePage()
+    {
+        return view('Admin.invoice.page');
+    }
 }

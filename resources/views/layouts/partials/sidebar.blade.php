@@ -125,9 +125,9 @@
 
         <ul class="childNav" data-parent="facture">
             <li class="nav-item">
-                <a href="">
+                <a href="{{route('facturation.invoice')}}">
                     <i class="nav-icon i-Add-File"></i>
-                    <span class="item-name">{{__('Liste facture')}}</span>
+                    <span class="item-name">{{__('facture')}}</span>
                 </a>
             </li>
             <li class="nav-item">

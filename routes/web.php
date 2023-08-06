@@ -41,6 +41,7 @@ Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){
 
 Route::group(['prefix' => 'facturation', 'middleware' => 'auth'], function(){
     Route::get('contract', [PagesController::class, 'contractPage'])->name('facturation.contract');
+    Route::get('invoice', [PagesController::class, 'invoicePage'])->name('facturation.invoice');
 });
 
 Route::get('/download-pdf/{user}', [\App\Http\Livewire\Users::class, 'exportPDF'])->name('download.pdf');
