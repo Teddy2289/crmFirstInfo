@@ -204,17 +204,6 @@ class Employe extends Component
             }
         }
     }
-    public function deleteEmployeConfirmed()
-    {
-        $employee = ModelsEmploye::find($this->employe_id);
-
-        if ($employee) {
-            $employee->delete();
-            $this->notificationMessage = 'Employé(e) supprimé(e) avec succes.';
-            $this->resetAll();
-            $this->emit('success');
-        }
-    }
 
     public function deleteEmployeeConfirmation($employe_id)
     {

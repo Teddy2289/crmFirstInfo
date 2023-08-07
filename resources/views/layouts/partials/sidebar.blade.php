@@ -133,39 +133,30 @@
         </ul>
 
         <ul class="childNav" data-parent="facture">
+                @can('view_invoice_list', auth()->user())
+                   <li class="nav-item">
+                       <a href="{{route('facturation.invoice')}}">
+                           <i class="nav-icon i-Add-File"></i>
+                           <span class="item-name">{{__('facture')}}</span>
+                       </a>
+                   </li>
+                @endcan
             <li class="nav-item">
-                <a href="{{route('facturation.invoice')}}">
-                    <i class="nav-icon i-Add-File"></i>
-                    <span class="item-name">{{__('facture')}}</span>
-                </a>
+                @can('view_contract', auth()->user())
+                    <a href="{{ route('facturation.contract') }}">
+                        <i class="nav-icon i-Calendar-4"></i>
+                        <span class="item-name">{{ __('Contrat') }}</span>
+                    </a>
+                @endcan
             </li>
             <li class="nav-item">
-                <a href="{{route('facturation.contract')}}">
-                    <i class="nav-icon i-Calendar-4"></i>
-                    <span class="item-name">{{__('Contrat')}}</span>
-    @can('view_invoice_list', auth()->user())
-        <a href="">
-            <i class="nav-icon i-Add-File"></i>
-            <span class="item-name">{{ __('Liste facture') }}</span>
-        </a>
-    @endcan
-</li>
-          <li class="nav-item">
-    @can('view_contract', auth()->user())
-        <a href="{{ route('facturation.contract') }}">
-            <i class="nav-icon i-Calendar-4"></i>
-            <span class="item-name">{{ __('Contrat') }}</span>
-        </a>
-    @endcan
-</li>
-        <li class="nav-item">
-            @can('view_contract', auth()->user())
-                <a href="{{ route('Payement.contract') }}">
-                    <i class="nav-icon i-Receipt-4"></i>
-                    <span class="item-name">{{ __('Payement') }}</span>
-                </a>
-            @endcan
-        </li>
+                @can('view_contract', auth()->user())
+                    <a href="{{ route('Payement.contract') }}">
+                        <i class="nav-icon i-Receipt-4"></i>
+                        <span class="item-name">{{ __('Payement') }}</span>
+                    </a>
+                @endcan
+            </li>
         </ul>
 
         <ul class="childNav" data-parent="dashboard">
@@ -179,39 +170,38 @@
 
         <ul class="childNav" data-parent="sessions">
           <li class="nav-item">
-    @can('manage_roles', auth()->user())
-        <a href="{{ route('security.role') }}">
-            <i class="nav-icon i-Key"></i>
-            <span class="item-name">{{ __('Role') }}</span>
-        </a>
-    @endcan
-</li>
-          <li class="nav-item">
-    @can('manage_permissions', auth()->user())
-        <a href="{{ route('security.permission') }}">
-            <i class="nav-icon i-Business-Mens"></i>
-            <span class="item-name">{{ __('Permission') }}</span>
-        </a>
-    @endcan
-</li>
-        <li class="nav-item">
-    @can('manage_users', auth()->user())
-        <a href="{{ route('security.users') }}">
-            <i class="nav-icon i-Business-Mens"></i>
-            <span class="item-name">{{ __('Utilisateurs') }}</span>
-        </a>
-    @endcan
-</li>
+            @can('manage_roles', auth()->user())
+                <a href="{{ route('security.role') }}">
+                    <i class="nav-icon i-Key"></i>
+                    <span class="item-name">{{ __('Role') }}</span>
+                </a>
+            @endcan
         </li>
-@can('manage_countries', auth()->user())
-    <li class="nav-item">
-        <a href="{{ route('esn.country') }}">
-            <i class="nav-icon i-Shop-4"></i>
-            <span class="item-name">{{ __('Country') }}</span>
-        </a>
-    </li>
-@endcan
-<ul>
+        <li class="nav-item">
+            @can('manage_permissions', auth()->user())
+                <a href="{{ route('security.permission') }}">
+                    <i class="nav-icon i-Business-Mens"></i>
+                    <span class="item-name">{{ __('Permission') }}</span>
+                </a>
+            @endcan
+        </li>
+        <li class="nav-item">
+            @can('manage_users', auth()->user())
+                <a href="{{ route('security.users') }}">
+                    <i class="nav-icon i-Business-Mens"></i>
+                    <span class="item-name">{{ __('Utilisateurs') }}</span>
+                </a>
+            @endcan
+        </li>
+        @can('manage_countries', auth()->user())
+            <li class="nav-item">
+                <a href="{{ route('esn.country') }}">
+                    <i class="nav-icon i-Shop-4"></i>
+                    <span class="item-name">{{ __('Country') }}</span>
+                </a>
+            </li>
+        @endcan
+    <ul>
 
         <ul class="childNav" data-parent="others">
             <li class="nav-item">

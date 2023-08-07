@@ -1,16 +1,16 @@
 <div>
     @if($notification)
-                        <div class="alert alert-success mt-3">
-                            {{ $notificationMessage }}
-                        </div>
+        <div class="alert alert-success mt-3">
+            {{ $notificationMessage }}
+        </div>
 
-                        <!-- JavaScript to automatically hide the notification after 3 seconds -->
-                        <script>
-                            setTimeout(() => {
-                                Livewire.emit('clearNotification');
-                            }, 3000);
-                        </script>
-                @endif
+        <!-- JavaScript to automatically hide the notification after 3 seconds -->
+        <script>
+            setTimeout(() => {
+                Livewire.emit('clearNotification');
+            }, 3000);
+        </script>
+    @endif
     <section class="section">
         <h4 class="card-title mb-3">{{ __('Liste des rôles et des permissions') }}</h4>
 

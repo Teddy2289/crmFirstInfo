@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+
 
 class HomeController extends Controller
 {
@@ -23,6 +25,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $monthlyUsers = DB::table('users')
+            ->select(DB::raw('MONTH(created_at) as month, COUNT(*) as count'))
+            ->groupBy('month')
+            ->orderBy('month')
+            ->get();
+        return view('Admin.dashboard.home',compact('monthlyUsers'));
     }
 }

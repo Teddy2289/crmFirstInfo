@@ -30,8 +30,7 @@ class Country extends Component
     public function render()
     {
         $countries = ModelsCountry::paginate(10);
-        return view('livewire.country', 
-            ['countries' => $countries]);
+        return view('livewire.country', ['countries' => $countries]);
     }
 
 

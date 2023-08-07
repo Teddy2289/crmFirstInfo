@@ -418,7 +418,7 @@
                                     </div>
                                 </div>
                                 <div class="row col-md-12">
-                                
+
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_date_of_birth" class="form-label">{{__('Date de naissance')}}</label>
@@ -551,7 +551,7 @@
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $employe->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>
                                         @endcan
                                         @can('delete-employe')
-                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteEmployeeConfirmation({{ $employe->id }})" data-toggle="modal" data-target="#deleteConfirmationModal"> <i class="nav-icon i-Close-Window font-weight-bold"></i></button>
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteEmployeConfirmation({{ $employe->id }})" data-toggle="modal" data-target="#deleteConfirmationModal"> <i class="nav-icon i-Close-Window font-weight-bold"></i></button>
                                         @endcan
                                     </td>
                                 </tr>

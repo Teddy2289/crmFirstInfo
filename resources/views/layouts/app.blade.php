@@ -31,6 +31,8 @@
     <script src="{{ asset('assets/js/es5/script.min.js') }}"></script>
     <script src="{{ asset('assets/js/es5/sidebar.large.script.min.js') }}"></script>
 
+
+
 </head>
 
 <body class="text-left">
@@ -316,6 +318,14 @@
     <!-- ============ Search UI End ============= -->
 	@livewireScripts
     @stack('scripts')
+
+    <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="assets/js/es5/chartjs.script.min.js"></script>
+    <script src="assets/js/es5/script.min.js"></script>
+    <script src="assets/js/es5/sidebar.large.script.min.js"></script>
 
 </body>
 
