@@ -2,8 +2,11 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\Date;
 use App\Models\Contract;
+use App\Models\Invoice as ModelsInvoice;
 use App\Models\Payement;
+
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -11,7 +14,7 @@ class Invoice extends Component
 {
     use WithPagination;
     public $contract_id;
-    public $payment_id;
+    public $payement_id;
     public $date;
     public $month;
     public $year;
@@ -36,106 +39,134 @@ class Invoice extends Component
     ];
     protected $rules = [
         'contract_id' => 'required|exists:companies,id',
-        'payment_id' => 'required|exists:companies,id',
+        'payement_id' => 'required|exists:companies,id',
         'date' => 'required',
         'month' => 'required',
         'day_count' => 'required',
         'note' => 'nullable',
         'montant_ht' => 'required',
         'montant_ttc' => 'required',
-        'birth_name' => 'required',
-        'date_of_birth' => 'required',
-        'birth_postal_code' => 'required',
-        'birth_city' => 'required',
-        'gender' => 'required',
-        'nationality' => 'required',
-        'social_security_number' => 'required',
+        'date_sent' => 'required',
+        'date_paid' => 'required',
+        'details.*.label' => 'required',
+        'details.*.quantity' => 'required|integer|min:1',
+        'details.*.price' => 'required|numeric|min:0',
+        'details.*.fee' => 'required|numeric|min:0',
     ];
+    public function mount()
+    {
+        $this->generateUniqueNumber();
+    }
+
+    private function generateUniqueNumber()
+    {
+        do {
+            $formattedNumber = str_pad($this->generateRandomNumber(), 4, '0', STR_PAD_LEFT);
+        } while ($this->numberExists($formattedNumber));
+
+        $this->number = $formattedNumber;
+    }
+
+    private function generateRandomNumber()
+    {
+        return mt_rand(1, 9999); // Générez un numéro aléatoire entre 1 et 9999
+    }
+
+    private function numberExists($number)
+    {
+        return ModelsInvoice::where('number', $number)->exists();
+    }
+
+
+
     public function render()
     {
         $contracts = Contract::all();
         $payements = Payement::all();
         return view('livewire.invoice', [
             "contracts" => $contracts,
-            "payements" => $payements
+            "payements" => $payements,
+            'monthsEn' => Date::getMonthsEn(),
         ]);
     }
 
-    private function resetFields()
-        {
-            $this->contract_id = null;
-            $this->payment_id = null;
-            $this->date = null;
-            $this->month = null;
-            $this->year = null;
-            $this->number = null;
-            $this->day_count = null;
-            $this->note = null;
-            $this->montant_ht = null;
-            $this->montant_ttc = null;
-            $this->date_sent = null;
-            $this->date_paid = null;
-            $this->details = [];
-        }
+    private function resetAll()
+    {
+        $this->contract_id = null;
+        $this->payement_id = null;
+        $this->date = null;
+        $this->month = null;
+        $this->year = null;
+        $this->number = null;
+        $this->day_count = null;
+        $this->note = null;
+        $this->montant_ht = null;
+        $this->montant_ttc = null;
+        $this->date_sent = null;
+        $this->date_paid = null;
+        $this->details = [];
+        $this->form = '';
+        $this->confirmingDelete = false;
+        $this->confirmingUpdate = false;
+    }
 
-     public function addDetail()
-     {
-         $newDetail = [
-             'label' => '',
-             'quantity' => 1,
-             // ... (autres champs)
-         ];
+    public function addDetail()
+    {
+        $newDetail = [
+            'label' => '',
+            'quantity' => 1,
+            // ... (autres champs)
+        ];
 
-         // Charger les données du modèle ici si nécessaire
-         $this->details[] = $newDetail;
-     }
+        // Charger les données du modèle ici si nécessaire
+        $this->details[] = $newDetail;
+    }
 
-     public function removeDetail($index)
-        {
-            unset($this->details[$index]);
-            $this->details = array_values($this->details);
-        }
+    public function removeDetail($index)
+    {
+        unset($this->details[$index]);
+        $this->details = array_values($this->details);
+    }
 
+
+    public function addInvoice()
+    {
+        $this->resetValidation();
+        $this->reset();
+        $this->form = 'addInvoice';
+    }
     public function saveInvoice()
     {
         $validatedData = $this->validate([
             'contract_id' => 'required|exists:contracts,id',
-            'payment_id' => 'required|exists:payements,id',
+            'payement_id' => 'required|exists:payements,id',
             'date' => 'required',
+            'number'=> 'required',
             'month' => 'required',
             'day_count' => 'required',
             'note' => 'nullable',
             'montant_ht' => 'required',
             'montant_ttc' => 'required',
-            'birth_name' => 'required',
-            'date_of_birth' => 'required',
-            'birth_postal_code' => 'required',
-            'birth_city' => 'required',
-            'gender' => 'required',
-            'nationality' => 'required',
-            'social_security_number' => 'required',
+            'date_paid' => 'required',
+            'date_sent' => 'required',
             'details.*.label' => 'required',
             'details.*.quantity' => 'required|integer|min:1',
             'details.*.price' => 'required|numeric|min:0',
             'details.*.fee' => 'required|numeric|min:0',
         ]);
 
-        $invoice = Invoice::create([
+        $invoice = ModelsInvoice::create([
             'contract_id' => $validatedData['contract_id'],
-            'payment_id' => $validatedData['payment_id'],
+            'payement_id' => $validatedData['payement_id'],
             'date' => $validatedData['date'],
+            'number'=> $validatedData['number'],
             'month' => $validatedData['month'],
             'day_count' => $validatedData['day_count'],
             'note' => $validatedData['note'],
             'montant_ht' => $validatedData['montant_ht'],
             'montant_ttc' => $validatedData['montant_ttc'],
-            'birth_name' => $validatedData['birth_name'],
-            'date_of_birth' => $validatedData['date_of_birth'],
-            'birth_postal_code' => $validatedData['birth_postal_code'],
-            'birth_city' => $validatedData['birth_city'],
-            'gender' => $validatedData['gender'],
-            'nationality' => $validatedData['nationality'],
-            'social_security_number' => $validatedData['social_security_number'],
+            'date_paid' => $validatedData['date_paid'],
+            'date_sent' => $validatedData['date_sent'],
         ]);
 
         foreach ($validatedData['details'] as $detailData) {
@@ -146,8 +177,12 @@ class Invoice extends Component
                 'fee' => $detailData['fee'],
             ]);
         }
-        dd("Test ok");
+       
         // Rediriger ou afficher un message de succès
     }
 
+    public function cancel()
+    {
+        $this->resetAll();
+    }
 }

@@ -6,11 +6,11 @@
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
-                    <button class="btn btn-primary btn-rounded mb-3" wire:click="addEmployee">
+                    <button class="btn btn-primary btn-rounded mb-3" wire:click="addInvoice">
                         <span>{{__('Créer facture')}}</span>
                     </button>
-
-                    <form wire:submit.prevent="storeEmployee" class="mb-3">
+                    @if ($form == 'addInvoice')
+                    <form wire:submit.prevent="saveInvoice" class="mb-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="card mb-4">
@@ -81,7 +81,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="date" class="form-label">{{__('date')}}<span class="text-danger">(*)</span></label>
-                                            <input type="text" class="form-control" id="date" name="date" wire:model.lazy="date">
+                                            <input type="date" class="form-control" id="date" name="date" wire:model.lazy="date">
                                             @error('date')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -92,7 +92,12 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="month" class="form-label">{{__('month')}}<span class="text-danger">(*)</span></label>
-                                            <input type="text" class="form-control" id="month" name="month" wire:model.lazy="month">
+                                            <select class="form-control" id="month" name="month" wire:model.lazy="month">
+                                                <option value="">Select a month</option>
+                                                @foreach($monthsEn as $index => $monthName)
+                                                <option value="{{ $index + 1 }}">{{ $monthName }}</option>
+                                                @endforeach
+                                            </select>
                                             @error('month')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -100,10 +105,16 @@
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="year" class="form-label">{{__('year')}}<span class="text-danger">(*)</span></label>
-                                            <input type="text" class="form-control" id="year" name="year" wire:model.lazy="year">
+                                            <label for="year" class="form-label">{{ __('year') }}<span class="text-danger">(*)</span></label>
+                                            <select class="form-control" id="year" name="year" wire:model.lazy="year">
+                                                <option value="">Select a year</option>
+                                                @for ($year = date('Y'); $year >= date('Y') - 100; $year--)
+                                                <option value="{{ $year }}">{{ $year }}</option>
+                                                @endfor
+                                            </select>
                                             @error('year')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -111,12 +122,13 @@
                                             @enderror
                                         </div>
                                     </div>
+
                                 </div>
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="number" class="form-label">{{__('number')}}</label>
-                                            <input type="text" class="form-control" id="number" name="number" wire:model.lazy="number">
+                                            <label for="number" class="form-label">{{ __('number') }}</label>
+                                            <input type="text" class="form-control" id="number" name="number" wire:model.lazy="number"  value="{{ $number }}"> 
                                             @error('number')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -124,6 +136,7 @@
                                             @enderror
                                         </div>
                                     </div>
+
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="day_count" class="form-label">{{__('day_count')}}</label>
@@ -137,14 +150,14 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="payment_id" class="form-label">{{__('status')}}<span class="text-danger">(*)</span></label>
-                                            <select class="form-control" id="payment_id" name="payment_id" wire:model.lazy="payment_id">
+                                            <label for="payement_id" class="form-label">{{__('status')}}<span class="text-danger">(*)</span></label>
+                                            <select class="form-control" id="payement_id" name="payement_id" wire:model.lazy="payement_id">
                                                 <option value="">{{__('Sélectionner une status payement')}}</option>
                                                 @foreach($payements as $payement)
                                                 <option value="{{ $payement->id }}">{{ $payement->label }}</option>
                                                 @endforeach
                                             </select>
-                                            @error('payment_id')
+                                            @error('payement_id')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
@@ -155,9 +168,9 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="contract_id" class="form-label">{{__('Pays')}}<span class="text-danger">(*)</span></label>
+                                            <label for="contract_id" class="form-label">{{__('Contract')}}<span class="text-danger">(*)</span></label>
                                             <select class="form-control" id="contract_id" name="contract_id" wire:model.lazy="contract_id">
-                                                <option value="">{{__('Sélectionner un pays')}}</option>
+                                                <option value="">{{__('Sélectionner un contrat')}}</option>
                                                 @foreach($contracts as $contract)
                                                 <option value="{{ $contract->id }}">{{ $contract->label }}</option>
                                                 @endforeach
@@ -207,7 +220,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="date_sent" class="form-label">{{__('date_sent')}}</label>
-                                            <input type="text" class="form-control" id="date_sent" name="date_sent" wire:model.lazy="date_sent">
+                                            <input type="date" class="form-control" id="date_sent" name="date_sent" wire:model.lazy="date_sent">
                                             @error('date_sent')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -220,7 +233,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="date_paid" class="form-label">{{__('date_paid')}}</label>
-                                            <input type="date" class="form-control" id="date_paid" name="date_paid" wire:model.lazy="date_of_birth">
+                                            <input type="date" class="form-control" id="date_paid" name="date_paid" wire:model.lazy="date_paid">
                                             @error('date_paid')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -231,14 +244,14 @@
                                 </div>
                                 <div class="col-md-12 mt-3 mb-3">
                                     <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-                                        <span wire:loading wire:target="storeEmployee" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                        <span wire:loading wire:target="saveInvoice" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                         {{__('Enregistrer')}}</button>
                                     <button type="button" class="btn btn-danger" wire:click="cancel">{{__('Annuler')}}</button>
                                 </div>
                             </div>
                         </div>
                     </form>
-
+                    @endif
                     <!-- Vue Livewire -->
                     <!-- Vue Blade -->
 

@@ -1,15 +1,15 @@
 <div>
     @if($notification)
-            <div class="alert alert-success mt-3">
-                {{ $notificationMessage }}
-            </div>
+    <div class="alert alert-success mt-3">
+        {{ $notificationMessage }}
+    </div>
 
-            <!-- JavaScript to automatically hide the notification after 3 seconds -->
-            <script>
-                setTimeout(() => {
-                    Livewire.emit('clearNotification');
-                }, 3000);
-            </script>
+    <!-- JavaScript to automatically hide the notification after 3 seconds -->
+    <script>
+        setTimeout(() => {
+            Livewire.emit('clearNotification');
+        }, 3000);
+    </script>
     @endif
     <section class="section">
 
@@ -236,10 +236,10 @@
                     <!-- Vue Livewire -->
                     <!-- Vue Blade -->
                     <div>
-                    @if ($clients->isEmpty())
-                            <div class="alert alert-info" role="alert">
-                                {{ __('Aucun client disponible.') }}
-                            </div>
+                        @if ($clients->isEmpty())
+                        <div class="alert alert-info" role="alert">
+                            {{ __('Aucun client disponible.') }}
+                        </div>
                         @else
                         <table class="table table-striped table-hover">
                             <thead>
@@ -257,8 +257,8 @@
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->country->name }}</td>
                                     <td>{{ $client->phone }}</td>
-                                    <td>{{ formatDateFr($client->created_at) }}
-</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($client->created_at) }}</td>
+
                                     <td>
                                         @can('edit-client')
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $client->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>
@@ -274,7 +274,7 @@
                         <div class="d-flex justify-content-center">
                             {{ $clients->links() }}
                         </div>
-                    @endif
+                        @endif
                         <!-- Delete  Modal -->
                         <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

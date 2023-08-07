@@ -1,9 +1,7 @@
 <?php
 
-function formatDateFr($date)
-{
-    return \Carbon\Carbon::parse($date)->format('d M Y');
-}
+namespace App\Helpers;
+
 
 class Date
 {
@@ -21,5 +19,10 @@ class Date
             'Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet',
             'Aout', 'Septembre', 'Octobre', 'Novembre', 'Décembre',
         ];
+    }
+
+    public static function formatDateFr($date)
+    {
+        return \Carbon\Carbon::parse($date)->format('d M Y');
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\Date;
 use App\Models\Client as ModelsClient;
 use App\Models\Country;
 use Livewire\Component;
@@ -45,7 +46,7 @@ class Client extends Component
 
         return view('livewire.client', [
             'clients' => $clients,
-            'countries' => $countries,
+            'countries' => $countries
         ]);
     }
 
