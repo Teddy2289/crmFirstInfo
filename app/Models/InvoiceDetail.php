@@ -13,4 +13,8 @@ class InvoiceDetail extends Model
     {
         return $this->belongsTo(Invoice::class);
     }
+
+    protected $casts = [
+        'fee' => 'boolean',
+    ];
 }

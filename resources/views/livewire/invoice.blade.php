@@ -1,4 +1,16 @@
 <div>
+    @if($notification)
+    <div class="alert alert-success mt-3">
+        {{ $notificationMessage }}
+    </div>
+
+    <!-- JavaScript to automatically hide the notification after 3 seconds -->
+    <script>
+        setTimeout(() => {
+            Livewire.emit('clearNotification');
+        }, 3000);
+    </script>
+    @endif
 
     <section class="section">
 
@@ -54,15 +66,27 @@
                                                 </div>
                                             </div>
                                             <div class="col-md-2">
-                                                <div class="mb-3">
-                                                    <label for="fee" class="form-label">{{__('fee')}}<span class="text-danger">(*)</span></label>
-                                                    <input type="number" class="form-control" id="fee" name="fee" wire:model="details.{{ $index }}.fee">
+
+                                                <!-- <label for="fee" class="form-label">{{__('fee')}}<span class="text-danger">(*)</span></label>
+                                                    <input type="checkbox" class="form-control" id="fee" name="fee" wire:model="details.{{ $index }}.fee">
                                                     @error('fee')
                                                     <div class="alert alert-danger" role="alert">
                                                         {{ $message }}
                                                     </div>
+                                                    @enderror -->
+                                                <label class="checkbox checkbox-primary">
+                                                    <input type="checkbox" id="fee" name="fee" wire:model="details.{{ $index }}.fee" value="1" wire:init="setDefaultFeeValue">
+                                                    <span>{{__('fee')}}</span>
+                                                    <span class="checkmark"></span>
+                                                    @error('details.{{ $index }}.fee')
+                                                    <div class="alert alert-danger" role="alert">
+                                                        {{ $message }}
+                                                    </div>
                                                     @enderror
-                                                </div>
+                                                </label>
+
+
+
                                             </div>
                                             <div class="col-md-1">
                                                 <button type="button" class="btn btn-danger " wire:click.prevent="removeDetail({{ $index }})">
@@ -128,7 +152,7 @@
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="number" class="form-label">{{ __('number') }}</label>
-                                            <input type="text" class="form-control" id="number" name="number" wire:model.lazy="number"  value="{{ $number }}"> 
+                                            <input type="text" class="form-control" id="numbergenerated" name="number" wire:model="number" readonly>
                                             @error('number')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -253,12 +277,41 @@
                     </form>
                     @endif
                     <!-- Vue Livewire -->
-                    <!-- Vue Blade -->
-
-
                     <!-- End Default Table Example -->
                 </div>
             </div>
         </div>
     </section>
+    @push('scripts')
+    <script>
+        function formatNumber(num, length) {
+            return num.toString().padStart(length, '0');
+        }
+
+        function generateNumber(year, currentNumber) {
+            return year + "-" + formatNumber(currentNumber, 4);
+        }
+
+        // Attendre que le DOM soit complètement chargé
+        document.addEventListener('DOMContentLoaded', function() {
+            const currentDate = new Date();
+            const currentYear = currentDate.getFullYear();
+            console.log(currentYear);
+            // Remplacez cette partie avec la logique pour obtenir le dernier numéro enregistré, puis ajoutez 1.
+            const currentNumber = 1;
+            console.log(currentNumber);
+            const generatedNumber = generateNumber(currentYear, currentNumber);
+
+            // Récupérer l'élément input par son ID
+            const numberInput = document.getElementById('numbergenerated');
+console.log("number", numberInput);
+            // Vérifier si l'élément input existe
+            if (numberInput) {
+                // Assigner la valeur générée à l'élément input
+                numberInput.value = generatedNumber;
+            }
+        });
+    </script>
+
+    @endpush
 </div>

@@ -32,6 +32,7 @@ class Invoice extends Component
     public $notification = false;
     public $loading = false;
     public $notificationMessage;
+    
 
     protected $listeners = [
         'success' => 'showNotification',
@@ -58,24 +59,17 @@ class Invoice extends Component
         $this->generateUniqueNumber();
     }
 
-    private function generateUniqueNumber()
+    public function generateUniqueNumber()
     {
-        do {
-            $formattedNumber = str_pad($this->generateRandomNumber(), 4, '0', STR_PAD_LEFT);
-        } while ($this->numberExists($formattedNumber));
+        $year = date('Y');
+        $lastNumber = ModelsInvoice::where('number', 'like', "{$year}%")
+            ->orderBy('number', 'desc')
+            ->value('number');
 
-        $this->number = $formattedNumber;
+        $lastSerial = intval(substr($lastNumber, 5)) + 1;
+        $this->number = "$year-" . str_pad($lastSerial, 4, '0', STR_PAD_LEFT);
     }
-
-    private function generateRandomNumber()
-    {
-        return mt_rand(1, 9999); // Générez un numéro aléatoire entre 1 et 9999
-    }
-
-    private function numberExists($number)
-    {
-        return ModelsInvoice::where('number', $number)->exists();
-    }
+    
 
 
 
@@ -88,6 +82,24 @@ class Invoice extends Component
             "payements" => $payements,
             'monthsEn' => Date::getMonthsEn(),
         ]);
+    }
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
+
+    public function setDefaultFeeValue()
+    {
+        foreach ($this->details as &$detail) {
+            $detail['fee'] = $detail['fee'] ?? 0;
+        }
     }
 
     private function resetAll()
@@ -114,8 +126,8 @@ class Invoice extends Component
     {
         $newDetail = [
             'label' => '',
-            'quantity' => 1,
-            // ... (autres champs)
+            'quantity' => '',
+            'fee' => 0
         ];
 
         // Charger les données du modèle ici si nécessaire
@@ -147,6 +159,7 @@ class Invoice extends Component
             'note' => 'nullable',
             'montant_ht' => 'required',
             'montant_ttc' => 'required',
+            'year' => 'required',
             'date_paid' => 'required',
             'date_sent' => 'required',
             'details.*.label' => 'required',
@@ -161,6 +174,7 @@ class Invoice extends Component
             'date' => $validatedData['date'],
             'number'=> $validatedData['number'],
             'month' => $validatedData['month'],
+            'year' => $validatedData['year'],
             'day_count' => $validatedData['day_count'],
             'note' => $validatedData['note'],
             'montant_ht' => $validatedData['montant_ht'],
@@ -178,7 +192,9 @@ class Invoice extends Component
             ]);
         }
        
-        // Rediriger ou afficher un message de succès
+        $this->resetAll();
+        $this->notificationMessage = 'Facture(s) ajouté(e) avec succes.';
+        $this->emit('success');
     }
 
     public function cancel()

@@ -316,9 +316,7 @@
         </div>
     </div>
     <!-- ============ Search UI End ============= -->
-	@livewireScripts
-    @stack('scripts')
-
+	
     <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
     <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
     <script src="assets/js/vendor/perfect-scrollbar.min.js"></script>
@@ -326,7 +324,8 @@
     <script src="assets/js/es5/chartjs.script.min.js"></script>
     <script src="assets/js/es5/script.min.js"></script>
     <script src="assets/js/es5/sidebar.large.script.min.js"></script>
-
+    @stack('scripts')
+    @livewireScripts
 </body>
 
 </html>
