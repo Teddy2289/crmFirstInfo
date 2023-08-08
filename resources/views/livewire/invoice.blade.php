@@ -291,8 +291,6 @@
         function generateNumber(year, currentNumber) {
             return year + "-" + formatNumber(currentNumber, 4);
         }
-
-        // Attendre que le DOM soit complètement chargé
         document.addEventListener('DOMContentLoaded', function() {
             const currentDate = new Date();
             const currentYear = currentDate.getFullYear();
@@ -302,9 +300,8 @@
             console.log(currentNumber);
             const generatedNumber = generateNumber(currentYear, currentNumber);
 
-            // Récupérer l'élément input par son ID
             const numberInput = document.getElementById('numbergenerated');
-console.log("number", numberInput);
+            console.log("number", numberInput);
             // Vérifier si l'élément input existe
             if (numberInput) {
                 // Assigner la valeur générée à l'élément input
