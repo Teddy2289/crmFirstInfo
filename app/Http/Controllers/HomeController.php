@@ -30,6 +30,18 @@ class HomeController extends Controller
             ->groupBy('month')
             ->orderBy('month')
             ->get();
-        return view('Admin.dashboard.home',compact('monthlyUsers'));
+
+        $monthlyClients = Db::table('Clients')
+        ->select(DB::raw('MONTH(created_at) as month, COUNT(*) as count'))
+        ->groupBy('month')
+        ->orderBy('month')
+        ->get();
+        $userDistribution = [
+                ['label' => 'Active Users', 'count' => 50],
+                ['label' => 'Inactive Users', 'count' => 30],
+                ['label' => 'Blocked Users', 'count' => 20],
+                // Add more data as needed for the pie chart
+            ];
+        return view('Admin.dashboard.home',compact('monthlyUsers','monthlyClients','userDistribution'));
     }
 }
