@@ -84,7 +84,7 @@ class LeaveType extends Component
 
             // Show notification and flash message
             $this->notification = true;
-            session()->flash('message', 'Leave type updated successfully!');
+            session()->flash('message', 'Mise à jour du type de congé reussit ');
             $this->form = 'default';
         }
     }
@@ -101,7 +101,7 @@ class LeaveType extends Component
             $this->selectedLeaveType->delete();
             $this->selectedLeaveType = null;
             $this->notification = true;
-            session()->flash('message', 'Leave type deleted successfully!');
+            session()->flash('message', 'Type de congé supprimer avec succes!');
             $this->resetAll();
             $this->emit('success');          
         }
@@ -120,4 +120,10 @@ class LeaveType extends Component
         $this->editMode = false;
         $this->reset(['libelle', 'description', 'selectedLeaveType']);
     }
+
+    public function cancel()
+    {
+        $this->resetAll();
+    }
+    
 }

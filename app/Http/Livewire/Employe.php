@@ -81,7 +81,8 @@ class Employe extends Component
         $companies = Company::all();
         $users  = User::all();
 
-        return view('livewire.employe', compact('employees', 'countries', 'companies', 'users'));
+        return view('livewire.employe', 
+            compact('employees', 'countries', 'companies', 'users'));
     }
 
     public function resetAll()
@@ -211,7 +212,7 @@ class Employe extends Component
         $this->confirmingDelete = true;
     }
 
-    public function deleteEmployee()
+    public function deleteEmployeConfirmed()
     {
         $employee = ModelsEmploye::find($this->employe_id);
 

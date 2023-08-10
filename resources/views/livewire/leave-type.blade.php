@@ -59,6 +59,8 @@
                                                 <span wire:loading wire:target="storeLeaveType" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
                                                 {{ __('Enregistrer') }}
                                                 </button>
+                                                <button type="button" class="btn btn-danger" wire:click="cancel">{{__('Annuler')}}</button>
+
                                             </div>
                                         </div>
                                     </div>
@@ -101,19 +103,19 @@
                         </div>
                     </div>
 
-                   <div class="col-md-12 mt-3 mb-3">
-    <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
-        <span wire:loading wire:target="updateLeaveTypeConfirmed" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-        {{ __('Enregistrer') }}
-    </button>
-    <button type="button" class="btn btn-danger" wire:click="cancelEdit">{{ __('Annuler') }}</button>
-</div>
+                        <div class="col-md-12 mt-3 mb-3">
+                                <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
+                                    <span wire:loading wire:target="updateLeaveTypeConfirmed" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+                                    {{ __('Enregistrer') }}
+                                </button>
+                                <button type="button" class="btn btn-danger" wire:click="cancelEdit">{{ __('Annuler') }}</button>
+                                 </div>  
 
-                </div>
-            </div>
-        </form>
-    @endif
-@endcan
+                                </div>
+                                </div>
+                            </form>
+                        @endif
+                    @endcan
 
                     <div>
                         @if($leaveTypes->isEmpty())
@@ -134,52 +136,52 @@
                                 <tbody>
                                  <!-- ... (other parts of the view) ... -->
                        @foreach ($leaveTypes as $leaveType)
-    <tr>
-        <td>{{ $leaveType->Libelle }}</td>
-        <td>{{ $leaveType->description }}</td>
-        <td>{{ $leaveType->created_at->format('d/m/Y H:i:s') }}</td>
-        <td>
-            @can('edit-leave-type')
-                <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $leaveType->id }}')">
-                    <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                </button>
-            @endcan
+                            <tr>
+                                <td>{{ $leaveType->Libelle }}</td>
+                                <td>{{ $leaveType->description }}</td>
+                                <td>{{ $leaveType->created_at->format('d/m/Y H:i:s') }}</td>
+                                <td>
+                                    @can('edit-leave-type')
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $leaveType->id }}')">
+                                            <i class="nav-icon i-Pen-2 font-weight-bold"></i>
+                                        </button>
+                                    @endcan
 
-            @can('delete-leave-type')
-                <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteLeaveTypeConfirmation({{ $leaveType->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
-                    <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                </button>
-            @endcan
-        </td>
-    </tr>
-@endforeach
+                                    @can('delete-leave-type')
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteLeaveTypeConfirmation({{ $leaveType->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
+                                            <i class="nav-icon i-Close-Window font-weight-bold"></i>
+                                        </button>
+                                    @endcan
+                                </td>
+                            </tr>
+                        @endforeach
 
-<!-- Delete Modal for Leave Type -->
-@can('delete-leave-type')
-    <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="deleteConfirmationModalLabel">{{__('Confirmer la suppression')}}</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                        <!-- Delete Modal for Leave Type -->
+                        @can('delete-leave-type')
+                            <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="deleteConfirmationModalLabel">{{__('Confirmer la suppression')}}</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <p>{{__('Êtes-vous sûr de vouloir supprimer ce type de congé ?')}}</p>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Annuler')}}</button>
+                                            <button type="button" class="btn btn-danger" wire:click="deleteLeaveTypeConfirmed">{{__('Supprimer')}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endcan     
+                      </tbody>
+                    </table>
+                @endif
                 </div>
-                <div class="modal-body">
-                    <p>{{__('Êtes-vous sûr de vouloir supprimer ce type de congé ?')}}</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">{{__('Annuler')}}</button>
-                    <button type="button" class="btn btn-danger" wire:click="deleteLeaveTypeConfirmed">{{__('Supprimer')}}</button>
-                </div>
-            </div>
-        </div>
-    </div>
-@endcan
-                                </tbody>
-                            </table>
-                        @endif
-                    </div>
                     
                 </div>
             </div>
