@@ -37,6 +37,7 @@ Route::group(['prefix' => 'gestionEmploye', 'middleware' => 'auth'], function(){
     Route::get('employe', [PagesController::class, 'employePage'])->name('gestionEmploye.employe');
     Route::get('typeleave', [PagesController::class, 'typeLeavePage'])->name('gestionEmploye.typeleave');
     Route::get('postEmploye', [PagesController::class, 'postEmployePage'])->name('gestionEmploye.postEmploye');
+    Route::get('leaveRequest',[PagesController::class, 'leaveRequestPage'])->name('gestionEmploye.leaveRequest');
 });
 
 Route::group(['prefix' => 'facturation', 'middleware' => 'auth'], function(){
