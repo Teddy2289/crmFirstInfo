@@ -151,8 +151,9 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
+                                            
                                             <label for="number" class="form-label">{{ __('number') }}</label>
-                                            <input type="text" class="form-control" id="numbergenerated" name="number" wire:model="number" readonly>
+                                            <input type="text" class="form-control" id="number" name="number" value="{{$number}}" wire:model.lazy="number" readonly>
                                             @error('number')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
@@ -282,33 +283,4 @@
             </div>
         </div>
     </section>
-    @push('scripts')
-    <script>
-        function formatNumber(num, length) {
-            return num.toString().padStart(length, '0');
-        }
-
-        function generateNumber(year, currentNumber) {
-            return year + "-" + formatNumber(currentNumber, 4);
-        }
-        document.addEventListener('DOMContentLoaded', function() {
-            const currentDate = new Date();
-            const currentYear = currentDate.getFullYear();
-            console.log(currentYear);
-            // Remplacez cette partie avec la logique pour obtenir le dernier numéro enregistré, puis ajoutez 1.
-            const currentNumber = 1;
-            console.log(currentNumber);
-            const generatedNumber = generateNumber(currentYear, currentNumber);
-
-            const numberInput = document.getElementById('numbergenerated');
-            console.log("number", numberInput);
-            // Vérifier si l'élément input existe
-            if (numberInput) {
-                // Assigner la valeur générée à l'élément input
-                numberInput.value = generatedNumber;
-            }
-        });
-    </script>
-
-    @endpush
 </div>

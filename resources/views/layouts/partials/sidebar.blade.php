@@ -186,7 +186,7 @@
         <li class="nav-item">
             @can('manage_permissions', auth()->user())
                 <a href="{{ route('security.permission') }}">
-                    <i class="nav-icon i-lock"></i>
+                <i class="nav-icon i-Key"></i>
                     <span class="item-name">{{ __('Permission') }}</span>
                 </a>
             @endcan
@@ -202,7 +202,6 @@
         @can('manage_countries', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('esn.country') }}">
-                    <i class="nav-icon i-Shop-4"></i>
                     <span class="item-name">{{ __('Country') }}</span>
                 </a>
             </li>

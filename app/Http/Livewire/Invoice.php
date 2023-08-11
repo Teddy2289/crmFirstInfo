@@ -75,12 +75,14 @@ class Invoice extends Component
 
     public function render()
     {
+        $this->generateUniqueNumber();
         $contracts = Contract::all();
         $payements = Payement::all();
         return view('livewire.invoice', [
             "contracts" => $contracts,
             "payements" => $payements,
             'monthsEn' => Date::getMonthsEn(),
+            'number' => $this->number,
         ]);
     }
 
