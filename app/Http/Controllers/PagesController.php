@@ -67,4 +67,9 @@ class PagesController extends Controller
     {
         return view('Admin.payement.page');
     }
+    public function leaveRequestPage()
+    {
+        return view('Admin.leaveRequest.page');
+    }
+    
 }

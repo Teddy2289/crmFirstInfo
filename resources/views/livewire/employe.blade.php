@@ -530,6 +530,7 @@
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
+                                <th scope="col">{{__('Nom')}}</th>
                                     <th scope="col">{{__('Numéro de téléphone')}}</th>
                                     <th scope="col">{{__('Adresse')}}</th>
                                     <th scope="col">{{__('Entreprise')}}</th>
@@ -541,6 +542,7 @@
                             <tbody>
                                 @foreach ($employees as $employe)
                                 <tr>
+                                    <td>{{ $employe->first_name }}</td>
                                     <td>{{ $employe->phone_number }}</td>
                                     <td>{{ $employe->address }}</td>
                                     <td>{{ $employe->company->name }}</td>

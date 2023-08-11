@@ -77,6 +77,12 @@
                         <span class="item-name">{{ __('Type conge') }}</span>
                     </a>
                 </li>
+                <li>
+                    <a class="" href="{{ route('gestionEmploye.leaveRequest') }}">
+                        <i class="nav-icon i-Calendar-4"></i>
+                        <span class="item-name">{{ __('Demande conge') }}</span>
+                    </a>
+                </li>
                 <!-- Other sub-menu items for users with the 'view_type_leave' permission -->
             </ul>
         </li>

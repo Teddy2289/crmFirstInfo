@@ -282,6 +282,7 @@
                                     <th scope="col">{{__('Label')}}</th>
                                     <th scope="col">{{__('Client')}}</th>
                                     <th scope="col">{{__('Utilisateur')}}</th>
+                                    <th scope="col">{{__('Entreprise')}}</th>
                                     <th scope="col">{{__('Daily Rate')}}</th>
                                     <th scope="col">{{__('Start Date')}}</th>
                                     <th scope="col">{{__('End Date')}}</th>
@@ -294,6 +295,7 @@
                                     <td>{{ $contract->label }}</td>
                                     <td>{{ $contract->client->name }}</td>
                                     <td>{{ $contract->user->name }}</td>
+                                    <td>{{ $contract->company->name }}</td>
                                     <td>{{ $contract->daily_rate }}</td>
                                     <td>{{ \App\Helpers\Date::formatDateFr($contract->start_date) }}</td>
                                     <td>{{ \App\Helpers\Date::formatDateFr($contract->end_date) }}</td>

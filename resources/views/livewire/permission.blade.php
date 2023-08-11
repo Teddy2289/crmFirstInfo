@@ -162,7 +162,7 @@
                                 <tr>
                                     <td>{{ $permission->name }}</td>
                                     <td>{{ $permission->guard_name }}</td>
-                                    <td>{{ formatDateFr($permission->created_at)}}</td>
+                                    <td>{{ $permission->created_at->format('d, M Y') }}</td>
                                     <td>
                                         @can('edit-permission')
                                             <button type="button" class="btn btn-raised btn-rounded btn-raised-primary"
