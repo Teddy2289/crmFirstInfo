@@ -31,7 +31,7 @@ class HomeController extends Controller
             ->orderBy('month')
             ->get();
 
-        $monthlyClients = Db::table('Clients')
+        $monthlyClients = Db::table('clients')
         ->select(DB::raw('MONTH(created_at) as month, COUNT(*) as count'))
         ->groupBy('month')
         ->orderBy('month')
