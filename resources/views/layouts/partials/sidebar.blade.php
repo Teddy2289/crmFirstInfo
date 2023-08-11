@@ -186,7 +186,7 @@
         <li class="nav-item">
             @can('manage_permissions', auth()->user())
                 <a href="{{ route('security.permission') }}">
-                    <i class="nav-icon i-Business-Mens"></i>
+                    <i class="nav-icon i-lock"></i>
                     <span class="item-name">{{ __('Permission') }}</span>
                 </a>
             @endcan

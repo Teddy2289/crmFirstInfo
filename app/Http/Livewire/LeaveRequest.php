@@ -55,7 +55,6 @@ class LeaveRequest extends Component
         'end_date.date' => 'Le champ Date de fin doit être une date valide.',
         'end_date.after' => 'La date de fin doit être après la date de début.',
         'statut.required' => 'Le champ Statut est obligatoire.'
-        
     ];
 
 
@@ -127,7 +126,7 @@ class LeaveRequest extends Component
         $this->loading = false;
     }    
 
-    public function showEdit($LeaveRequst_Id)
+    public function showEdit($leaveRequest_id)
     {
         $leaveRequest = ModelsLeaveRequest::find($leaveRequest_id);
         if ($leaveRequest) {

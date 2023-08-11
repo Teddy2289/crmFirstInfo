@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LeaveRequested extends Model
 {
     use HasFactory;
-    protected $fillable = ['employe_id','leave_type_id','compagny_id','Leave_reason','start_date','end_date','statut'];
+    protected $fillable = ['employe_id','leave_type_id','company_id','Leave_reason','start_date','end_date','statut'];
 
     public function employe()
     {
