@@ -141,7 +141,7 @@
                                 @foreach ($payements as $payement)
                                     <tr>
                                         <td>{{ $payement->label }}</td>
-                                        <td>{{ formatDateFr($payement->created_at) }}</td>
+                                        <td>{{ $payement->created_at->formatLocalized('%d %B %Y') }}</td>
                                         <td>
                                             @can('edit-payement')
                                                 <button type="button"

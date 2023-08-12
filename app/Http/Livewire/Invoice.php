@@ -15,6 +15,7 @@ class Invoice extends Component
     use WithPagination;
     public $contract_id;
     public $payement_id;
+    public $invoice_id;
     public $date;
     public $month;
     public $year;
@@ -76,9 +77,11 @@ class Invoice extends Component
     public function render()
     {
         $this->generateUniqueNumber();
+        $invoices = ModelsInvoice::paginate(8); 
         $contracts = Contract::all();
         $payements = Payement::all();
         return view('livewire.invoice', [
+            'invoices' => $invoices,
             "contracts" => $contracts,
             "payements" => $payements,
             'monthsEn' => Date::getMonthsEn(),
@@ -198,6 +201,62 @@ class Invoice extends Component
         $this->notificationMessage = 'Facture(s) ajouté(e) avec succes.';
         $this->emit('success');
     }
+
+    public function showEdit($invoiceId)
+{
+    $this->resetAll(); // Clear any previous form data
+    $this->form = 'editInvoice';
+    $this->loading = true;
+
+    $invoice = ModelsInvoice::findOrFail($invoiceId);
+
+    $this->contract_id = $invoice->contract_id;
+    $this->payement_id = $invoice->payement_id;
+    // Set other properties as needed...
+
+    // Load invoice details
+    $this->details = $invoice->details->map(function ($detail) {
+        return [
+            'label' => $detail->label,
+            'quantity' => $detail->quantity,
+            'price' => $detail->price,
+            'fee' => $detail->fee,
+        ];
+    });
+
+    // Set other properties...
+
+    $this->loading = false;
+}
+
+public function deleteInvoiceConfirmation($invoiceId)
+{
+    $this->confirmingDelete = true;
+    $this->invoice_id = $invoiceId;
+}
+public function deleteInvoiceConfirmed()
+{
+    // Find the invoice by its ID
+    $invoice = ModelsInvoice::find($this->invoice_id);
+
+    if ($invoice) {
+        // Delete the invoice and its associated details
+        $invoice->details()->delete();
+        $invoice->delete();
+
+        // Optionally, you can refresh the component data using Livewire's render method
+        $this->render();
+
+        // Show a success notification
+        session()->flash('success', 'Invoice deleted successfully.');
+
+        // Emit a Livewire event to handle UI updates
+        $this->emit('success');
+
+        // Emit an event to close the delete confirmation modal
+        $this->emit('close-delete-confirmation-modal');
+    }
+}
 
     public function cancel()
     {

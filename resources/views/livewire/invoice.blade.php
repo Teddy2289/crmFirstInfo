@@ -278,6 +278,89 @@
                     </form>
                     @endif
                     <!-- Vue Livewire -->
+                     <div>
+                        @if ($invoices->isEmpty())
+                        <div class="alert alert-info" role="alert">
+                            {{ __('Aucun facture disponible.') }}
+                        </div>
+                             @else
+    <table class="table table-striped table-hover">
+        <thead>
+            <tr>
+                <th scope="col">{{__('Quantity')}}</th>
+                <th scope="col">{{__('Date')}}</th>
+                <th scope="col">{{__('Status')}}</th>
+                <th scope="col">{{__('Contract')}}</th>
+                <th scope="col">{{__('Montant_ttc')}}</th>
+                <th scope="col">{{__('Date_sent')}}</th>
+                <th scope="col">{{__('Date_paid')}}</th>
+                <th scope="col">{{__('Action')}}</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach ($invoices as $invoice)
+                <tr>
+                    <td>{{ $invoice->quantity }}</td>
+                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date) }}</td>
+                    <td>{{ $invoice->status }}</td>
+                    <td>{{ $invoice->contract->label }}</td>
+                      <td>{{ number_format($invoice->montant_ttc, 2, '.', ',') }} $</td>
+                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_sent) }}</td>
+                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_paid) }}</td>
+                    <td>
+                        @can('edit-invoice')
+                            <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $invoice->id }}')">
+                                <i class="nav-icon i-Pen-2 font-weight-bold"></i>
+                            </button>
+                        @endcan
+                        @can('delete-invoice')
+                            <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $invoice->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
+                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
+                            </button>
+                        @endcan
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+    <div class="d-flex justify-content-center">
+        {{ $invoices->links() }}
+    </div>
+@endif
+          <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+        <!-- Modal content here -->
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteConfirmationModalLabel">{{__('Confirm Delete')}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+        <!-- ... -->
+    </div>
+    <div>
+     <div class="modal-body">
+      <p>{{__('Are you sure you want to delete this employee?')}}</p>                             </div>
+    </div>
+     <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{__('Cancel')}}</button>
+         <button type="button" class="btn btn-danger" wire:click="deleteInvoiceConfirmed">{{__('Delete')}}</button>
+  
+   </div>
+</div>
+@push('scripts')
+<script>
+    Livewire.on('success', () => {
+        // Close the delete confirmation modal
+        $('#deleteConfirmationModal').modal('hide');
+    });
+
+    Livewire.on('close-delete-confirmation-modal', () => {
+        // Close the delete confirmation modal
+        $('#deleteConfirmationModal').modal('hide');
+    });
+</script>
+@endpush            
+                        
                     <!-- End Default Table Example -->
                 </div>
             </div>

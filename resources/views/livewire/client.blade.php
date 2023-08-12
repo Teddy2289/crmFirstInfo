@@ -264,7 +264,7 @@
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $client->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>
                                         @endcan
                                         @can('delete-client')
-                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteClientConfirmation({{ $client->id }})" data-toggle="modal" data-target="#deleteConfirmationModal"> <i class="nav-icon i-Close-Window font-weight-bold"></i></button>
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $client->id }})" data-toggle="modal" data-target="#deleteConfirmationModal"> <i class="nav-icon i-Close-Window font-weight-bold"></i></button>
                                         @endcan
                                     </td>
                                 </tr>
