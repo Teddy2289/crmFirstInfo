@@ -15,6 +15,7 @@ class Invoice extends Component
     use WithPagination;
     public $contract_id;
     public $payement_id;
+    public $invoice_id;
     public $date;
     public $month;
     public $year;
@@ -26,6 +27,7 @@ class Invoice extends Component
     public $date_sent;
     public $date_paid;
     public $details = [];
+    public $editingInvoiceId = null;
     public $form = '';
     public $confirmingDelete = false;
     public $confirmingUpdate = false;
@@ -72,13 +74,14 @@ class Invoice extends Component
     
 
 
-
     public function render()
     {
         $this->generateUniqueNumber();
+        $invoices = ModelsInvoice::paginate(8); 
         $contracts = Contract::all();
         $payements = Payement::all();
         return view('livewire.invoice', [
+            'invoices' => $invoices,
             "contracts" => $contracts,
             "payements" => $payements,
             'monthsEn' => Date::getMonthsEn(),
@@ -199,8 +202,122 @@ class Invoice extends Component
         $this->emit('success');
     }
 
+    public function showEdit($invoiceId)
+{
+    $this->resetAll(); 
+    $this->form = 'editInvoice';
+    $this->editingInvoiceId = $invoiceId;
+    $this->loading = true;
+
+    $invoice = ModelsInvoice::findOrFail($invoiceId);
+
+    $this->contract_id = $invoice->contract_id;
+    $this->payement_id = $invoice->payement_id;
+    $this->details = $invoice->details->map(function ($detail) {
+        return [
+            'label' => $detail->label,
+            'quantity' => $detail->quantity,
+            'price' => $detail->price,
+            'fee' => $detail->fee,
+        ];
+    });
+
+    $this->loading = false;
+}
+   public function updateInvoice()
+    {
+        $this->validate([
+            'date' => 'required|date',
+            'month' => 'required',
+            'year' => 'required',
+            // ... add validation rules for other properties ...
+        ]);
+
+        $invoice = Invoice::findOrFail($this->editingInvoiceId);
+        $invoice->update([
+            'date' => $this->date,
+            'month' => $this->month,
+            'year' => $this->year,
+            // ... update other properties ...
+        ]);
+        $this->resetForm();
+        $this->emit('success', __('Invoice updated successfully.'));
+    }
+
+    public function resetForm()
+    {
+        $this->date = null;
+        $this->month = null;
+        $this->year = null;
+        // ... reset other properties ...
+    }
+    public function updateInvoiceConfirmed()
+    {
+  
+    $this->validate([
+        'date' => 'required|date',
+        'month' => 'required',
+        'year' => 'required',
+        'contract_id' => 'required|exists:contracts,id',
+        'payement_id' => 'required|exists:payements,id', 
+        'day_count' => 'required|integer|min:1',
+        'note' => 'nullable', 
+        'montant_ht' => 'required|numeric|min:0',
+        'montant_ttc' => 'required|numeric|min:0', 
+        'date_sent' => 'required|date', 
+        'date_paid' => 'required|date', 
+        // ... Add validation rules for other fields ...
+    ]);
+
+    // Find the invoice by its ID
+    $invoice = ModelsInvoice::find($this->editingInvoiceId);
+
+    // Update the invoice's data with the edited values
+    if ($invoice) {
+        // Update the invoice's data with the edited values
+        $invoice->date = $this->date;
+        $invoice->month = $this->month;
+        $invoice->year = $this->year;
+        $invoice->contract_id = $this->contract_id;
+        $invoice->payement_id = $this->payement_id;
+        $invoice->day_count = $this->day_count;
+        $invoice->note = $this->note;
+        $invoice->montant_ht = $this->montant_ht;
+        $invoice->montant_ttc = $this->montant_ttc;
+        $invoice->date_sent = $this->date_sent;
+        $invoice->date_paid = $this->date_paid;
+        // ... Update other fields ...
+
+        $invoice->update();
+        $this->resetForm();
+        $this->editingInvoiceId = null; 
+        $this->notificationMessage = 'Facture modifiee avec succes.';
+        $this->emit('success');
+        $this->form = '';
+    }
+    }
+
+
+        public function deleteInvoiceConfirmation($invoiceId)
+    {
+       $this->confirmingDelete = true;
+       $this->invoice_id = $invoiceId;
+    }
+        public function deleteInvoiceConfirmed()
+{
+        $invoice = ModelsInvoice::find($this->invoice_id);
+
+    if ($invoice) {
+        $invoice->details()->delete();
+        $invoice->delete();
+        $this->notificationMessage = 'Facture supprimé(e) avec succes.';
+        $this->resetAll();
+        $this->emit('success');
+    }
+ }
+
     public function cancel()
     {
         $this->resetAll();
     }
-}
+  }
