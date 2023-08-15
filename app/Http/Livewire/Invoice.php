@@ -23,7 +23,6 @@ class Invoice extends Component
     public $day_count;
     public $note;
     public $montant_ht;
-    public $montant_ttc;
     public $date_sent;
     public $date_paid;
     public $details = [];
@@ -48,7 +47,6 @@ class Invoice extends Component
         'day_count' => 'required',
         'note' => 'nullable',
         'montant_ht' => 'required',
-        'montant_ttc' => 'required',
         'date_sent' => 'required',
         'date_paid' => 'required',
         'details.*.label' => 'required',
@@ -164,7 +162,6 @@ class Invoice extends Component
             'day_count' => 'required',
             'note' => 'nullable',
             'montant_ht' => 'required',
-            'montant_ttc' => 'required',
             'year' => 'required',
             'date_paid' => 'required',
             'date_sent' => 'required',
@@ -184,7 +181,6 @@ class Invoice extends Component
             'day_count' => $validatedData['day_count'],
             'note' => $validatedData['note'],
             'montant_ht' => $validatedData['montant_ht'],
-            'montant_ttc' => $validatedData['montant_ttc'],
             'date_paid' => $validatedData['date_paid'],
             'date_sent' => $validatedData['date_sent'],
         ]);
@@ -219,7 +215,6 @@ class Invoice extends Component
             $this->day_count = $invoice->day_count;
             $this->note = $invoice->note;
             $this->montant_ht = $invoice->montant_ht;
-            $this->montant_ttc = $invoice->montant_ttc;
             $this->date_paid = $invoice->date_paid;
             $this->date_sent = $invoice->date_sent;
             $this->details = $invoice->details->map(function ($detail) {
@@ -248,7 +243,6 @@ class Invoice extends Component
                     'day_count' => $this->day_count,
                     'note' => $this->note,
                     'montant_ht' => $this->montant_ht,
-                    'montant_ttc' => $this->montant_ttc,
                     'date_paid' => $this->date_paid,
                     'date_sent' => $this->date_sent,
                 ]);

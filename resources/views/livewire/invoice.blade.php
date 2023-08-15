@@ -233,17 +233,6 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="montant_ttc" class="form-label">{{__('montant_ttc')}}</label>
-                                            <input type="text" class="form-control" id="montant_ttc" name="montant_ttc" wire:model.lazy="montant_ttc">
-                                            @error('montant_ttc')
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
                                             <label for="date_sent" class="form-label">{{__('date_sent')}}</label>
                                             <input type="date" class="form-control" id="date_sent" name="date_sent" wire:model.lazy="date_sent">
                                             @error('date_sent')
@@ -472,17 +461,6 @@
                                             <label for="edit_montant_ht" class="form-label">{{__('montant_ht')}}</label>
                                             <input type="text" class="form-control" id="edit_montant_ht" name="edit_montant_ht" wire:model.lazy="montant_ht">
                                             @error('montant_ht')
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="edit_montant_ttc" class="form-label">{{__('montant_ttc')}}</label>
-                                            <input type="text" class="form-control" id="edit_montant_ttc" name="edit_montant_ttc" wire:model.lazy="montant_ttc">
-                                            @error('montant_ttc')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
