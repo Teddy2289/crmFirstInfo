@@ -11,9 +11,8 @@ class InvoiceDetail extends Model
     protected $fillable = ['label', 'quantity', 'price', 'fee','invoice_id'];
     public function invoice()
     {
-        return $this->belongsTo(Invoice::class);
+        return $this->belongsTo(Invoice::class, 'invoice_id', 'id');
     }
-
     protected $casts = [
         'fee' => 'boolean',
     ];

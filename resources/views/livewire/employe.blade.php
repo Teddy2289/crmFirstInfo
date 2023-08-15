@@ -584,20 +584,6 @@
                                 </div>
                             </div>
                         </div>
-
-                        @push('scripts')
-                        <script>
-                            Livewire.on('success', () => {
-                                // Close the delete confirmation modal
-                                $('#deleteConfirmationModal').modal('hide');
-                            });
-
-                            Livewire.on('close-delete-confirmation-modal', () => {
-                                // Close the delete confirmation modal
-                                $('#deleteConfirmationModal').modal('hide');
-                            });
-                        </script>
-                        @endpush
                     </div>
 
                     <!-- End Default Table Example -->

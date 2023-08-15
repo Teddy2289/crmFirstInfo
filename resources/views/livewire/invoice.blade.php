@@ -151,7 +151,7 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            
+
                                             <label for="number" class="form-label">{{ __('number') }}</label>
                                             <input type="text" class="form-control" id="number" name="number" value="{{$number}}" wire:model.lazy="number" readonly>
                                             @error('number')
@@ -277,10 +277,10 @@
                         </div>
                     </form>
                     @endif
-{{-- edit  --}}
-@can('edit-invoice')
+                    {{-- edit  --}}
+                    @can('edit-invoice')
                     @if ($form == 'editInvoice')
-                    <form wire:submit.prevent="saveInvoice" class="mb-3">
+                    <form class="mb-3">
                         <div class="card">
                             <div class="card-body">
                                 <div class="card mb-4">
@@ -325,26 +325,17 @@
                                             </div>
                                             <div class="col-md-2">
 
-                                                <!-- <label for="fee" class="form-label">{{__('fee')}}<span class="text-danger">(*)</span></label>
-                                                    <input type="checkbox" class="form-control" id="fee" name="fee" wire:model="details.{{ $index }}.fee">
-                                                    @error('fee')
-                                                    <div class="alert alert-danger" role="alert">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror -->
+
                                                 <label class="checkbox checkbox-primary">
                                                     <input type="checkbox" id="edit_fee" name="edit_fee" wire:model="details.{{ $index }}.fee" value="1" wire:init="setDefaultFeeValue">
                                                     <span>{{__('fee')}}</span>
                                                     <span class="checkmark"></span>
-                                                    @error('details.{{ $index }}.fee')
-                                                    <div class="alert alert-danger" role="alert">
-                                                        {{ $message }}
-                                                    </div>
-                                                    @enderror
                                                 </label>
-
-
-
+                                                @error("details.$index.fee")
+                                                <div class="alert alert-danger" role="alert">
+                                                    {{ $message }}
+                                                </div>
+                                                @enderror
                                             </div>
                                             <div class="col-md-1">
                                                 <button type="button" class="btn btn-danger " wire:click.prevent="removeDetail({{ $index }})">
@@ -353,7 +344,6 @@
                                             </div>
                                         </div>
                                         <hr>
-
                                         @endforeach
                                         <button class="btn btn-primary btn-rounded" wire:click.prevent="addDetail">ajout details</button>
                                     </div>
@@ -404,12 +394,11 @@
                                             @enderror
                                         </div>
                                     </div>
-
                                 </div>
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            
+
                                             <label for="edit_number" class="form-label">{{ __('number') }}</label>
                                             <input type="text" class="form-control" id="edit_number" name="edit_number" value="{{$number}}" wire:model.lazy="number" readonly>
                                             @error('number')
@@ -559,99 +548,84 @@
                             </div>
                         </div>
                     </form>
-                     @endif
+                    @endif
                     @endcan
 
-{{-- fin edit --}}
-
+                    {{-- fin edit --}}
 
                     <!-- Vue Livewire -->
-                     <div>
+                    <div>
                         @if ($invoices->isEmpty())
                         <div class="alert alert-info" role="alert">
                             {{ __('Aucun facture disponible.') }}
                         </div>
-                             @else
-    <table class="table table-striped table-hover">
-        <thead>
-            <tr>
-                <th scope="col">{{__('Quantity')}}</th>
-                <th scope="col">{{__('Date')}}</th>
-                <th scope="col">{{__('Status')}}</th>
-                <th scope="col">{{__('Contract')}}</th>
-                <th scope="col">{{__('Montant_ttc')}}</th>
-                <th scope="col">{{__('Date_sent')}}</th>
-                <th scope="col">{{__('Date_paid')}}</th>
-                <th scope="col">{{__('Action')}}</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($invoices as $invoice)
-                <tr>
-                    <td>{{ $invoice->quantity }}</td>
-                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date) }}</td>
-                    <td>{{ $invoice->status }}</td>
-                    <td>{{ $invoice->contract->label }}</td>
-                      <td>{{ number_format($invoice->montant_ttc, 2, '.', ',') }} $</td>
-                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_sent) }}</td>
-                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_paid) }}</td>
-                    <td>
-                        @can('edit-invoice')
-                            <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $invoice->id }}')">
-                                <i class="nav-icon i-Pen-2 font-weight-bold"></i>
-                            </button>
-                        @endcan
-                        @can('delete-invoice')
-                            <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $invoice->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
-                                <i class="nav-icon i-Close-Window font-weight-bold"></i>
-                            </button>
-                        @endcan
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-    <div class="d-flex justify-content-center">
-        {{ $invoices->links() }}
-    </div>
-@endif
-          <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
-        <!-- Modal content here -->
-        <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="deleteConfirmationModalLabel">{{__('Confirm Delete')}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-        <!-- ... -->
-    </div>
-    <div>
-     <div class="modal-body">
-      <p>{{__('Are you sure you want to delete this employee?')}}</p>                             </div>
-    </div>
-     <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{__('Cancel')}}</button>
-         <button type="button" class="btn btn-danger" wire:click="deleteInvoiceConfirmed">{{__('Delete')}}</button>
-  
-   </div>
-</div>
-@push('scripts')
-<script>
-    Livewire.on('success', () => {
-        // Close the delete confirmation modal
-        $('#deleteConfirmationModal').modal('hide');
-    });
+                        @else
+                        <table class="table table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">{{__('Date')}}</th>
+                                    <th scope="col">{{__('Status')}}</th>
+                                    <th scope="col">{{__('Contract')}}</th>
+                                    <th scope="col">{{__('Montant_ttc')}}</th>
+                                    <th scope="col">{{__('Date_sent')}}</th>
+                                    <th scope="col">{{__('Date_paid')}}</th>
+                                    <th scope="col">{{__('Action')}}</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach ($invoices as $invoice)
+                                <tr>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date) }}</td>
+                                    <td>{{ $invoice->statusPayement->label }}</td>
+                                    <td>{{ $invoice->contract->label }}</td>
+                                    <td>{{ number_format($invoice->montant_ttc, 2, '.', ',') }} $</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_sent) }}</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_paid) }}</td>
+                                    <td>
+                                        @can('edit-invoice')
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $invoice->id }}')">
+                                            <i class="nav-icon i-Pen-2 font-weight-bold"></i>
+                                        </button>
+                                        @endcan
+                                        @can('delete-invoice')
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $invoice->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
+                                            <i class="nav-icon i-Close-Window font-weight-bold"></i>
+                                        </button>
+                                        @endcan
+                                    </td>
+                                </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
+                        <div class="d-flex justify-content-center">
+                            {{ $invoices->links() }}
+                        </div>
+                        @endif
+                        <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
+                            <!-- Modal content here -->
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="deleteConfirmationModalLabel">{{__('Confirm Delete')}}</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                            <!-- ... -->
+                                    </div>
+                                    <div>
+                                        <div class="modal-body">
+                                            <p>{{__('Are you sure you want to delete this employee?')}}</p>
+                                        </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal"> {{__('Cancel')}}</button>
+                                        <button type="button" class="btn btn-danger" wire:click="deleteInvoiceConfirmed">{{__('Delete')}}</button>
 
-    Livewire.on('close-delete-confirmation-modal', () => {
-        // Close the delete confirmation modal
-        $('#deleteConfirmationModal').modal('hide');
-    });
-         </script>
-              @endpush  
-              </div>                      
-                    <!-- End Default Table Example -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- End Default Table Example -->
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
     </section>
 </div>

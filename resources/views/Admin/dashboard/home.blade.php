@@ -16,8 +16,6 @@
                 <li class="breadcrumb-item active" aria-current="page">{{__('Dashboard')}}</li>
             </ol>
         </nav>
-
-        <!-- Move the Utilisateur inscrit par mois card here -->
         <div class="row">
             <div class="col-md-6">
                 <div class="card mb-4">
@@ -27,10 +25,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-
-        <!-- Move the Clients inscrit par mois card here -->
-        <div class="row">
             <div class="col-md-6">
                 <div class="card mb-4">
                     <div class="card-body">
@@ -39,19 +33,8 @@
                     </div>
                 </div>
             </div>
-            
-            <!-- Move the Répartition des utilisateurs card here -->
-            <div class="col-md-6">
-                <div class="card mb-4">
-                    <div class="card-body">
-                        <div class="card-title">Répartition des utilisateurs</div>
-                        <canvas id="userPieChart" style="display: block; width: 444px; height: 222px;" width="444" height="222"></canvas>
-                    </div>
-                </div>
-            </div>
         </div>
     </div>
-    
        @push('scripts')
     <script>
         // Chart.js configuration for the bar chart
@@ -93,40 +76,6 @@
             }
         });
     </script>
-    <script>
-      var pieCtx = document.getElementById('userPieChart').getContext('2d');
-        var pieData = @json($userDistribution);
-
-        var pieLabels = [];
-        var pieCounts = [];
-
-        pieData.forEach(item => {
-            pieLabels.push(item.label);
-            pieCounts.push(item.count);
-        });
-
-        var pieChart = new Chart(pieCtx, {
-            type: 'pie',
-            data: {
-                labels: pieLabels,
-                datasets: [{
-                    label: 'User Distribution',
-                    data: pieCounts,
-                    backgroundColor: [
-                        '#FF6384',
-                        '#36A2EB',
-                        '#FFCE56',
-                        // Add more colors if you have more data
-                    ],
-                }],
-            },
-            options: {
-                responsive: false,
-            },
-        });
-        
-    </script>
-
    <script>
         // Chart.js configuration for the bar chart
         var ctx = document.getElementById('clientChart').getContext('2d');

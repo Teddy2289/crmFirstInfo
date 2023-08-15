@@ -12,7 +12,7 @@
             <li class="nav-item" data-item="clients">
                 <a class="nav-item-hold " href="#">
                     <i class="nav-icon i-Windows-2"></i>
-                    <span class="nav-text">{{__('Gestion des ESN')}}</span>
+                    <span class="nav-text">{{__('Gestion des clients / entreprises')}}</span>
                 </a>
                 <div class="triangle"></div>
             </li>
@@ -46,123 +46,103 @@
         <!-- Submenu Dashboards -->
 
         <ul class="childNav" data-parent="salaries">
-    @can('view_employee_list', auth()->user())
-        <li class="nav-item">
-            <a href="{{ route('gestionEmploye.employe') }}">
-                <i class="nav-icon i-Business-ManWoman"></i>
-                <span class="item-name">{{ __('Liste Employées') }}</span>
-            </a>
-        </li>
-    @endcan
-    @can('view_post_employer', auth()->user())
-        <li class="nav-item">
-            <a href="{{ route('gestionEmploye.postEmploye') }}">
-                <i class="nav-icon i-Calendar-4"></i>
-                <span class="item-name">{{ __('Post Employer') }}</span>
-            </a>
-        </li>
-    @endcan
+            @can('view_employee_list', auth()->user())
+            <li class="nav-item">
+                <a href="{{ route('gestionEmploye.employe') }}">
+                    <i class="nav-icon i-Business-ManWoman"></i>
+                    <span class="item-name">{{ __(' Employées') }}</span>
+                </a>
+            </li>
+            @endcan
+            @can('view_post_employer', auth()->user())
+            <li class="nav-item">
+                <a href="{{ route('gestionEmploye.postEmploye') }}">
+                    <i class="nav-icon i-Calendar-4"></i>
+                    <span class="item-name">{{ __('Post Employer') }}</span>
+                </a>
+            </li>
+            @endcan
 
- @can('view_type_leave', auth()->user())
-        <li class="nav-item dropdown-sidemenu">
-            <a>
-                <i class="nav-icon i-Shop-2"></i>
-                <span class="item-name">{{ __('Suivi congée') }}</span>
-                <i class="dd-arrow i-Arrow-Down"></i>
-            </a>
-            <ul class="submenu">
-                <li>
-                    <a class="" href="{{ route('gestionEmploye.typeleave') }}">
-                        <i class="nav-icon i-Calendar-4"></i>
-                        <span class="item-name">{{ __('Type conge') }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a class="" href="{{ route('gestionEmploye.leaveRequest') }}">
-                        <i class="nav-icon i-Calendar-4"></i>
-                        <span class="item-name">{{ __('Demande conge') }}</span>
-                    </a>
-                </li>
-                <!-- Other sub-menu items for users with the 'view_type_leave' permission -->
-            </ul>
-        </li>
-    @endcan
-        </ul>
-
-
-<ul class="childNav" data-parent="clients">
- @can('view_clients', auth()->user())
-    <li class="nav-item dropdown-sidemenu">
-        <a>
-            <i class="nav-icon i-Checked-User"></i>
-            <span class="item-name">{{ __('Gestion clients') }}</span>
-            <i class="dd-arrow i-Arrow-Down"></i>
-        </a>
-        <ul class="submenu">
-                <li>
-                    <a class="" href="{{ route('esn.client') }}">
-                        <i class="nav-icon i-Receipt"></i>
-                        <span class="item-name">{{ __('Liste clients') }}</span>
-                    </a>
-                </li>
-                <!-- Other sub-menu items for users with the 'view_clients' permission -->
+            @can('view_type_leave', auth()->user())
+            <li class="nav-item dropdown-sidemenu">
+                <a>
+                    <i class="nav-icon i-Calendar-4"></i>
+                    <span class="item-name">{{ __('Suivi congée') }}</span>
+                    <i class="dd-arrow i-Arrow-Down"></i>
+                </a>
+                <ul class="submenu">
+                    <li>
+                        <a class="" href="{{ route('gestionEmploye.typeleave') }}">
+                            <i class="nav-icon i-Calendar-4"></i>
+                            <span class="item-name">{{ __('Type conge') }}</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="" href="{{ route('gestionEmploye.leaveRequest') }}">
+                            <i class="nav-icon i-Calendar-4"></i>
+                            <span class="item-name">{{ __('Demande conge') }}</span>
+                        </a>
+                    </li>
+                    <!-- Other sub-menu items for users with the 'view_type_leave' permission -->
+                </ul>
+            </li>
             @endcan
         </ul>
-    </li>
 
-              @can('view_company', auth()->user())
-        <li class="nav-item dropdown-sidemenu">
-            <a>
-                <i class="nav-icon i-Shop-2"></i>
-                <span class="item-name">{{ __('Entreprises prestataires') }}</span>
-                <i class="dd-arrow i-Arrow-Down"></i>
-            </a>
-            <ul class="submenu">
-                <li>
-                    <a class="" href="{{ route('esn.company') }}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">{{ __('Liste entreprise') }}</span>
-                    </a>
-                </li>
-                <!-- Other sub-menu items for users with the 'view_company' permission -->
-            </ul>
-        </li>
-    @endcan
-  @can('view_technology', auth()->user())
-        <li class="nav-item">
-            <a href="{{ route('esn.technology') }}">
-                <i class="nav-icon i-Receipt-4"></i>
-                <span class="item-name">{{ __('Liste techno') }}</span>
-            </a>
-        </li>
-    @endcan
+
+        <ul class="childNav" data-parent="clients">
+            @can('view_clients', auth()->user())
+            <li class="nav-item">
+                <a class="" href="{{ route('esn.client') }}">
+                    <i class="nav-icon i-Receipt"></i>
+                    <span class="item-name">{{ __('Clients') }}</span>
+                </a>
+            </li>
+            @endcan
+            @can('view_company', auth()->user())
+            <li class="nav-item">
+                <a class="" href="{{ route('esn.company') }}">
+                    <i class="nav-icon i-Shop-2"></i>
+                    <span class="item-name">{{ __('Entreprise') }}</span>
+                </a>
+            </li>
+            @endcan
+            @can('view_technology', auth()->user())
+            <li class="nav-item">
+                <a href="{{ route('esn.technology') }}">
+                    <i class="nav-icon i-Receipt-4"></i>
+                    <span class="item-name">{{ __('Technologie') }}</span>
+                </a>
+            </li>
+            @endcan
         </ul>
 
         <ul class="childNav" data-parent="facture">
-                @can('view_invoice_list', auth()->user())
-                   <li class="nav-item">
-                       <a href="{{route('facturation.invoice')}}">
-                           <i class="nav-icon i-Add-File"></i>
-                           <span class="item-name">{{__('facture')}}</span>
-                       </a>
-                   </li>
-                @endcan
+            @can('view_invoice_list', auth()->user())
             <li class="nav-item">
-                @can('view_contract', auth()->user())
-                    <a href="{{ route('facturation.contract') }}">
-                        <i class="nav-icon i-Calendar-4"></i>
-                        <span class="item-name">{{ __('Contrat') }}</span>
-                    </a>
-                @endcan
+                <a href="{{route('facturation.invoice')}}">
+                    <i class="nav-icon i-Add-File"></i>
+                    <span class="item-name">{{__('facture')}}</span>
+                </a>
             </li>
+            @endcan
+            @can('view_contract', auth()->user())
             <li class="nav-item">
-                @can('view_contract', auth()->user())
-                    <a href="{{ route('Payement.contract') }}">
-                        <i class="nav-icon i-Receipt-4"></i>
-                        <span class="item-name">{{ __('Payement') }}</span>
-                    </a>
-                @endcan
+                <a href="{{ route('facturation.contract') }}">
+                    <i class="nav-icon i-Calendar-4"></i>
+                    <span class="item-name">{{ __('Contrat') }}</span>
+                </a>
             </li>
+            @endcan
+            @can('view_contract', auth()->user())
+            <li class="nav-item">
+                
+                <a href="{{ route('Payement.contract') }}">
+                    <i class="nav-icon i-Receipt-4"></i>
+                    <span class="item-name">{{ __('Payement') }}</span>
+                </a>
+            </li>
+            @endcan
         </ul>
 
         <ul class="childNav" data-parent="dashboard">
@@ -175,59 +155,59 @@
         </ul>
 
         <ul class="childNav" data-parent="sessions">
-          <li class="nav-item">
-            @can('manage_roles', auth()->user())
+        @can('manage_roles', auth()->user())
+            <li class="nav-item">
                 <a href="{{ route('security.role') }}">
                     <i class="nav-icon i-Key"></i>
                     <span class="item-name">{{ __('Role') }}</span>
                 </a>
+            </li>
             @endcan
-        </li>
-        <li class="nav-item">
             @can('manage_permissions', auth()->user())
+            <li class="nav-item">
                 <a href="{{ route('security.permission') }}">
-                <i class="nav-icon i-Key"></i>
+                    <i class="nav-icon i-Key"></i>
                     <span class="item-name">{{ __('Permission') }}</span>
                 </a>
+            </li>
             @endcan
-        </li>
-        <li class="nav-item">
             @can('manage_users', auth()->user())
+            <li class="nav-item">
                 <a href="{{ route('security.users') }}">
                     <i class="nav-icon i-Business-Mens"></i>
                     <span class="item-name">{{ __('Utilisateurs') }}</span>
                 </a>
+            </li>
             @endcan
-        </li>
-        @can('manage_countries', auth()->user())
+            @can('manage_countries', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('esn.country') }}">
                     <span class="item-name">{{ __('Country') }}</span>
                 </a>
             </li>
-        @endcan
-    <ul>
-
-        <ul class="childNav" data-parent="others">
-            <li class="nav-item">
-                <a href="not.found.html">
-                    <i class="nav-icon i-Error-404-Window"></i>
-                    <span class="item-name">Not Found</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="user.profile.html">
-                    <i class="nav-icon i-Male"></i>
-                    <span class="item-name">User Profile</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="blank.html" class="open">
-                    <i class="nav-icon i-File-Horizontal"></i>
-                    <span class="item-name">Blank Page</span>
-                </a>
-            </li>
-        </ul>
+            @endcan
+            <ul>
+                <ul class="childNav" data-parent="others">
+                    <li class="nav-item">
+                        <a href="not.found.html">
+                            <i class="nav-icon i-Error-404-Window"></i>
+                            <span class="item-name">Not Found</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="user.profile.html">
+                            <i class="nav-icon i-Male"></i>
+                            <span class="item-name">User Profile</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="blank.html" class="open">
+                            <i class="nav-icon i-File-Horizontal"></i>
+                            <span class="item-name">Blank Page</span>
+                        </a>
+                    </li>
+                </ul>
+            </ul>
     </div>
     <div class="sidebar-overlay"></div>
 </div>
