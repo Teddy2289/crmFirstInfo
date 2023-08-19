@@ -19,6 +19,10 @@ class Contract extends Model
     {
         return $this->belongsTo(Client::class);
     }
+    public function finalclient()
+    {
+        return $this->belongsTo(Client::class, 'final_client_id', 'id');
+    }
 
     public function company()
     {

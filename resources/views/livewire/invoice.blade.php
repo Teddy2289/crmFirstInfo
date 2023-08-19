@@ -545,31 +545,36 @@
                                     <th scope="col">{{__('Status')}}</th>
                                     <th scope="col">{{__('Contract')}}</th>
                                     <th scope="col">{{__('Montant_ttc')}}</th>
+                                    <th scope="col">{{__('Montant_ht')}}</th>
                                     <th scope="col">{{__('Date_sent')}}</th>
                                     <th scope="col">{{__('Date_paid')}}</th>
                                     <th scope="col">{{__('Action')}}</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($invoices as $invoice)
+                                @foreach ($invoices as $row)
                                 <tr>
-                                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date) }}</td>
-                                    <td>{{ $invoice->statusPayement->label }}</td>
-                                    <td>{{ $invoice->contract->label }}</td>
-                                    <td>{{ number_format($invoice->montant_ttc, 2, '.', ',') }} $</td>
-                                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_sent) }}</td>
-                                    <td>{{ \App\Helpers\Date::formatDateFr($invoice->date_paid) }}</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($row->date) }}</td>
+                                    <td>{{ $row->statusPayement->label }}</td>
+                                    <td>{{ $row->contract->label }}</td>
+                                    <td>{{ number_format($row->montant_ttc, 2, '.', ',') }} $</td>
+                                    <td>{{ number_format($row->montant_ht, 2, '.', ',') }} $</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($row->date_sent) }}</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($row->date_paid) }}</td>
                                     <td>
                                         @can('edit-invoice')
-                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $invoice->id }}')">
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $row->id }}')">
                                             <i class="nav-icon i-Pen-2 font-weight-bold"></i>
                                         </button>
                                         @endcan
                                         @can('delete-invoice')
-                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $invoice->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $row->id }})" data-toggle="modal" data-target="#deleteConfirmationModal">
                                             <i class="nav-icon i-Close-Window font-weight-bold"></i>
                                         </button>
                                         @endcan
+                                        <a href="{{ route('invoice.pdf', ['invoice' => $row->id]) }}" class="btn btn-raised btn-rounded btn-raised-light">
+                                                    <i class="nav-icon i-File-Download"></i>
+                                        </a>
                                     </td>
                                 </tr>
                                 @endforeach

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8b383a08d89dee25313039c8f7b00206",
+    "content-hash": "c6e986df99cf5914e1d21dd7b6de9cab",
     "packages": [
         {
             "name": "asantibanez/livewire-charts",
@@ -1655,6 +1655,73 @@
             },
             "abandoned": "spatie/laravel-html",
             "time": "2023-04-25T02:46:11+00:00"
+        },
+        {
+            "name": "laraveldaily/laravel-invoices",
+            "version": "3.1.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/LaravelDaily/laravel-invoices.git",
+                "reference": "7f3f2fd2042ad7ca228b506059a1e8535de46e05"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/LaravelDaily/laravel-invoices/zipball/7f3f2fd2042ad7ca228b506059a1e8535de46e05",
+                "reference": "7f3f2fd2042ad7ca228b506059a1e8535de46e05",
+                "shasum": ""
+            },
+            "require": {
+                "barryvdh/laravel-dompdf": "^v2.0",
+                "illuminate/http": "^5.5|^6|^7|^8|^9|^10",
+                "illuminate/support": "^5.5|^6|^7|^8|^9|^10",
+                "php": "^7.3|^8.0",
+                "symfony/http-foundation": "^4.0|^5.0|^6.0"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "^9.3",
+                "symfony/var-dumper": "^5.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "LaravelDaily\\Invoices\\InvoiceServiceProvider"
+                    ],
+                    "aliases": {
+                        "Invoice": "LaravelDaily\\Invoices\\Facades\\Invoice"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "LaravelDaily\\Invoices\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL-3.0-only"
+            ],
+            "authors": [
+                {
+                    "name": "David Lun",
+                    "email": "mysticcode@gmail.com",
+                    "homepage": "https://davidlun.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Missing invoices for Laravel",
+            "homepage": "https://github.com/LaravelDaily/laravel-invoices",
+            "keywords": [
+                "invoice",
+                "invoices",
+                "laravel",
+                "pdf"
+            ],
+            "support": {
+                "issues": "https://github.com/LaravelDaily/laravel-invoices/issues",
+                "source": "https://github.com/LaravelDaily/laravel-invoices/tree/3.1.0"
+            },
+            "time": "2023-02-15T12:35:38+00:00"
         },
         {
             "name": "league/commonmark",

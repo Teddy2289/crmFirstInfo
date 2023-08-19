@@ -61,14 +61,18 @@ class Invoice extends Component
 
     public function generateUniqueNumber()
     {
-        $year = date('Y');
-        $lastNumber = ModelsInvoice::where('number', 'like', "{$year}%")
-            ->orderBy('number', 'desc')
-            ->value('number');
-
-        $lastSerial = intval(substr($lastNumber, 5)) + 1;
-        $this->number = "$year-" . str_pad($lastSerial, 4, '0', STR_PAD_LEFT);
+        // Check if the invoice ID is present, indicating editing mode
+        if (!$this->invoice_id) {
+            $year = date('Y');
+            $lastNumber = ModelsInvoice::where('number', 'like', "{$year}%")
+                ->orderBy('number', 'desc')
+                ->value('number');
+    
+            $lastSerial = intval(substr($lastNumber, 5)) + 1;
+            $this->number = "$year-" . str_pad($lastSerial, 4, '0', STR_PAD_LEFT);
+        }
     }
+    
 
 
 
@@ -116,7 +120,6 @@ class Invoice extends Component
         $this->day_count = null;
         $this->note = null;
         $this->montant_ht = null;
-        $this->montant_ttc = null;
         $this->date_sent = null;
         $this->date_paid = null;
         $this->details = [];
@@ -147,7 +150,6 @@ class Invoice extends Component
 
     public function addInvoice()
     {
-        $this->resetValidation();
         $this->reset();
         $this->form = 'addInvoice';
     }
@@ -246,24 +248,36 @@ class Invoice extends Component
                     'date_paid' => $this->date_paid,
                     'date_sent' => $this->date_sent,
                 ]);
+    
                 foreach ($this->details as $index => $detail) {
-                    $detailModel = $invoice->details[$index];
-                    $detailModel->update([
-                        'label' => $detail['label'],
-                        'quantity' => $detail['quantity'],
-                        'price' => $detail['price'],
-                        'fee' => $detail['fee'],
-                    ]);
-                }                
+                    // Check if the detail exists before updating
+                    if (isset($invoice->details[$index])) {
+                        $detailModel = $invoice->details[$index];
+                        $detailModel->update([
+                            'label' => $detail['label'],
+                            'quantity' => $detail['quantity'],
+                            'price' => $detail['price'],
+                            'fee' => $detail['fee'],
+                        ]);
+                    }
+                }
+
+                 // Supprimez les détails manquants
+                foreach ($invoice->details as $index => $detailModel) {
+                    if (!isset($this->details[$index])) {
+                        $detailModel->delete();
+                    }
+                }
+    
                 $this->resetAll();
-                $this->notificationMessage = 'Facture mis à jour avec succes.';
+                $this->notificationMessage = 'Facture mise à jour avec succès.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
             }
         }
     }
-
+    
 
     public function deleteInvoiceConfirmation($invoiceId)
     {
