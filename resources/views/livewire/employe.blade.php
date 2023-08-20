@@ -528,7 +528,7 @@
                             </div>
                         @else
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                 <th scope="col">{{__('Nom')}}</th>
                                     <th scope="col">{{__('Numéro de téléphone')}}</th>

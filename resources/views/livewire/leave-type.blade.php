@@ -125,7 +125,7 @@
                         @else
                             <!-- Leave type table -->
                             <table class="table table-striped table-hover">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">{{__('Nom')}}</th>
                                         <th scope="col">{{__('Description')}}</th>
@@ -139,8 +139,7 @@
                             <tr>
                                 <td>{{ $leaveType->Libelle }}</td>
                                 <td>{{ $leaveType->description }}</td>
-                                <td>{{ $leaveType->created_at->format('d/m/Y H:i:s') }}</td>
-                                <td>
+                                <td>{{ \App\Helpers\Date::formatDateFr($leaveType->created_at) }}</td>
                                     @can('edit-leave-type')
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $leaveType->id }}')">
                                             <i class="nav-icon i-Pen-2 font-weight-bold"></i>

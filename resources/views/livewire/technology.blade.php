@@ -158,7 +158,7 @@
                             </div>
                         @else
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                             <tr>
                                 <th scope="col">{{__('Nom')}}</th>
                                 <th scope="col">{{__('Description')}}</th>
@@ -171,7 +171,7 @@
                                 <tr>
                                     <td>{{ $technology->name }}</td>
                                     <td>{{ $technology->description }}</td>
-                                    <td>{{ $technology->created_at->format('d/m/Y H:i:s') }}</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($technology->created_at)}}</td>
                                     <td>
                                         @can('edit-technology')
                                             <button type="button" class="btn btn-raised btn-rounded btn-raised-primary"

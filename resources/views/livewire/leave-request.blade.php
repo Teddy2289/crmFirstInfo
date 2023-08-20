@@ -297,7 +297,7 @@
                             </div>
                         @else
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">{{__('Nom Employe')}}</th>
                                     <th scope="col">{{__('Type de congé')}}</th>
@@ -319,7 +319,7 @@
                                     <td>{{ $leaveRequested->Leave_reason }}</td>
                                     <td>{{ \App\Helpers\Date::formatDateFr($leaveRequested->start_date) }}</td>
                                     <td>{{ \App\Helpers\Date::formatDateFr($leaveRequested->end_date) }}</td>
-                                    <td>{{ $leaveRequested->statut }}</td>
+                                    <td><span class="badge badge-success">{{ $leaveRequested->statut }}</span></td>
                                     <td>
                                         @can('edit-leave-request')
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $leaveRequest->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>

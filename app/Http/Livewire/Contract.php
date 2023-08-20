@@ -14,7 +14,7 @@ class Contract extends Component
 {
     use WithPagination;
 
-    public $label, $client_id, $user_id, $daily_rate, $start_date, $end_date,$company_id;
+    public $label, $client_id,$final_client_id, $user_id, $daily_rate, $start_date, $end_date,$company_id;
     public $contract_id;
     public $form = '';
     public $confirmingDelete = false;
@@ -67,6 +67,7 @@ class Contract extends Component
         $this->client_id = '';
         $this->user_id = '';
         $this->company_id = '';
+        $this->final_client_id = '';
         $this->daily_rate = '';
         $this->start_date = '';
         $this->end_date = '';
@@ -81,6 +82,7 @@ class Contract extends Component
         $this->validate([
             'label' => 'required',
             'client_id' => 'required|exists:clients,id',
+            'final_client_id' => 'required|exists:clients,id',
             'user_id' => 'required|exists:users,id',
             'company_id' => 'required|exists:companies,id',
             'daily_rate' => 'required',
@@ -91,6 +93,7 @@ class Contract extends Component
         ModelsContract::create([
             'label' => $this->label,
             'client_id' => $this->client_id,
+            'final_client_id' => $this->client_id,
             'company_id' => $this->company_id,
             'user_id' => $this->user_id,
             'daily_rate' => $this->daily_rate,
@@ -113,6 +116,7 @@ class Contract extends Component
             $this->contract_id = $contract_id;
             $this->label = $contract->label;
             $this->client_id = $contract->client_id;
+            $this->final_client_id = $contract->final_client_id;
             $this->company_id = $contract->company_id;
             $this->user_id = $contract->user_id;
             $this->daily_rate = $contract->daily_rate;
@@ -130,6 +134,7 @@ class Contract extends Component
                 $contract->update([
                     'label' => $this->label,
                     'client_id' => $this->client_id,
+                    'final_client_id' => $this->client_id,
                     'user_id' => $this->user_id,
                     'company_id' => $this->company_id,
                     'daily_rate' => $this->daily_rate,

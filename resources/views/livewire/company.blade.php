@@ -438,11 +438,16 @@
                             </div>
                         @else
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Trade Name')}}</th>
                                     <th scope="col">{{__('Email')}}</th>
+                                    <th scope="col">{{__('address')}}</th>
+                                    <th scope="col">{{__('capital')}}</th>
+                                    <th scope="col">{{__('siren')}}</th>
+                                    <th scope="col">{{__('siret')}}</th>
+                                    <th scope="col">{{__('postal_code')}}</th>
                                     <th scope="col">{{__('Action')}}</th>
                                 </tr>
                             </thead>
@@ -454,6 +459,11 @@
                                     </td>
                                     <td>{{ $company->trade_name }}</td>
                                     <td>{{ $company->email }}</td>
+                                    <td>{{ $company->address }}</td>
+                                    <td>{{ $company->capital }}</td>
+                                    <td>{{ $company->siren }}</td>
+                                    <td>{{ $company->siret }}</td>
+                                    <td>{{ $company->postal_code }}</td>
                                     <td>
                                         @can('edit-company')
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $company->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>

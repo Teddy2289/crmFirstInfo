@@ -12,7 +12,7 @@ class Client extends Component
 {
     use WithPagination;
 
-    public $name, $phone, $address, $postal_code, $country_id, $tva;
+    public $name, $phone, $address, $postal_code, $country_id, $tva,$rcs,$siret;
     public $clientId;
     public $form = '';
     public $confirmingDelete = false;
@@ -54,6 +54,8 @@ class Client extends Component
     {
         $this->name = '';
         $this->phone = '';
+        $this->rcs = '';
+        $this->siret = '';
         $this->address = '';
         $this->postal_code = '';
         $this->country_id = '';
@@ -75,6 +77,8 @@ class Client extends Component
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'rcs' => 'required',
+            'siret' => 'required',
             'postal_code' => 'required',
             'country_id' => 'required|exists:countries,id',
             'tva' => 'required',
@@ -84,6 +88,8 @@ class Client extends Component
             'name' => $this->name,
             'phone' => $this->phone,
             'address' => $this->address,
+            'rcs' => $this->rcs,
+            'siret' => $this->siret,
             'postal_code' => $this->postal_code,
             'country_id' => $this->country_id,
             'tva' => $this->tva,
@@ -104,6 +110,8 @@ class Client extends Component
             $this->clientId = $clientId;
             $this->name = $client->name;
             $this->phone = $client->phone;
+            $this->rcs = $client->rcs;
+            $this->siret = $client->siret;
             $this->address = $client->address;
             $this->postal_code = $client->postal_code;
             $this->country_id = $client->country_id;
@@ -121,6 +129,8 @@ class Client extends Component
                     'name' => $this->name,
                     'phone' => $this->phone,
                     'address' => $this->address,
+                    'rcs' => $this->rcs,
+                    'siret' => $this->siret,
                     'postal_code' => $this->postal_code,
                     'country_id' => $this->country_id,
                     'tva' => $this->tva,

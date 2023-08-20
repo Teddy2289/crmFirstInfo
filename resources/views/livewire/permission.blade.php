@@ -149,7 +149,7 @@
                             </div>
                         @else
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                             <tr>
                                 <th scope="col">{{__('Nom')}}</th>
                                 <th scope="col">{{__('Guard Name')}}</th>
@@ -162,7 +162,7 @@
                                 <tr>
                                     <td>{{ $permission->name }}</td>
                                     <td>{{ $permission->guard_name }}</td>
-                                    <td>{{ $permission->created_at->format('d, M Y') }}</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($permission->created_at)}}</td>
                                     <td>
                                         @can('edit-permission')
                                             <button type="button" class="btn btn-raised btn-rounded btn-raised-primary"

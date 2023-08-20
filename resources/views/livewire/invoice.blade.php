@@ -540,7 +540,7 @@
                         @else
                         <table class="table table-striped table-hover">
                             <thead>
-                                <tr>
+                                <tr class="thead-dark">
                                     <th scope="col">{{__('Date')}}</th>
                                     <th scope="col">{{__('Status')}}</th>
                                     <th scope="col">{{__('Contract')}}</th>

@@ -130,7 +130,7 @@
                             </div>
                         @else
                             <table class="table table-striped table-hover">
-                                <thead>
+                                <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">{{__('label')}}</th>
                                     <th scope="col">{{__('created_at')}}</th>
@@ -141,7 +141,7 @@
                                 @foreach ($payements as $payement)
                                     <tr>
                                         <td>{{ $payement->label }}</td>
-                                        <td>{{ $payement->created_at->formatLocalized('%d %B %Y') }}</td>
+                                        <td>{{ \App\Helpers\Date::formatDateFr($payement->created_at) }}</td>
                                         <td>
                                             @can('edit-payement')
                                                 <button type="button"

@@ -110,7 +110,7 @@
                         <!-- Vue Blade -->
                         <div>
                             <table class="table table-striped table-hover">
-                                <thead>
+                                <thead class="thead-dark">
                                     <tr>
                                         <th scope="col">Name</th>
                                         <th scope="col">{{ __('Guard')}}</th>
@@ -124,7 +124,7 @@
                                         <td>
                                             <p>{{ $item->name }}</p>
                                         <td>{{ $item->guard_name }}</td>
-                                        <td>{{ $item->created_at->format('d, M Y') }}</td>
+                                        <td>{{  \App\Helpers\Date::formatDateFr($item->created_at) }}</td>
                                         </td>
                                         <td>
                                             @can('edit-role')

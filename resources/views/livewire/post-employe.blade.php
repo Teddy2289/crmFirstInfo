@@ -272,7 +272,7 @@
                             </div>
                         @else
                             <table class="table table-striped table-hover">
-                                <thead>
+                                <thead class="thead-dark"> 
                                 <tr>
                                     <th scope="col">{{__('Nom')}}</th>
                                     <th scope="col">{{__('Rôle')}}</th>
@@ -291,7 +291,7 @@
                                         <td>{{ $postEmployee->type_contrat }}</td>
                                         <td>{{ $postEmployee->start_date }}</td>
                                         <td>{{ $postEmployee->end_date }}</td>
-                                        <td>{{ $postEmployee->created_at->format('d/m/Y H:i:s') }}</td>
+                                        <td>{{ \App\Helpers\Date::formatDateFr($postEmployee->created_at)}}</td>
                                         <td>
                                             @can('edit-post-employee')
                                                 <button type="button"

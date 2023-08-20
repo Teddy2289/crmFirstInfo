@@ -73,6 +73,22 @@
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
                                         <div class="mb-3">
+                                            <label for="final_client_id" class="form-label">{{__('Client Finale')}}<span class="text-danger">(*)</span></label>
+                                            <select class="form-control" id="final_client_id" name="final_client_id" wire:model.lazy="final_client_id">
+                                                <option value="">{{__('Select Client Final')}}</option>
+                                                @foreach($clients as $client)
+                                                <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('final_client_id')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
                                             <label for="user_id" class="form-label">{{__('Utilisateur')}}<span class="text-danger">(*)</span></label>
                                             <select class="form-control" id="user_id" name="user_id" wire:model.lazy="user_id">
                                                 <option value="">{{__('sélectionner Utilisateur')}}</option>
@@ -185,6 +201,22 @@
                                     </div>
                                 </div>
                                 <div class="row col-md-12">
+                                <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="edit_final_client_id" class="form-label">{{__('Client Finale')}}<span class="text-danger">(*)</span></label>
+                                            <select class="form-control" id="edit_final_client_id" name="edit_final_client_id" wire:model.lazy="final_client_id">
+                                                <option value="">{{__('Select Client Final')}}</option>
+                                                @foreach($clients as $client)
+                                                <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('final_client_id')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="edit_user_id" class="form-label">{{__('Utilisateur')}}</label>
@@ -278,7 +310,7 @@
                         @else
                         <table class="table table-striped table-hover">
                             <thead>
-                                <tr>
+                                <tr class="thead-dark">
                                     <th scope="col">{{__('Label')}}</th>
                                     <th scope="col">{{__('Client')}}</th>
                                     <th scope="col">{{__('Utilisateur')}}</th>

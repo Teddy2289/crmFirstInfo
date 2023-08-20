@@ -73,19 +73,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="tva" class="form-label">{{__('tva')}}<span class="text-danger">(*)</span></label>
-                                            <input type="text" class="form-control" id="tva" name="tva" wire:model.lazy="tva">
-                                            @error('tva')
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="country_id" class="form-label">{{__('Country')}}<span class="text-danger">(*)</span></label>
@@ -102,6 +89,42 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="tva" class="form-label">{{__('tva')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="tva" name="tva" wire:model.lazy="tva">
+                                            @error('tva')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="rcs" class="form-label">{{__('rcs')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="rcs" name="rcs" wire:model.lazy="rcs">
+                                            @error('rcs')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="siret" class="form-label">{{__('siret')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="siret" name="siret" wire:model.lazy="siret">
+                                            @error('siret')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-12 mt-3 mb-3">
                                     <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
@@ -171,6 +194,22 @@
                                             @enderror
                                         </div>
                                     </div>
+                                     <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="country_id" class="form-label">{{__('Country')}}<span class="text-danger">(*)</span></label>
+                                            <select class="form-control" id="country_id" name="country_id" wire:model.lazy="country_id">
+                                                <option value="">{{__('Select Country')}}</option>
+                                                @foreach($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('country_id')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
@@ -186,14 +225,20 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="country_id" class="form-label">{{__('Country')}}<span class="text-danger">(*)</span></label>
-                                            <select class="form-control" id="country_id" name="country_id" wire:model.lazy="country_id">
-                                                <option value="">{{__('Select Country')}}</option>
-                                                @foreach($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('country_id')
+                                            <label for="rcs" class="form-label">{{__('rcs')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="rcs" name="rcs" wire:model.lazy="rcs">
+                                            @error('rcs')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="siret" class="form-label">{{__('siret')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="siret" name="siret" wire:model.lazy="siret">
+                                            @error('siret')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
@@ -247,7 +292,9 @@
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Country')}}</th>
                                     <th scope="col">{{__('phone')}}</th>
-                                    <th scope="col">{{__('created_at')}}</th>
+                                    <th scope="col">{{__('Siret')}}</th>
+                                    <th scope="col">{{__('Rcs')}}</th>
+                                    <th scope="col">{{__('Date creation')}}</th>
                                     <th scope="col">{{__('Action')}}</th>
                                 </tr>
                             </thead>
@@ -257,6 +304,8 @@
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->country->name }}</td>
                                     <td>{{ $client->phone }}</td>
+                                    <td>{{ $client->siret }}</td>
+                                    <td>{{ $client->rcs }}</td>
                                     <td>{{ \App\Helpers\Date::formatDateFr($client->created_at) }}</td>
 
                                     <td>

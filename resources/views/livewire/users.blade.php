@@ -217,7 +217,7 @@
                         <div class="mt-3">
                             <!-- Table with stripped rows -->
                             <table class="table table-striped table-hover">
-                                <thead>
+                                <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
