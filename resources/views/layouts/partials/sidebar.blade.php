@@ -2,6 +2,13 @@
 <div class="side-content-wrap">
     <div class="sidebar-left open rtl-ps-none" data-perfect-scrollbar data-suppress-scroll-x="true">
         <ul class="navigation-left">
+            <li class="nav-item" data-item="dashboard">
+                <a class="nav-item-hold " href="#">
+                    <i class="nav-icon i-Bar-Chart"></i>
+                    <span class="nav-text">{{__('Tableau de bord')}}</span>
+                </a>
+                <div class="triangle"></div>
+            </li>
             <li class="nav-item" data-item="salaries">
                 <a class="nav-item-hold " href="#">
                     <i class="nav-icon i-Windows-2"></i>
@@ -20,13 +27,6 @@
                 <a class="nav-item-hold " href="#">
                     <i class="nav-icon i-Windows-2"></i>
                     <span class="nav-text">{{__('Facturation')}}</span>
-                </a>
-                <div class="triangle"></div>
-            </li>
-            <li class="nav-item" data-item="dashboard">
-                <a class="nav-item-hold " href="#">
-                    <i class="nav-icon i-Bar-Chart"></i>
-                    <span class="nav-text">{{__('Tableau de bord')}}</span>
                 </a>
                 <div class="triangle"></div>
             </li>
@@ -57,7 +57,7 @@
             @can('view_post_employer', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('gestionEmploye.postEmploye') }}">
-                    <i class="nav-icon i-Calendar-4"></i>
+                    <i class="text-16 i-Checked-User mr-8"></i>
                     <span class="item-name">{{ __('Post Employer') }}</span>
                 </a>
             </li>
@@ -66,20 +66,20 @@
             @can('view_type_leave', auth()->user())
             <li class="nav-item dropdown-sidemenu">
                 <a>
-                    <i class="nav-icon i-Calendar-4"></i>
+                    <i class="text-16 i-Calendar mr-8"></i>
                     <span class="item-name">{{ __('Suivi congée') }}</span>
                     <i class="dd-arrow i-Arrow-Down"></i>
                 </a>
                 <ul class="submenu">
                     <li>
                         <a class="" href="{{ route('gestionEmploye.typeleave') }}">
-                            <i class="nav-icon i-Calendar-4"></i>
+                            <i class="text-16 i-Right-2 mr-8"></i>
                             <span class="item-name">{{ __('Type conge') }}</span>
                         </a>
                     </li>
                     <li>
                         <a class="" href="{{ route('gestionEmploye.leaveRequest') }}">
-                            <i class="nav-icon i-Calendar-4"></i>
+                            <i class="text-16 i-Right-2 mr-8"></i>
                             <span class="item-name">{{ __('Demande conge') }}</span>
                         </a>
                     </li>
@@ -94,7 +94,7 @@
             @can('view_clients', auth()->user())
             <li class="nav-item">
                 <a class="" href="{{ route('esn.client') }}">
-                    <i class="nav-icon i-Receipt"></i>
+                    <i class="text-16 i-Business-ManWoman mr-8"></i>
                     <span class="item-name">{{ __('Clients') }}</span>
                 </a>
             </li>
@@ -102,7 +102,7 @@
             @can('view_company', auth()->user())
             <li class="nav-item">
                 <a class="" href="{{ route('esn.company') }}">
-                    <i class="nav-icon i-Shop-2"></i>
+                    <i class="text-16 i-Building mr-8"></i>
                     <span class="item-name">{{ __('Entreprise') }}</span>
                 </a>
             </li>
@@ -110,7 +110,7 @@
             @can('view_technology', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('esn.technology') }}">
-                    <i class="nav-icon i-Receipt-4"></i>
+                    <i class="text-16 i-Chrome mr-8"></i>
                     <span class="item-name">{{ __('Technologie') }}</span>
                 </a>
             </li>
@@ -121,7 +121,7 @@
             @can('view_invoice_list', auth()->user())
             <li class="nav-item">
                 <a href="{{route('facturation.invoice')}}">
-                    <i class="nav-icon i-Add-File"></i>
+                    <i class="text-16 i-File-Copy-2 mr-8"></i>
                     <span class="item-name">{{__('facture')}}</span>
                 </a>
             </li>
@@ -129,17 +129,17 @@
             @can('view_contract', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('facturation.contract') }}">
-                    <i class="nav-icon i-Calendar-4"></i>
+                    <i class="text-16 i-Billing mr-8"></i>
                     <span class="item-name">{{ __('Contrat') }}</span>
                 </a>
             </li>
             @endcan
             @can('view_contract', auth()->user())
             <li class="nav-item">
-                
+
                 <a href="{{ route('Payement.contract') }}">
-                    <i class="nav-icon i-Receipt-4"></i>
-                    <span class="item-name">{{ __('Payement') }}</span>
+                    <i class="text-16 i-Circular-Point mr-8"></i>
+                    <span class="item-name">{{ __('Status Payement') }}</span>
                 </a>
             </li>
             @endcan
@@ -148,14 +148,14 @@
         <ul class="childNav" data-parent="dashboard">
             <li class="nav-item">
                 <a href="{{ route('home') }}">
-                    <i class="nav-icon i-Clock-3"></i>
+                    <i class="text-16 i-Bar-Chart-2 mr-8"></i>
                     <span class="item-name">{{ __('Tableau de bord')}}</span>
                 </a>
             </li>
         </ul>
 
         <ul class="childNav" data-parent="sessions">
-        @can('manage_roles', auth()->user())
+            @can('manage_roles', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('security.role') }}">
                     <i class="nav-icon i-Key"></i>
@@ -166,7 +166,7 @@
             @can('manage_permissions', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('security.permission') }}">
-                    <i class="nav-icon i-Key"></i>
+                    <i class="text-16 i-Unlock-2 mr-8"></i>
                     <span class="item-name">{{ __('Permission') }}</span>
                 </a>
             </li>
@@ -174,7 +174,7 @@
             @can('manage_users', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('security.users') }}">
-                    <i class="nav-icon i-Business-Mens"></i>
+                    <i class="text-16 i-Conference mr-8"></i>
                     <span class="item-name">{{ __('Utilisateurs') }}</span>
                 </a>
             </li>
@@ -182,6 +182,7 @@
             @can('manage_countries', auth()->user())
             <li class="nav-item">
                 <a href="{{ route('esn.country') }}">
+                    <i class="text-16 i-Globe mr-8"></i>
                     <span class="item-name">{{ __('Country') }}</span>
                 </a>
             </li>
