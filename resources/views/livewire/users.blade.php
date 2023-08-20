@@ -17,11 +17,11 @@
             <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">User</h5>
+                        <h5 class="card-title">Utilisateurs</h5>
                         {{-- Add user --}}
                         @can('create-user')
                             <button class="btn btn-primary btn-rounded mb-3" wire:click="adduser">
-                                <span wire:loading.remove wire:target="adduser">{{__('Create User')}}</span>
+                                <span wire:loading.remove wire:target="adduser">{{__('Creer un nouvel Utilisateur ')}}</span>
                             </button>
                             @if ($form == 'adduser')
                                 <div class="card">

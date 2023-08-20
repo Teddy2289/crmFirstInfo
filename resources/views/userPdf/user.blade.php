@@ -78,20 +78,18 @@
     <div class="content">
         <h1 class="title">ATTESTATION</h1>
         <p class="text text-justify">
-            Nous soussignés, <strong>{{$company->name}}</strong>, dont le siège social est sis 05 Parvis de la Bièvre -
+            Nous soussignés, <strong>{{ $company->name }}</strong>, dont le siège social est sis 05 Parvis de la Bièvre -
             92160
-            ANTONY, certifions que Monsieur <strong>{{ $user->first_name }}{{ $user->last_name }} </strong>, est employé au sein de notre
-            Société sous contrat à durée @foreach ($posts as $post) <strong>{{$post->type_contrat}} </strong>  @endforeach depuis
+            ANTONY, certifions que Monsieur <strong>{{ $user->first_name }} {{ $user->last_name }}</strong>, est employé au sein de notre
+            Société sous contrat à durée @foreach ($posts as $post) <strong>{{ $post->type_contrat }} </strong>  @endforeach depuis
             le @foreach ($posts as $post)  {{ \Carbon\Carbon::parse($post->start_date)->locale('fr')->isoFormat('LL') }} @endforeach.Il occupe
             actuellement
             le poste de <strong>@foreach ($posts as $post){{ $post->name }}@endforeach</strong>.
-
         </p>
         <p class="text text-justify">
             Nous certifions également qu'à ce jour, Monsieur <strong>{{ $user->name }}</strong> n'est ni
             démissionnaire, ni en préavis de licenciement.
         </p>
-
         <p class="text text-justify">En foi de quoi, nous délivrons la présente attestation pour servir et valoir ce que
             de droit.</p>
     </div>
@@ -108,8 +106,8 @@
         </p>
     </div>
     <div class="content-footer">
-        <p class="text-medium text-footer">SAS FIRSTINFO - {{$company->address}} - {{$company->postal_code}}</p>
-        <p class="text-small text-footer">Immatriculation au {{$company->rcs}}</p>
+        <p class="text-medium text-footer">SAS FIRSTINFO - {{ $company->address }} - {{ $company->postal_code }}</p>
+        <p class="text-small text-footer">Immatriculation au {{ $company->rcs }}</p>
         <p class="text-small text-footer">Numéro URSSAF 117 1566947030</p>
     </div>
 </div>

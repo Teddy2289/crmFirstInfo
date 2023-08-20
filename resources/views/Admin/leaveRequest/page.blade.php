@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">{{__('Géstion des demandes')}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{__('Liste Demande')}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{__('Liste des Demandes')}}</li>
             </ol>
           </nav>
           @livewire('leave-request')

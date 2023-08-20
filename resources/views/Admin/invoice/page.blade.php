@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">{{__('Invoice')}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{__('Liste Invoice')}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{__('Liste des Factures')}}</li>
             </ol>
           </nav>
           @livewire('invoice')

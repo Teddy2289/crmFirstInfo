@@ -12,13 +12,13 @@
         </script>
     @endif
     <section class="section">
-        <h4 class="card-title mb-3">{{ __('Liste des employés') }}</h4>
+        <h4 class="card-title mb-3">{{ __('Liste des postes employés') }}</h4>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     @can('add-post-employee')
                         <button class="btn btn-primary btn-rounded mb-3" wire:click="addPostEmployee">
-                            <span>{{__('Créer un employé')}}</span>
+                            <span>{{__('Ajouter un poste employé')}}</span>
                         </button>
                         @if ($form == 'addPostEmployee')
                             <form wire:submit.prevent="storePostEmployee" class="mb-3">

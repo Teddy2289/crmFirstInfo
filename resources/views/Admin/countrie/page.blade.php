@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">{{__('Country')}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{__('Liste Country')}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{__('Liste des Pays')}}</li>
             </ol>
           </nav>
           @livewire('country')

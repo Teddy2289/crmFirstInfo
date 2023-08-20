@@ -19,7 +19,7 @@
                 <div class="card-body">
                     @can('add-client')
                     <button class="btn btn-primary btn-rounded mb-3" wire:click="addClient">
-                        <span>{{__('Crée client')}}</span>
+                        <span>{{__('Ajouter un(e) client(e)')}}</span>
                     </button>
                     @if ($form == 'addClient')
                     <form wire:submit.prevent="storeClient" class="mb-3">

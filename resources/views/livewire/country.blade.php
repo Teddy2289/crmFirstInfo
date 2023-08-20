@@ -191,7 +191,7 @@
                                         <td>{{ $country->name }}</td>
                                         <td>{{ $country->code }}</td>
                                         <td>{{ $country->nationality }}</td>
-                                        <td>{{ formatDateFr($country->created_at) }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($country->created_at)->format('d/m/Y') }}</td>
                                         <td>
                                             @can('edit-country')
                                                 <button type="button"

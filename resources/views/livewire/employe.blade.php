@@ -20,7 +20,7 @@
                 <div class="card-body">
                     @can('add-employe')
                     <button class="btn btn-primary btn-rounded mb-3" wire:click="addEmployee">
-                        <span>{{__('Créer employé')}}</span>
+                        <span>{{__('Ajouter employé(e)')}}</span>
                     </button>
                     @if ($form == 'addEmployee')
                     <form wire:submit.prevent="storeEmployee" class="mb-3">

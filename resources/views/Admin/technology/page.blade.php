@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">{{__('Technology')}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{__('Liste des techno')}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{__('Liste des technologies')}}</li>
             </ol>
           </nav>
           @livewire('technology')

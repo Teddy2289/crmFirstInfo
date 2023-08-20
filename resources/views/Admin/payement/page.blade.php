@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">{{__('Payement')}}</a></li>
-              <li class="breadcrumb-item active" aria-current="page">{{__('Liste Payement')}}</li>
+              <li class="breadcrumb-item active" aria-current="page">{{__('Liste des Payements')}}</li>
             </ol>
           </nav>
           @livewire('payement')

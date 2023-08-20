@@ -13,14 +13,14 @@
                 @endif
     <section class="section">
 
-        <h4 class="card-title mb-3">{{ __('Liste des techno') }}</h4>
+        <h4 class="card-title mb-3">{{ __('Liste des technologies') }}</h4>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     @can('add-technology')
                         <button class="btn btn-primary btn-rounded mb-3" wire:click="addTechnology">
 
-                            <span>{{__('Créer une techno')}}</span>
+                            <span>{{__('Ajouter une technologie')}}</span>
                         </button>
                         @if ($form == 'addTechnology')
                             <form wire:submit.prevent="storeTechnology" class="mb-3">

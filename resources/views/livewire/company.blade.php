@@ -19,7 +19,7 @@
                 <div class="card-body">
                     @can('add-company')
                     <button class="btn btn-primary btn-rounded mb-3" wire:click="addCompany">
-                        <span>{{__('Crée entrepise')}}</span>
+                        <span>{{__('Ajouter une entrepise')}}</span>
                     </button>
                     @if ($form == 'addCompany')
                     <form wire:submit.prevent="storeCompany" class="mb-3">

@@ -14,12 +14,12 @@
 
     <section class="section">
 
-        <h4 class="card-title mb-3">{{ __('Liste des facture') }}</h4>
+        <h4 class="card-title mb-3">{{ __('Liste des factures') }}</h4>
         <div class="col-lg-12">
             <div class="card">
                 <div class="card-body">
                     <button class="btn btn-primary btn-rounded mb-3" wire:click="addInvoice">
-                        <span>{{__('Créer facture')}}</span>
+                        <span>{{__('Créer une facture')}}</span>
                     </button>
                     @if ($form == 'addInvoice')
                     <form wire:submit.prevent="saveInvoice" class="mb-3">

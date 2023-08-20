@@ -12,7 +12,7 @@
         </script>
     @endif
     <section class="section">
-        <h4 class="card-title mb-3">{{ __('Liste des rôles et des permissions') }}</h4>
+        <h4 class="card-title mb-3">{{ __('Liste des rôles') }}</h4>
 
         <div class="row">
             <div class="col-md-12">
@@ -21,7 +21,7 @@
                         <h5 class="card-title">Role</h5>
                         @can('add-role')
                         <button class="btn btn-primary btn-rounded mb-3" wire:click="addrole">
-                            <span>{{__('Créer rôle')}}</span>
+                            <span>{{__('Créer une rôle')}}</span>
                         </button>
                         @if ($form == 'addrole')
                         <form wire:submit.prevent='storerole'>
