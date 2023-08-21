@@ -8,7 +8,24 @@ use Illuminate\Database\Eloquent\Model;
 class Employe extends Model
 {
     use HasFactory;
-    protected $fillable = ['phone_number', 'address', 'street_number', 'country_id', 'company_id', 'user_id', 'city', 'postal_code', 'birth_name', 'date_of_birth', 'birth_postal_code', 'birth_city', 'gender', 'nationality', 'social_security_number'];
+    protected $fillable = [
+        'first_name',
+        'last_name',
+        'phone_number',
+        'address',
+        'street_number',
+        'country_id',
+        'company_id',
+        'user_id',
+        'city',
+        'postal_code',
+        'birth_name',
+        'date_of_birth',
+        'birth_postal_code',
+        'birth_city', 'gender',
+        'nationality',
+        'social_security_number'
+    ];
     public function company()
     {
         return $this->belongsTo(Company::class);
@@ -20,5 +37,10 @@ class Employe extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function leaveRequests()
+    {
+        return $this->hasMany(LeaveRequested::class, 'employe_id');
     }
 }

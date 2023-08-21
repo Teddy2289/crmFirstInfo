@@ -13,7 +13,7 @@
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb">
               <li class="breadcrumb-item"><a href="#">Parametrages globale</a></li>
-              <li class="breadcrumb-item active" aria-current="page">Catégorie depense</li>
+              <li class="breadcrumb-item active" aria-current="page">Utilisateurs</li>
             </ol>
           </nav>
           @livewire('users')

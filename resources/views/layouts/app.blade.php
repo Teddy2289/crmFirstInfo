@@ -31,6 +31,8 @@
     <script src="{{ asset('assets/js/es5/script.min.js') }}"></script>
     <script src="{{ asset('assets/js/es5/sidebar.large.script.min.js') }}"></script>
 
+
+
 </head>
 
 <body class="text-left">
@@ -144,7 +146,7 @@
                 <!-- User avatar dropdown -->
                 <div class="dropdown">
                     <div class="user col align-self-end">
-                        <img src="{{ asset('assets/images/faces/1.jpg') }}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <img src="{{ asset('assets/images/logo.png') }}" id="userDropdown" alt="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 
                         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                             <div class="dropdown-header">
@@ -177,7 +179,7 @@
     <!-- ============ Search UI Start ============= -->
     <div class="search-ui">
         <div class="search-header o-hidden">
-            <img src="{{ asset('assets/images/logo.avif') }}" alt="" class="logo float-left">
+            <!-- <img src="{{ asset('assets/images/logo.avif') }}" alt="" class="logo float-left"> -->
             <button class="search-close btn btn-icon bg-transparent float-right mt-2">
                 <i class="i-Close-Window text-22 text-muted"></i>
             </button>
@@ -194,7 +196,7 @@
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
-                        <img src="{{ asset('assets/images/products/headphone-1.jpg') }}" alt="">
+                        <!-- <img src="{{ asset('assets/images/products/headphone-1.jpg') }}" alt=""> -->
                     </div>
                     <div class="flex-grow-1 pl-2 d-flex">
                         <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
@@ -219,7 +221,7 @@
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
-                        <img src="{{ asset('assets/images/products/headphone-2.jpg') }}" alt="">
+                        <!-- <img src="{{ asset('assets/images/products/headphone-2.jpg') }}" alt=""> -->
                     </div>
                     <div class="flex-grow-1 pl-2 d-flex">
                         <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
@@ -244,7 +246,7 @@
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
-                        <img src="./assets/images/products/headphone-3.jpg" alt="">
+                        <!-- <img src="./assets/images/products/headphone-3.jpg" alt=""> -->
                     </div>
                     <div class="flex-grow-1 pl-2 d-flex">
                         <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
@@ -269,7 +271,7 @@
                 <div class="card o-hidden flex-row mb-4 d-flex">
                     <div class="list-thumb d-flex">
                         <!-- TUMBNAIL -->
-                        <img src="./assets/images/products/headphone-4.jpg" alt="">
+                        <!-- <img src="./assets/images/products/headphone-4.jpg" alt=""> -->
                     </div>
                     <div class="flex-grow-1 pl-2 d-flex">
                         <div class="card-body align-self-center d-flex flex-column justify-content-between align-items-lg-center flex-lg-row">
@@ -314,9 +316,16 @@
         </div>
     </div>
     <!-- ============ Search UI End ============= -->
-	@livewireScripts
+	
+    <!-- <script src="assets/js/vendor/jquery-3.3.1.min.js"></script>
+    <script src="assets/js/vendor/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendor/perfect-scrollbar.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.4.0/Chart.min.js"></script>
+    <script src="assets/js/es5/chartjs.script.min.js"></script>
+    <script src="assets/js/es5/script.min.js"></script>
+    <script src="assets/js/es5/sidebar.large.script.min.js"></script> -->
     @stack('scripts')
-
+    @livewireScripts
 </body>
 
 </html>

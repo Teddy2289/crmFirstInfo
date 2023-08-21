@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 class Leave extends Model
 {
     use HasFactory;
-    protected $fillale = ['label', 'employe_id', 'date_start', 'date_end'];
+    protected $fillale = ['label', 'employe_id', 'date_start', 'date_end','statut'];
 
     public function employes(): BelongsTo
     {

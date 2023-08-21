@@ -1,15 +1,15 @@
 <div>
     @if($notification)
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-        <div id="notification" wire:transition.fade.out.500ms>
-            @if (session()->has('message'))
-            <div class="alert alert-success" role="alert">
-                <i class="icon-info1"></i>{{ session('message')}}
-            </div>
-            @endif
-        </div>
-        <div wire:poll.5s="hideNotification"></div>
+    <div class="alert alert-success mt-3">
+        {{ $notificationMessage }}
     </div>
+
+    <!-- JavaScript to automatically hide the notification after 3 seconds -->
+    <script>
+        setTimeout(() => {
+            Livewire.emit('clearNotification');
+        }, 3000);
+    </script>
     @endif
     <section class="section">
 
@@ -19,7 +19,7 @@
                 <div class="card-body">
                     @can('add-client')
                     <button class="btn btn-primary btn-rounded mb-3" wire:click="addClient">
-                        <span>{{__('Crée client')}}</span>
+                        <span>{{__('Ajouter un(e) client(e)')}}</span>
                     </button>
                     @if ($form == 'addClient')
                     <form wire:submit.prevent="storeClient" class="mb-3">
@@ -73,19 +73,6 @@
                                             @enderror
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row col-md-12">
-                                    <div class="col-md-4">
-                                        <div class="mb-3">
-                                            <label for="tva" class="form-label">{{__('tva')}}<span class="text-danger">(*)</span></label>
-                                            <input type="text" class="form-control" id="tva" name="tva" wire:model.lazy="tva">
-                                            @error('tva')
-                                            <div class="alert alert-danger" role="alert">
-                                                {{ $message }}
-                                            </div>
-                                            @enderror
-                                        </div>
-                                    </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
                                             <label for="country_id" class="form-label">{{__('Country')}}<span class="text-danger">(*)</span></label>
@@ -102,6 +89,42 @@
                                             @enderror
                                         </div>
                                     </div>
+                                </div>
+                                <div class="row col-md-12">
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="tva" class="form-label">{{__('tva')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="tva" name="tva" wire:model.lazy="tva">
+                                            @error('tva')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="rcs" class="form-label">{{__('rcs')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="rcs" name="rcs" wire:model.lazy="rcs">
+                                            @error('rcs')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="siret" class="form-label">{{__('siret')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="siret" name="siret" wire:model.lazy="siret">
+                                            @error('siret')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    
                                 </div>
                                 <div class="col-md-12 mt-3 mb-3">
                                     <button type="submit" class="btn btn-primary" wire:loading.attr="disabled">
@@ -171,6 +194,22 @@
                                             @enderror
                                         </div>
                                     </div>
+                                     <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="country_id" class="form-label">{{__('Country')}}<span class="text-danger">(*)</span></label>
+                                            <select class="form-control" id="country_id" name="country_id" wire:model.lazy="country_id">
+                                                <option value="">{{__('Select Country')}}</option>
+                                                @foreach($countries as $country)
+                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
+                                                @endforeach
+                                            </select>
+                                            @error('country_id')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row col-md-12">
                                     <div class="col-md-4">
@@ -186,14 +225,20 @@
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-3">
-                                            <label for="country_id" class="form-label">{{__('Country')}}<span class="text-danger">(*)</span></label>
-                                            <select class="form-control" id="country_id" name="country_id" wire:model.lazy="country_id">
-                                                <option value="">{{__('Select Country')}}</option>
-                                                @foreach($countries as $country)
-                                                <option value="{{ $country->id }}">{{ $country->name }}</option>
-                                                @endforeach
-                                            </select>
-                                            @error('country_id')
+                                            <label for="rcs" class="form-label">{{__('rcs')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="rcs" name="rcs" wire:model.lazy="rcs">
+                                            @error('rcs')
+                                            <div class="alert alert-danger" role="alert">
+                                                {{ $message }}
+                                            </div>
+                                            @enderror
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="mb-3">
+                                            <label for="siret" class="form-label">{{__('siret')}}<span class="text-danger">(*)</span></label>
+                                            <input type="text" class="form-control" id="siret" name="siret" wire:model.lazy="siret">
+                                            @error('siret')
                                             <div class="alert alert-danger" role="alert">
                                                 {{ $message }}
                                             </div>
@@ -236,13 +281,20 @@
                     <!-- Vue Livewire -->
                     <!-- Vue Blade -->
                     <div>
+                        @if ($clients->isEmpty())
+                        <div class="alert alert-info" role="alert">
+                            {{ __('Aucun client disponible.') }}
+                        </div>
+                        @else
                         <table class="table table-striped table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Country')}}</th>
                                     <th scope="col">{{__('phone')}}</th>
-                                    <th scope="col">{{__('created_at')}}</th>
+                                    <th scope="col">{{__('Siret')}}</th>
+                                    <th scope="col">{{__('Rcs')}}</th>
+                                    <th scope="col">{{__('Date creation')}}</th>
                                     <th scope="col">{{__('Action')}}</th>
                                 </tr>
                             </thead>
@@ -252,14 +304,16 @@
                                     <td>{{ $client->name }}</td>
                                     <td>{{ $client->country->name }}</td>
                                     <td>{{ $client->phone }}</td>
-                                    <td>{{ formatDateFr($client->created_at) }}
-</td>
+                                    <td>{{ $client->siret }}</td>
+                                    <td>{{ $client->rcs }}</td>
+                                    <td>{{ \App\Helpers\Date::formatDateFr($client->created_at) }}</td>
+
                                     <td>
                                         @can('edit-client')
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $client->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>
                                         @endcan
                                         @can('delete-client')
-                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteClientConfirmation({{ $client->id }})" data-toggle="modal" data-target="#deleteConfirmationModal"> <i class="nav-icon i-Close-Window font-weight-bold"></i></button>
+                                        <button type="button" class="btn btn-raised btn-rounded btn-raised-danger" wire:click="deleteInvoiceConfirmation({{ $client->id }})" data-toggle="modal" data-target="#deleteConfirmationModal"> <i class="nav-icon i-Close-Window font-weight-bold"></i></button>
                                         @endcan
                                     </td>
                                 </tr>
@@ -269,7 +323,7 @@
                         <div class="d-flex justify-content-center">
                             {{ $clients->links() }}
                         </div>
-
+                        @endif
                         <!-- Delete  Modal -->
                         <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">

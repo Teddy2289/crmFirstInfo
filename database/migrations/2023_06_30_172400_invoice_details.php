@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateLeavesTable extends Migration
+class InvoiceDetails extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,15 @@ class CreateLeavesTable extends Migration
      */
     public function up()
     {
-        Schema::create('leaves', function (Blueprint $table) {
+        Schema::create('invoice_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('invoice_id')->constrained();
             $table->string('label');
-            $table->foreignId('employe_id')->constrained()->onDelete('cascade');
-            $table->date('date_start');
-            $table->date('date_end');
+            $table->string('quantity');
+            $table->string('price');
+            $table->boolean('fee')->default(false);
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
@@ -30,6 +32,6 @@ class CreateLeavesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('leaves');
+        Schema::dropIfExists('invoice_details');
     }
 }

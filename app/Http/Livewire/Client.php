@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Helpers\Date;
 use App\Models\Client as ModelsClient;
 use App\Models\Country;
 use Livewire\Component;
@@ -11,18 +12,32 @@ class Client extends Component
 {
     use WithPagination;
 
-    public $name, $phone, $address, $postal_code, $country_id, $tva;
+    public $name, $phone, $address, $postal_code, $country_id, $tva,$rcs,$siret;
     public $clientId;
     public $form = '';
     public $confirmingDelete = false;
     public $confirmingUpdate = false;
     public $notification = false;
     public $loading = false;
+    public $notificationMessage;
+
 
     protected $paginationTheme = 'bootstrap';
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -31,8 +46,23 @@ class Client extends Component
 
         return view('livewire.client', [
             'clients' => $clients,
-            'countries' => $countries,
+            'countries' => $countries
         ]);
+    }
+
+    public function resetAll()
+    {
+        $this->name = '';
+        $this->phone = '';
+        $this->rcs = '';
+        $this->siret = '';
+        $this->address = '';
+        $this->postal_code = '';
+        $this->country_id = '';
+        $this->tva = '';
+        $this->form = '';
+        $this->confirmingDelete = false;
+        $this->confirmingUpdate = false;
     }
 
     public function addClient()
@@ -47,6 +77,8 @@ class Client extends Component
             'name' => 'required',
             'phone' => 'required',
             'address' => 'required',
+            'rcs' => 'required',
+            'siret' => 'required',
             'postal_code' => 'required',
             'country_id' => 'required|exists:countries,id',
             'tva' => 'required',
@@ -56,33 +88,17 @@ class Client extends Component
             'name' => $this->name,
             'phone' => $this->phone,
             'address' => $this->address,
+            'rcs' => $this->rcs,
+            'siret' => $this->siret,
             'postal_code' => $this->postal_code,
             'country_id' => $this->country_id,
             'tva' => $this->tva,
         ]);
 
         $this->resetAll();
+        $this->notificationMessage = 'Client(e) ajouté(e) avec succes.';
         $this->emit('success');
         $this->loading = false;
-    }
-
-    public function deleteClientConfirmation($clientId)
-    {
-        $this->clientId = $clientId;
-        $this->confirmingDelete = true;
-    }
-
-    public function deleteClientConfirmed()
-    {
-        $this->loading = true;
-        $client = ModelsClient::find($this->clientId);
-        if ($client) {
-            $client->delete();
-            $this->resetAll();
-            $this->emit('success');
-            $this->dispatchBrowserEvent('close-delete-confirmation-modal');
-            $this->loading = false;
-        }
     }
 
     public function showEdit($clientId)
@@ -94,6 +110,8 @@ class Client extends Component
             $this->clientId = $clientId;
             $this->name = $client->name;
             $this->phone = $client->phone;
+            $this->rcs = $client->rcs;
+            $this->siret = $client->siret;
             $this->address = $client->address;
             $this->postal_code = $client->postal_code;
             $this->country_id = $client->country_id;
@@ -111,11 +129,14 @@ class Client extends Component
                     'name' => $this->name,
                     'phone' => $this->phone,
                     'address' => $this->address,
+                    'rcs' => $this->rcs,
+                    'siret' => $this->siret,
                     'postal_code' => $this->postal_code,
                     'country_id' => $this->country_id,
                     'tva' => $this->tva,
                 ]);
                 $this->resetAll();
+                $this->notificationMessage = 'Client(e) mis à jour avec succes.';
                 $this->emit('success');
                 $this->confirmingUpdate = false;
                 $this->loading = false;
@@ -123,21 +144,31 @@ class Client extends Component
         }
     }
 
+    public function deleteClientConfirmation($clientId)
+    {
+        $this->clientId = $clientId;
+        $this->confirmingDelete = true;
+    }
+
+    public function deleteClientConfirmed()
+    {
+        $this->loading = true;
+        $client = ModelsClient::find($this->clientId);
+        if ($client) {
+            $client->delete();
+            $this->resetAll();
+            $this->notificationMessage = 'Client(e) supprimé(e) avec succes.';
+            $this->emit('success');
+            $this->dispatchBrowserEvent('close-delete-confirmation-modal');
+            $this->loading = false;
+        }
+    }
+
+
     public function cancel()
     {
         $this->resetAll();
     }
 
-    public function resetAll()
-    {
-        $this->name = '';
-        $this->phone = '';
-        $this->address = '';
-        $this->postal_code = '';
-        $this->country_id = '';
-        $this->tva = '';
-        $this->form = '';
-        $this->confirmingDelete = false;
-        $this->confirmingUpdate = false;
-    }
+
 }

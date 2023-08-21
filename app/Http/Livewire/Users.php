@@ -3,6 +3,7 @@
 namespace App\Http\Livewire;
 
 use App\Models\User;
+use PDF;
 use Livewire\Component;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\Models\Permission;
@@ -19,10 +20,23 @@ class Users extends Component
     public $email;
     public $name;
     public $btnCreate = true;
+    public $notificationMessage;
+    public $notification = false;
 
     protected $listeners = [
-        'success' => '$refresh'
+        'success' => 'showNotification',
+        'clearNotification' => 'clearNotification',
     ];
+    public function showNotification()
+    {
+        $this->notification = true;
+    }
+
+    public function clearNotification()
+    {
+        $this->notification = false;
+        $this->notificationMessage = '';
+    }
 
     public function render()
     {
@@ -48,6 +62,7 @@ class Users extends Component
         $user->syncRoles($this->getroleuseredit);
         $user->syncPermissions($this->userPermissions);
         $this->resetAll();
+        $this->notificationMessage = 'Utilisateur modifié avec succes.';
         $this->emit('success');
     }
 
@@ -94,12 +109,37 @@ class Users extends Component
         }
 
         $this->resetAll();
+        $this->notificationMessage = 'Utilisateur ajouté(e) avec succes.';
         $this->emit('success');
     }
 
     public function delete(User $user)
     {
         $user->delete();
+        $this->notificationMessage = 'Utilisateur supprimé(e) avec succes.';
         $this->emit('success');
     }
+
+    public function exportPDF($id)
+    {
+        $user = User::findOrFail($id);
+        $employee = $user->employee;
+        $posts = $user->posts;
+        $company = null; // Define $company variable before the loop
+        foreach ($user->employee as $employee) {
+            $company = $employee->company;
+        }
+        $pdf = PDF::loadView('userPdf.user', compact('employee', 'posts', 'user', 'company'));
+        $pdf->getDomPDF()->setHttpContext(
+            stream_context_create([
+                'ssl' => [
+                    'allow_self_signed' => true,
+                    'verify_peer' => false,
+                    'verify_peer_name' => false,
+                ]
+            ])
+        );
+        return $pdf->download($user->name . '.pdf');
+    }
+
 }

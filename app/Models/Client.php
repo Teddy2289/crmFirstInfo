@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     use HasFactory;
-    protected $fillable = ['name','phone','address','postal_code','country_id','tva'];
+    protected $fillable = ['name','phone','address','postal_code','siret','rcs','country_id','tva'];
 
     public function country(){
         return $this->belongsTo(Country::class,'country_id');

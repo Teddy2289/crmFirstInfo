@@ -55,6 +55,17 @@ class User extends Authenticatable
 
     public function employee()
     {
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Employe::class);
     }
+
+    public function posts()
+    {
+        return $this->hasMany(PostEmployee::class);
+    }
+    // Dans le modèle User (app/Models/User.php)
+    public function isAdmin()
+    {
+        return $this->role === 'admin';
+    }
+
 }

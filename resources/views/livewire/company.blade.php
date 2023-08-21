@@ -1,16 +1,16 @@
 <div>
-    @if($notification)
-    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4">
-        <div id="notification" wire:transition.fade.out.500ms>
-            @if (session()->has('message'))
-            <div class="alert alert-success" role="alert">
-                <i class="icon-info1"></i>{{ session('message')}}
-            </div>
+        @if($notification)
+                    <div class="alert alert-success mt-3">
+                        {{ $notificationMessage }}
+                    </div>
+
+                    <!-- JavaScript to automatically hide the notification after 3 seconds -->
+                    <script>
+                        setTimeout(() => {
+                            Livewire.emit('clearNotification');
+                        }, 3000);
+                    </script>
             @endif
-        </div>
-        <div wire:poll.5s="hideNotification"></div>
-    </div>
-    @endif
     <section class="section">
 
         <h4 class="card-title mb-3">{{ __('Liste des entreprises') }}</h4>
@@ -19,7 +19,7 @@
                 <div class="card-body">
                     @can('add-company')
                     <button class="btn btn-primary btn-rounded mb-3" wire:click="addCompany">
-                        <span>{{__('Crée entrepise')}}</span>
+                        <span>{{__('Ajouter une entrepise')}}</span>
                     </button>
                     @if ($form == 'addCompany')
                     <form wire:submit.prevent="storeCompany" class="mb-3">
@@ -432,12 +432,22 @@
                     <!-- Vue Livewire -->
                     <!-- Vue Blade -->
                     <div>
+                    @if ($companies->isEmpty())
+                            <div class="alert alert-info" role="alert">
+                                {{ __('Aucun entreprise disponible.') }}
+                            </div>
+                        @else
                         <table class="table table-striped table-hover">
-                            <thead>
+                            <thead class="thead-dark">
                                 <tr>
                                     <th scope="col">{{__('Name')}}</th>
                                     <th scope="col">{{__('Trade Name')}}</th>
                                     <th scope="col">{{__('Email')}}</th>
+                                    <th scope="col">{{__('address')}}</th>
+                                    <th scope="col">{{__('capital')}}</th>
+                                    <th scope="col">{{__('siren')}}</th>
+                                    <th scope="col">{{__('siret')}}</th>
+                                    <th scope="col">{{__('postal_code')}}</th>
                                     <th scope="col">{{__('Action')}}</th>
                                 </tr>
                             </thead>
@@ -449,6 +459,11 @@
                                     </td>
                                     <td>{{ $company->trade_name }}</td>
                                     <td>{{ $company->email }}</td>
+                                    <td>{{ $company->address }}</td>
+                                    <td>{{ $company->capital }}</td>
+                                    <td>{{ $company->siren }}</td>
+                                    <td>{{ $company->siret }}</td>
+                                    <td>{{ $company->postal_code }}</td>
                                     <td>
                                         @can('edit-company')
                                         <button type="button" class="btn btn-raised btn-rounded btn-raised-primary" wire:click="showEdit('{{ $company->id }}')"><i class="nav-icon i-Pen-2 font-weight-bold"></i></button>
@@ -464,7 +479,7 @@
                         <div class="d-flex justify-content-center">
                             {{ $companies->links() }}
                         </div>
-
+                        @endif
                         <!-- Delete  Modal -->
                         <div wire:ignore.self class="modal fade" id="deleteConfirmationModal" tabindex="-1" role="dialog" aria-labelledby="deleteConfirmationModalLabel" aria-hidden="true">
                             <div class="modal-dialog" role="document">
