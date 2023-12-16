@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="{{ asset('assets/styles/css/spiner.css')}}">
 	@livewireStyles
     @stack('styles')
-	
+
     <script src="{{ asset('assets/js/vendor/jquery-3.3.1.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/perfect-scrollbar.min.js') }}"></script>
@@ -25,7 +25,7 @@
     <script src="{{ asset('assets/js/vendor/pickadate/picker.js') }}"></script>
     <script src="{{ asset('assets/js/vendor/pickadate/picker.date.js') }}"></script>
     <script src="{{ asset('assets/js/form.basic.script.js') }}"></script>
-    
+
     <script src="{{ asset('assets/js/es5/echart.options.min.js') }}"></script>
     <script src="{{ asset('assets/js/es5/dashboard.v1.script.min.js') }}"></script>
     <script src="{{ asset('assets/js/es5/script.min.js') }}"></script>
@@ -44,7 +44,7 @@
     <div class="app-admin-wrap layout-sidebar-large clearfix">
         <div class="main-header">
             <div class="logo">
-                <img src="{{ asset('assets/images/logo.png') }}" alt="">
+                <img src="{{ asset('assets/images/crm.jpg') }}" alt="">
             </div>
 
             <div class="menu-toggle">
